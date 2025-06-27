@@ -192,8 +192,8 @@ defineExpose({
 
 <template>
   <TreeRoot
-    v-model:expanded="expanded as string[]"
     v-slot="{ flattenItems }"
+    v-model:expanded="expanded as string[]"
     :get-key="(item) => get(item, valueField)"
     :get-children="(item) => get(item, childrenField)"
     :items="treeData"

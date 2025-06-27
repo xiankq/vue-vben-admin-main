@@ -96,7 +96,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
           typeWithClass.content,
         ]"
         :data-index="i"
-        class="translate-all group tab-item [&:not(.is-active)]:hover:bg-accent flex cursor-pointer select-none relative"
+        class="group translate-all tab-item [&:not(.is-active)]:hover:bg-accent flex cursor-pointer select-none relative"
         data-tab-item="true"
         @click="active = tab.key"
         @mousedown="onMouseDown($event, tab)"
@@ -115,7 +115,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
               <!-- close-icon -->
               <X
                 v-show="!tab.affixTab && tabsView.length > 1 && tab.closable"
-                class="hover:bg-accent stroke-accent-foreground/80 hover:stroke-accent-foreground dark:group-[.is-active]:text-accent-foreground group-[.is-active]:text-primary rounded-full size-3 cursor-pointer transition-all"
+                class="hover:bg-accent stroke-accent-foreground/80 hover:stroke-accent-foreground group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground rounded-full size-3 cursor-pointer transition-all"
                 @click.stop="() => emit('close', tab.key)"
               />
               <Pin
@@ -127,7 +127,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
 
             <!-- tab-item-main -->
             <div
-              class="text-accent-foreground group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground mx-3 mr-4 pr-3 rounded-tl-[5px] rounded-tr-[5px] flex h-full transition-all duration-300 items-center overflow-hidden"
+              class="group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground text-accent-foreground mx-3 mr-4 pr-3 rounded-tl-[5px] rounded-tr-[5px] flex h-full transition-all duration-300 items-center overflow-hidden"
             >
               <VbenIcon
                 v-if="showIcon"

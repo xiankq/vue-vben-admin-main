@@ -295,7 +295,7 @@ function handleMouseleave() {
         'border-l': extraVisible,
       }"
       :style="extraStyle"
-      class="bg-sidebar border-border border-r h-full transition-all duration-200 top-0 fixed overflow-hidden"
+      class="border-border bg-sidebar border-r h-full transition-all duration-200 top-0 fixed overflow-hidden"
     >
       <SidebarCollapseButton
         v-if="isSidebarMixed && expandOnHover"
