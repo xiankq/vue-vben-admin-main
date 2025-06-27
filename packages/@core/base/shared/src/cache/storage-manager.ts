@@ -19,8 +19,8 @@ class StorageManager {
     storageType = 'localStorage',
   }: StorageManagerOptions = {}) {
     this.prefix = prefix;
-    this.storage =
-      storageType === 'localStorage'
+    this.storage
+      = storageType === 'localStorage'
         ? window.localStorage
         : window.sessionStorage;
   }
@@ -36,7 +36,7 @@ class StorageManager {
         keysToRemove.push(key);
       }
     }
-    keysToRemove.forEach((key) => this.storage.removeItem(key));
+    keysToRemove.forEach(key => this.storage.removeItem(key));
   }
 
   /**
@@ -72,7 +72,8 @@ class StorageManager {
         return defaultValue;
       }
       return item.value;
-    } catch (error) {
+    }
+    catch (error) {
       console.error(`Error parsing item with key "${fullKey}":`, error);
       this.storage.removeItem(fullKey); // 如果解析失败，删除该项
       return defaultValue;
@@ -100,7 +101,8 @@ class StorageManager {
     const item: StorageItem<T> = { expiry, value };
     try {
       this.storage.setItem(fullKey, JSON.stringify(item));
-    } catch (error) {
+    }
+    catch (error) {
       console.error(`Error setting item with key "${fullKey}":`, error);
     }
   }

@@ -32,14 +32,14 @@ withDefaults(defineProps<Props>(), {
   clickLogo: () => {},
 });
 
-const { authPanelCenter, authPanelLeft, authPanelRight, isDark } =
-  usePreferences();
+const { authPanelCenter, authPanelLeft, authPanelRight, isDark }
+  = usePreferences();
 </script>
 
 <template>
   <div
     :class="[isDark ? 'dark' : '']"
-    class="flex min-h-full flex-1 select-none overflow-x-hidden"
+    class="flex flex-1 min-h-full select-none overflow-x-hidden"
   >
     <template v-if="toolbar">
       <slot name="toolbar">
@@ -49,7 +49,7 @@ const { authPanelCenter, authPanelLeft, authPanelRight, isDark } =
     <!-- 左侧认证面板 -->
     <AuthenticationFormView
       v-if="authPanelLeft"
-      class="min-h-full w-2/5 flex-1"
+      class="flex-1 min-h-full w-2/5"
       transition-name="slide-left"
     >
       <template v-if="copyright" #copyright>
@@ -65,35 +65,35 @@ const { authPanelCenter, authPanelLeft, authPanelRight, isDark } =
     <!-- 头部 Logo 和应用名称 -->
     <div
       v-if="logo || appName"
-      class="absolute left-0 top-0 z-10 flex flex-1"
+      class="flex flex-1 left-0 top-0 absolute z-10"
       @click="clickLogo"
     >
       <div
         class="text-foreground lg:text-foreground ml-4 mt-4 flex flex-1 items-center sm:left-6 sm:top-6"
       >
-        <img v-if="logo" :alt="appName" :src="logo" class="mr-2" width="42" />
-        <p v-if="appName" class="m-0 text-xl font-medium">
+        <img v-if="logo" :alt="appName" :src="logo" class="mr-2" width="42">
+        <p v-if="appName" class="text-xl font-medium m-0">
           {{ appName }}
         </p>
       </div>
     </div>
 
     <!-- 系统介绍 -->
-    <div v-if="!authPanelCenter" class="relative hidden w-0 flex-1 lg:block">
+    <div v-if="!authPanelCenter" class="flex-1 w-0 hidden relative lg:block">
       <div
-        class="bg-background-deep absolute inset-0 h-full w-full dark:bg-[#070709]"
+        class="bg-background-deep h-full w-full inset-0 absolute dark:bg-[#070709]"
       >
-        <div class="login-background absolute left-0 top-0 size-full"></div>
+        <div class="login-background size-full left-0 top-0 absolute" />
         <div class="flex-col-center -enter-x mr-20 h-full">
           <template v-if="sloganImage">
             <img
               :alt="appName"
               :src="sloganImage"
               class="animate-float h-64 w-2/5"
-            />
+            >
           </template>
           <SloganIcon v-else :alt="appName" class="animate-float h-64 w-2/5" />
-          <div class="text-1xl text-foreground mt-6 font-sans lg:text-2xl">
+          <div class="text-foreground text-1xl font-sans mt-6 lg:text-2xl">
             {{ pageTitle }}
           </div>
           <div class="dark:text-muted-foreground mt-2">
@@ -104,10 +104,10 @@ const { authPanelCenter, authPanelLeft, authPanelRight, isDark } =
     </div>
 
     <!-- 中心认证面板 -->
-    <div v-if="authPanelCenter" class="flex-center relative w-full">
-      <div class="login-background absolute left-0 top-0 size-full"></div>
+    <div v-if="authPanelCenter" class="flex-center w-full relative">
+      <div class="login-background size-full left-0 top-0 absolute" />
       <AuthenticationFormView
-        class="md:bg-background shadow-primary/5 shadow-float w-full rounded-3xl pb-20 md:w-2/3 lg:w-1/2 xl:w-[36%]"
+        class="shadow-float shadow-primary/5 md:bg-background pb-20 rounded-3xl w-full lg:w-1/2 md:w-2/3 xl:w-[36%]"
       >
         <template v-if="copyright" #copyright>
           <slot name="copyright">
@@ -123,7 +123,7 @@ const { authPanelCenter, authPanelLeft, authPanelRight, isDark } =
     <!-- 右侧认证面板 -->
     <AuthenticationFormView
       v-if="authPanelRight"
-      class="min-h-full w-[34%] flex-1"
+      class="flex-1 min-h-full w-[34%]"
     >
       <template v-if="copyright" #copyright>
         <slot name="copyright">
@@ -139,23 +139,13 @@ const { authPanelCenter, authPanelLeft, authPanelRight, isDark } =
 
 <style scoped>
 .login-background {
-  background: linear-gradient(
-    154deg,
-    #07070915 30%,
-    hsl(var(--primary) / 30%) 48%,
-    #07070915 64%
-  );
+  background: linear-gradient(154deg, #07070915 30%, hsl(var(--primary) / 30%) 48%, #07070915 64%);
   filter: blur(100px);
 }
 
 .dark {
   .login-background {
-    background: linear-gradient(
-      154deg,
-      #07070915 30%,
-      hsl(var(--primary) / 20%) 48%,
-      #07070915 64%
-    );
+    background: linear-gradient(154deg, #07070915 30%, hsl(var(--primary) / 20%) 48%, #07070915 64%);
     filter: blur(100px);
   }
 }

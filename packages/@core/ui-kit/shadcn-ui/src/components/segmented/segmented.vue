@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { SegmentedItem } from './types';
 
-import { computed } from 'vue';
-
 import { TabsTrigger } from 'radix-vue';
+
+import { computed } from 'vue';
 
 import { Tabs, TabsContent, TabsList } from '../../ui';
 import TabsIndicator from './tabs-indicator.vue';
@@ -39,12 +39,12 @@ const tabsIndicatorStyle = computed(() => {
 
 <template>
   <Tabs v-model="activeTab" :default-value="getDefaultValue">
-    <TabsList :style="tabsStyle" class="bg-accent relative grid w-full">
+    <TabsList :style="tabsStyle" class="bg-accent grid w-full relative">
       <TabsIndicator :style="tabsIndicatorStyle" />
       <template v-for="tab in tabs" :key="tab.value">
         <TabsTrigger
           :value="tab.value"
-          class="z-20 inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium disabled:pointer-events-none disabled:opacity-50"
+          class="text-sm font-medium px-3 py-1 rounded-md inline-flex whitespace-nowrap items-center justify-center z-20 disabled:opacity-50 disabled:pointer-events-none"
         >
           {{ tab.label }}
         </TabsTrigger>
@@ -52,7 +52,7 @@ const tabsIndicatorStyle = computed(() => {
     </TabsList>
     <template v-for="tab in tabs" :key="tab.value">
       <TabsContent :value="tab.value">
-        <slot :name="tab.value"></slot>
+        <slot :name="tab.value" />
       </TabsContent>
     </template>
   </Tabs>

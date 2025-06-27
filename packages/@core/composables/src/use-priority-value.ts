@@ -1,11 +1,11 @@
 import type { ComputedRef, Ref } from 'vue';
 
-import { computed, getCurrentInstance, unref, useAttrs, useSlots } from 'vue';
-
 import {
   getFirstNonNullOrUndefined,
   kebabToCamelCase,
 } from '@vben-core/shared/utils';
+
+import { computed, getCurrentInstance, unref, useAttrs, useSlots } from 'vue';
 
 /**
  * 依次从插槽、attrs、props、state 中获取值
@@ -32,8 +32,8 @@ export function usePriorityValue<
     for (const [key, value] of Object.entries(rawProps)) {
       standardRawProps[kebabToCamelCase(key) as K] = value;
     }
-    const propsKey =
-      standardRawProps?.[key] === undefined ? undefined : props[key];
+    const propsKey
+      = standardRawProps?.[key] === undefined ? undefined : props[key];
 
     // slot可以关闭
     return getFirstNonNullOrUndefined(

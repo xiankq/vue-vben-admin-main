@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import type { SelectOption } from '@vben/types';
 
-import { useSlots } from 'vue';
-
-import { CircleHelp } from '@vben/icons';
-
 import {
   NumberField,
   NumberFieldContent,
@@ -13,6 +9,10 @@ import {
   NumberFieldInput,
   VbenTooltip,
 } from '@vben-core/shadcn-ui';
+
+import { CircleHelp } from '@vben/icons';
+
+import { useSlots } from 'vue';
 
 defineOptions({
   name: 'PreferenceSelectItem',
@@ -44,10 +44,10 @@ const slots = useSlots();
       'hover:bg-accent': !slots.tip,
       'pointer-events-none opacity-50': disabled,
     }"
-    class="my-1 flex w-full items-center justify-between rounded-md px-2 py-1"
+    class="my-1 px-2 py-1 rounded-md flex w-full items-center justify-between"
   >
-    <span class="flex items-center text-sm">
-      <slot></slot>
+    <span class="text-sm flex items-center">
+      <slot />
 
       <VbenTooltip v-if="slots.tip || tip" side="bottom">
         <template #trigger>

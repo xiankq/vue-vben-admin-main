@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { Component } from 'vue';
 
-import { computed } from 'vue';
-
 import { $t } from '@vben/locales';
+
+import { computed } from 'vue';
 
 import { ContentCompact, ContentWide } from '../../icons';
 
@@ -35,16 +35,16 @@ function activeClass(theme: string): string[] {
 </script>
 
 <template>
-  <div class="flex w-full gap-5">
+  <div class="flex gap-5 w-full">
     <template v-for="theme in PRESET" :key="theme.name">
       <div
-        class="flex w-[100px] cursor-pointer flex-col"
+        class="flex flex-col w-[100px] cursor-pointer"
         @click="modelValue = theme.type"
       >
         <div :class="activeClass(theme.type)" class="outline-box flex-center">
           <component :is="components[theme.type]" />
         </div>
-        <div class="text-muted-foreground mt-2 text-center text-xs">
+        <div class="text-muted-foreground text-xs mt-2 text-center">
           {{ theme.name }}
         </div>
       </div>

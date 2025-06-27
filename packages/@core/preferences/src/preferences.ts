@@ -2,16 +2,16 @@ import type { DeepPartial } from '@vben-core/typings';
 
 import type { InitialOptions, Preferences } from './types';
 
-import { markRaw, reactive, readonly, watch } from 'vue';
-
 import { StorageManager } from '@vben-core/shared/cache';
-import { isMacOs, merge } from '@vben-core/shared/utils';
 
+import { isMacOs, merge } from '@vben-core/shared/utils';
 import {
   breakpointsTailwind,
   useBreakpoints,
   useDebounceFn,
 } from '@vueuse/core';
+
+import { markRaw, reactive, readonly, watch } from 'vue';
 
 import { defaultPreferences } from './config';
 import { updateCSSVariables } from './update-css-variables';
@@ -29,6 +29,7 @@ class PreferenceManager {
   private state: Preferences = reactive<Preferences>({
     ...this.loadPreferences(),
   });
+
   constructor() {
     this.cache = new StorageManager();
 
@@ -146,8 +147,8 @@ class PreferenceManager {
     }
 
     if (
-      Reflect.has(appUpdates, 'colorGrayMode') ||
-      Reflect.has(appUpdates, 'colorWeakMode')
+      Reflect.has(appUpdates, 'colorGrayMode')
+      || Reflect.has(appUpdates, 'colorWeakMode')
     ) {
       this.updateColorMode(this.state);
     }

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { computed, nextTick } from 'vue';
-
 import { VbenButton } from '@vben-core/shadcn-ui';
+
+import { computed, nextTick } from 'vue';
 
 interface Props {
   /**
@@ -40,10 +40,10 @@ const bindProps = computed(() => {
 });
 
 function toggleTheme(event: MouseEvent) {
-  const isAppearanceTransition =
+  const isAppearanceTransition
     // @ts-expect-error
-    document.startViewTransition &&
-    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    = document.startViewTransition
+      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!isAppearanceTransition || !event) {
     isDark.value = !isDark.value;
     return;
@@ -85,7 +85,7 @@ function toggleTheme(event: MouseEvent) {
     :aria-label="theme"
     :class="[`is-${theme}`]"
     aria-live="polite"
-    class="theme-toggle cursor-pointer border-none bg-none"
+    class="theme-toggle border-none cursor-pointer bg-none"
     v-bind="bindProps"
     @click.stop="toggleTheme"
   >

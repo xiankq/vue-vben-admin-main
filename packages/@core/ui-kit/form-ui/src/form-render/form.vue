@@ -9,10 +9,10 @@ import type {
   FormShape,
 } from '../types';
 
-import { computed } from 'vue';
-
 import { Form } from '@vben-core/shadcn-ui';
+
 import { cn, isString, mergeWithArrayOverride } from '@vben-core/shared/utils';
+import { computed } from 'vue';
 
 import { provideFormRenderProps } from './context';
 import { useExpandable } from './expandable';
@@ -68,7 +68,7 @@ const formComponent = computed(() => (props.form ? 'form' : Form));
 const formComponentProps = computed(() => {
   return props.form
     ? {
-        onSubmit: props.form.handleSubmit((val) => emits('submit', val)),
+        onSubmit: props.form.handleSubmit(val => emits('submit', val)),
       }
     : {
         onSubmit: (val: GenericObject) => emits('submit', val),
@@ -104,9 +104,9 @@ const computedSchema = computed(
     return (props.schema || []).map((schema, index) => {
       const keepIndex = keepFormItemIndex.value;
 
-      const hidden =
+      const hidden
         // 折叠状态 & 显示折叠按钮 & 当前索引大于保留索引
-        props.showCollapseButton && !!formCollapsed.value && keepIndex
+        = props.showCollapseButton && !!formCollapsed.value && keepIndex
           ? keepIndex <= index
           : false;
 
@@ -155,11 +155,11 @@ const computedSchema = computed(
           :rules="cSchema.rules"
         >
           <template #default="slotProps">
-            <slot v-bind="slotProps" :name="cSchema.fieldName"> </slot>
+            <slot v-bind="slotProps" :name="cSchema.fieldName" />
           </template>
         </FormField>
       </template>
-      <slot :shapes="shapes"></slot>
+      <slot :shapes="shapes" />
     </div>
   </component>
 </template>

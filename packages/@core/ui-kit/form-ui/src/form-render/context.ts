@@ -1,13 +1,13 @@
 import type { FormRenderProps } from '../types';
 
-import { computed } from 'vue';
-
 import { createContext } from '@vben-core/shadcn-ui';
 
-export const [injectRenderFormProps, provideFormRenderProps] =
-  createContext<FormRenderProps>('FormRenderProps');
+import { computed } from 'vue';
 
-export const useFormContext = () => {
+export const [injectRenderFormProps, provideFormRenderProps]
+  = createContext<FormRenderProps>('FormRenderProps');
+
+export function useFormContext() {
   const formRenderProps = injectRenderFormProps();
 
   const isVertical = computed(() => formRenderProps.layout === 'vertical');
@@ -21,4 +21,4 @@ export const useFormContext = () => {
     componentMap,
     isVertical,
   };
-};
+}

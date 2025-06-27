@@ -2,10 +2,10 @@
 import type { VbenFormSchema } from '@vben/common-ui';
 import type { Recordable } from '@vben/types';
 
-import { computed, ref } from 'vue';
-
 import { AuthenticationCodeLogin, z } from '@vben/common-ui';
+
 import { $t } from '@vben/locales';
+import { computed, ref } from 'vue';
 
 defineOptions({ name: 'CodeLogin' });
 
@@ -24,7 +24,7 @@ const formSchema = computed((): VbenFormSchema[] => {
       rules: z
         .string()
         .min(1, { message: $t('authentication.mobileTip') })
-        .refine((v) => /^\d{11}$/.test(v), {
+        .refine(v => /^\d{11}$/.test(v), {
           message: $t('authentication.mobileErrortip'),
         }),
     },
@@ -33,8 +33,8 @@ const formSchema = computed((): VbenFormSchema[] => {
       componentProps: {
         codeLength: CODE_LENGTH,
         createText: (countdown: number) => {
-          const text =
-            countdown > 0
+          const text
+            = countdown > 0
               ? $t('authentication.sendText', [countdown])
               : $t('authentication.sendCode');
           return text;

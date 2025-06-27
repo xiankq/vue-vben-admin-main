@@ -5,13 +5,13 @@ import type {
   SliderRotateVerifyPassingData,
 } from '../types';
 
-import { reactive, unref, useTemplateRef, watch, watchEffect } from 'vue';
+import { cn } from '@vben-core/shared/utils';
 
 import { $t } from '@vben/locales';
 
-import { cn } from '@vben-core/shared/utils';
-
 import { useTimeoutFn } from '@vueuse/core';
+
+import { reactive, unref, useTemplateRef, watch, watchEffect } from 'vue';
 
 import SliderCaptchaAction from './slider-captcha-action.vue';
 import SliderCaptchaBar from './slider-captcha-bar.vue';
@@ -73,7 +73,8 @@ watchEffect(() => {
 function getEventPageX(e: MouseEvent | TouchEvent): number {
   if ('pageX' in e) {
     return e.pageX;
-  } else if ('touches' in e && e.touches[0]) {
+  }
+  else if ('touches' in e && e.touches[0]) {
     return e.touches[0].pageX;
   }
   return 0;
@@ -83,15 +84,16 @@ function handleDragStart(e: MouseEvent | TouchEvent) {
   if (state.isPassing) {
     return;
   }
-  if (!actionRef.value) return;
+  if (!actionRef.value)
+    return;
   emit('start', e);
 
-  state.moveDistance =
-    getEventPageX(e) -
-    Number.parseInt(
-      actionRef.value.getStyle().left.replace('px', '') || '0',
-      10,
-    );
+  state.moveDistance
+    = getEventPageX(e)
+      - Number.parseInt(
+        actionRef.value.getStyle().left.replace('px', '') || '0',
+        10,
+      );
   state.startTime = Date.now();
   state.isMoving = true;
 }
@@ -108,7 +110,8 @@ function handleDragMoving(e: MouseEvent | TouchEvent) {
   if (isMoving) {
     const actionEl = unref(actionRef);
     const barEl = unref(barRef);
-    if (!actionEl || !barEl) return;
+    if (!actionEl || !barEl)
+      return;
     const { actionWidth, offset, wrapperWidth } = getOffset(actionEl.getEl());
     const moveX = getEventPageX(e) - moveDistance;
 
@@ -120,7 +123,8 @@ function handleDragMoving(e: MouseEvent | TouchEvent) {
     if (moveX > 0 && moveX <= offset) {
       actionEl.setLeft(`${moveX}px`);
       barEl.setWidth(`${moveX + actionWidth / 2}px`);
-    } else if (moveX > offset) {
+    }
+    else if (moveX > offset) {
       actionEl.setLeft(`${wrapperWidth - actionWidth}px`);
       barEl.setWidth(`${wrapperWidth - actionWidth / 2}px`);
       if (!props.isSlot) {
@@ -136,7 +140,8 @@ function handleDragOver(e: MouseEvent | TouchEvent) {
     emit('end', e);
     const actionEl = actionRef.value;
     const barEl = unref(barRef);
-    if (!actionEl || !barEl) return;
+    if (!actionEl || !barEl)
+      return;
     const moveX = getEventPageX(e) - moveDistance;
     const { actionWidth, offset, wrapperWidth } = getOffset(actionEl.getEl());
     if (moveX < offset) {
@@ -147,14 +152,17 @@ function handleDragOver(e: MouseEvent | TouchEvent) {
             if (contentEl) {
               contentEl.getEl().style.width = `${Number.parseInt(barEl.getEl().style.width)}px`;
             }
-          } else {
+          }
+          else {
             resume();
           }
         }, 0);
-      } else {
+      }
+      else {
         resume();
       }
-    } else {
+    }
+    else {
       actionEl.setLeft(`${wrapperWidth - actionWidth}px`);
       barEl.setWidth(`${wrapperWidth - actionWidth / 2}px`);
       checkPass();
@@ -183,7 +191,8 @@ function resume() {
   const actionEl = unref(actionRef);
   const barEl = unref(barRef);
   const contentEl = unref(contentRef);
-  if (!actionEl || !barEl || !contentEl) return;
+  if (!actionEl || !barEl || !contentEl)
+    return;
 
   contentEl.getEl().style.width = '100%';
   state.toLeft = true;
@@ -224,7 +233,7 @@ function resume() {
       :text="text || $t('ui.captcha.sliderDefaultText')"
     >
       <template v-if="$slots.text" #text>
-        <slot :is-passing="state.isPassing" name="text"></slot>
+        <slot :is-passing="state.isPassing" name="text" />
       </template>
     </SliderCaptchaContent>
 
@@ -237,7 +246,7 @@ function resume() {
       @touchstart="handleDragStart"
     >
       <template v-if="$slots.actionIcon" #icon>
-        <slot :is-passing="state.isPassing" name="actionIcon"></slot>
+        <slot :is-passing="state.isPassing" name="actionIcon" />
       </template>
     </SliderCaptchaAction>
   </div>

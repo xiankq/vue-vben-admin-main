@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, useSlots } from 'vue';
-
 import { Eye, EyeOff } from '@vben-core/icons';
+
 import { cn } from '@vben-core/shared/utils';
+import { ref, useSlots } from 'vue';
 
 import { Input } from '../../ui';
 import PasswordStrength from './password-strength.vue';
@@ -29,7 +29,7 @@ const show = ref(false);
 </script>
 
 <template>
-  <div class="relative w-full">
+  <div class="w-full relative">
     <Input
       v-bind="$attrs"
       v-model="modelValue"
@@ -38,8 +38,8 @@ const show = ref(false);
     />
     <template v-if="passwordStrength">
       <PasswordStrength :password="modelValue" />
-      <p v-if="slots.strengthText" class="text-muted-foreground mt-1.5 text-xs">
-        <slot name="strengthText"> </slot>
+      <p v-if="slots.strengthText" class="text-muted-foreground text-xs mt-1.5">
+        <slot name="strengthText" />
       </p>
     </template>
     <div
@@ -47,7 +47,7 @@ const show = ref(false);
         'top-3': !!passwordStrength,
         'top-1/2 -translate-y-1/2 items-center': !passwordStrength,
       }"
-      class="hover:text-foreground text-foreground/60 absolute inset-y-0 right-0 flex cursor-pointer pr-3 text-lg leading-5"
+      class="hover:text-foreground text-foreground/60 text-lg leading-5 pr-3 flex cursor-pointer inset-y-0 right-0 absolute"
       @click="show = !show"
     >
       <Eye v-if="show" class="size-4" />

@@ -35,7 +35,8 @@ export class StateHandler {
     return new Promise((resolve, reject) => {
       if (this.condition) {
         resolve(); // 如果 condition 已经为 true，立即 resolve
-      } else {
+      }
+      else {
         this.resolveCondition = resolve;
         this.rejectCondition = reject;
       }

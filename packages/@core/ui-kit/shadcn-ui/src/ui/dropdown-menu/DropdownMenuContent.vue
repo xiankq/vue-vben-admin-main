@@ -4,8 +4,6 @@ import type {
   DropdownMenuContentProps,
 } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import {
@@ -13,6 +11,8 @@ import {
   DropdownMenuPortal,
   useForwardPropsEmits,
 } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = withDefaults(
   defineProps<DropdownMenuContentProps & { class?: any }>(),
@@ -42,7 +42,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         )
       "
     >
-      <slot></slot>
+      <slot />
     </DropdownMenuContent>
   </DropdownMenuPortal>
 </template>

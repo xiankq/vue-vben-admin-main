@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { CountToProps } from './types';
 
-import { computed, onMounted, ref, watch } from 'vue';
-
 import { isString } from '@vben-core/shared/utils';
 
 import { TransitionPresets, useTransition } from '@vueuse/core';
+
+import { computed, onMounted, ref, watch } from 'vue';
 
 const props = withDefaults(defineProps<CountToProps>(), {
   startVal: 0,
@@ -63,14 +63,15 @@ const numDec = computed(() => {
   );
 });
 </script>
+
 <template>
   <div class="count-to" v-bind="$attrs">
     <slot name="prefix">
       <div
+        v-if="prefix"
         class="count-to-prefix"
         :style="prefixStyle"
         :class="prefixClass"
-        v-if="prefix"
       >
         {{ prefix }}
       </div>
@@ -78,8 +79,8 @@ const numDec = computed(() => {
     <div class="count-to-main" :class="mainClass" :style="mainStyle">
       <span>{{ numMain }}</span>
       <span
-        class="count-to-main-decimal"
         v-if="decimals > 0"
+        class="count-to-main-decimal"
         :class="decimalClass"
         :style="decimalStyle"
       >
@@ -88,16 +89,17 @@ const numDec = computed(() => {
     </div>
     <slot name="suffix">
       <div
+        v-if="suffix"
         class="count-to-suffix"
         :style="suffixStyle"
         :class="suffixClass"
-        v-if="suffix"
       >
         {{ suffix }}
       </div>
     </slot>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .count-to {
   display: flex;

@@ -29,37 +29,42 @@ function checkPasswordStrength(password: string) {
   let strength = 0;
 
   // Check length
-  if (password.length >= 8) strength++;
+  if (password.length >= 8)
+    strength++;
 
   // Check for lowercase letters
-  if (/[a-z]/.test(password)) strength++;
+  if (/[a-z]/.test(password))
+    strength++;
 
   // Check for uppercase letters
-  if (/[A-Z]/.test(password)) strength++;
+  if (/[A-Z]/.test(password))
+    strength++;
 
   // Check for numbers
-  if (/\d/.test(password)) strength++;
+  if (/\d/.test(password))
+    strength++;
 
   // Check for special characters
-  if (/[^\da-z]/i.test(password)) strength++;
+  if (/[^\da-z]/i.test(password))
+    strength++;
 
   return strength;
 }
 </script>
 
 <template>
-  <div class="relative mt-2 flex items-center justify-between">
+  <div class="mt-2 flex items-center justify-between relative">
     <template v-for="index in 5" :key="index">
       <div
-        class="dark:bg-input-background bg-heavy relative mr-1 h-1.5 w-1/5 rounded-sm last:mr-0"
+        class="bg-heavy dark:bg-input-background mr-1 rounded-sm h-1.5 w-1/5 relative last:mr-0"
       >
         <span
           :style="{
             backgroundColor: currentColor,
             width: currentStrength >= index ? '100%' : '',
           }"
-          class="absolute left-0 h-full w-0 rounded-sm transition-all duration-500"
-        ></span>
+          class="rounded-sm h-full w-0 transition-all duration-500 left-0 absolute"
+        />
       </div>
     </template>
   </div>

@@ -25,17 +25,18 @@ function handleItemClick(menu: IDropdownMenuItem) {
   menu?.handler?.(props);
 }
 </script>
+
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger class="flex h-full items-center gap-1">
-      <slot></slot>
+    <DropdownMenuTrigger class="flex gap-1 h-full items-center">
+      <slot />
     </DropdownMenuTrigger>
     <DropdownMenuContent align="start">
       <DropdownMenuGroup>
         <template v-for="menu in menus" :key="menu.value">
           <DropdownMenuItem
             :disabled="menu.disabled"
-            class="data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground text-foreground/80 mb-1 cursor-pointer"
+            class="text-foreground/80 data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground mb-1 cursor-pointer"
             @click="handleItemClick(menu)"
           >
             <component :is="menu.icon" v-if="menu.icon" class="mr-2 size-4" />

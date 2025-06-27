@@ -5,11 +5,11 @@ import type {
   RouteLocationNormalizedLoadedGeneric,
 } from 'vue-router';
 
-import { computed } from 'vue';
-import { RouterView } from 'vue-router';
-
 import { preferences, usePreferences } from '@vben/preferences';
 import { getTabKey, storeToRefs, useTabbarStore } from '@vben/stores';
+
+import { computed } from 'vue';
+import { RouterView } from 'vue-router';
 
 import { IFrameRouterView } from '../../iframe';
 
@@ -18,8 +18,8 @@ defineOptions({ name: 'LayoutContent' });
 const tabbarStore = useTabbarStore();
 const { keepAlive } = usePreferences();
 
-const { getCachedTabs, getExcludeCachedTabs, renderRouteView } =
-  storeToRefs(tabbarStore);
+const { getCachedTabs, getExcludeCachedTabs, renderRouteView }
+  = storeToRefs(tabbarStore);
 
 /**
  * 是否使用动画
@@ -97,7 +97,7 @@ function transformComponent(
 </script>
 
 <template>
-  <div class="relative h-full">
+  <div class="h-full relative">
     <IFrameRouterView />
     <RouterView v-slot="{ Component, route }">
       <Transition

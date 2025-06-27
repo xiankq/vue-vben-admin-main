@@ -1,5 +1,7 @@
 import type { ExtendedModalApi, ModalApiOptions, ModalProps } from './modal';
 
+import { useStore } from '@vben-core/shared/store';
+
 import {
   defineComponent,
   h,
@@ -9,8 +11,6 @@ import {
   reactive,
   ref,
 } from 'vue';
-
-import { useStore } from '@vben-core/shared/store';
 
 import { ModalApi } from './modal-api';
 import VbenModal from './modal.vue';
@@ -63,7 +63,7 @@ export function useVbenModal<TParentModalProps extends ModalProps = ModalProps>(
             slots,
           );
       },
-      // eslint-disable-next-line vue/one-component-per-file
+
       {
         name: 'VbenParentModal',
         inheritAttrs: false,
@@ -115,7 +115,7 @@ export function useVbenModal<TParentModalProps extends ModalProps = ModalProps>(
           slots,
         );
     },
-    // eslint-disable-next-line vue/one-component-per-file
+
     {
       name: 'VbenModal',
       inheritAttrs: false,

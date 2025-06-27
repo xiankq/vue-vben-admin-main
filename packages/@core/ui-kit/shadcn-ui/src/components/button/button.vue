@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { VbenButtonProps } from './button';
 
-import { computed } from 'vue';
-
 import { LoaderCircle } from '@vben-core/icons';
-import { cn } from '@vben-core/shared/utils';
 
+import { cn } from '@vben-core/shared/utils';
 import { Primitive } from 'radix-vue';
+
+import { computed } from 'vue';
 
 import { buttonVariants } from '../../ui';
 
@@ -35,8 +35,8 @@ const isDisabled = computed(() => {
   >
     <LoaderCircle
       v-if="loading"
-      class="text-md mr-2 size-4 flex-shrink-0 animate-spin"
+      class="text-md mr-2 flex-shrink-0 size-4 animate-spin"
     />
-    <slot></slot>
+    <slot />
   </Primitive>
 </template>

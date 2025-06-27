@@ -22,7 +22,8 @@ class FileUploader {
         value.forEach((item, index) => {
           !isUndefined(item) && formData.append(`${key}[${index}]`, item);
         });
-      } else {
+      }
+      else {
         !isUndefined(value) && formData.append(key, value);
       }
     });

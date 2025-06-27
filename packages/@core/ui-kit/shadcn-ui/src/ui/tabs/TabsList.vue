@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { TabsListProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { TabsList } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<TabsListProps & { class?: any }>();
 
@@ -26,6 +26,6 @@ const delegatedProps = computed(() => {
       )
     "
   >
-    <slot></slot>
+    <slot />
   </TabsList>
 </template>

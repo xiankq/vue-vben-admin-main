@@ -47,11 +47,11 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div :class="theme" class="flex h-full items-center text-lg">
+  <div :class="theme" class="text-lg flex h-full items-center">
     <a
       :class="$attrs.class"
       :href="href"
-      class="flex h-full items-center gap-2 overflow-hidden px-3 text-lg leading-normal transition-all duration-500"
+      class="text-lg leading-normal px-3 flex gap-2 h-full transition-all duration-500 items-center overflow-hidden"
     >
       <VbenAvatar
         v-if="src"
@@ -59,11 +59,11 @@ withDefaults(defineProps<Props>(), {
         :src="src"
         :size="logoSize"
         :fit="fit"
-        class="relative rounded-none bg-transparent"
+        class="rounded-none bg-transparent relative"
       />
       <template v-if="!collapsed">
         <slot name="text">
-          <span class="text-foreground truncate text-nowrap font-semibold">
+          <span class="text-foreground font-semibold text-nowrap truncate">
             {{ text }}
           </span>
         </slot>

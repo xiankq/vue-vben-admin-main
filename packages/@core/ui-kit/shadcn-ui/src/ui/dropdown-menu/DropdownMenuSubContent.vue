@@ -4,11 +4,11 @@ import type {
   DropdownMenuSubContentProps,
 } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { DropdownMenuSubContent, useForwardPropsEmits } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<DropdownMenuSubContentProps & { class?: any }>();
 const emits = defineEmits<DropdownMenuSubContentEmits>();
@@ -32,6 +32,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       )
     "
   >
-    <slot></slot>
+    <slot />
   </DropdownMenuSubContent>
 </template>

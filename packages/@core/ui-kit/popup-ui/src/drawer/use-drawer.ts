@@ -4,6 +4,8 @@ import type {
   ExtendedDrawerApi,
 } from './drawer';
 
+import { useStore } from '@vben-core/shared/store';
+
 import {
   defineComponent,
   h,
@@ -13,8 +15,6 @@ import {
   reactive,
   ref,
 } from 'vue';
-
-import { useStore } from '@vben-core/shared/store';
 
 import { DrawerApi } from './drawer-api';
 import VbenDrawer from './drawer.vue';
@@ -64,7 +64,7 @@ export function useVbenDrawer<
             slots,
           );
       },
-      // eslint-disable-next-line vue/one-component-per-file
+
       {
         name: 'VbenParentDrawer',
         inheritAttrs: false,
@@ -107,7 +107,7 @@ export function useVbenDrawer<
       return () =>
         h(VbenDrawer, { ...props, ...attrs, drawerApi: extendedApi }, slots);
     },
-    // eslint-disable-next-line vue/one-component-per-file
+
     {
       name: 'VbenDrawer',
       inheritAttrs: false,

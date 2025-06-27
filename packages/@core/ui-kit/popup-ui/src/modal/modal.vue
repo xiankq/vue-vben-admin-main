@@ -2,21 +2,11 @@
 import type { ExtendedModalApi, ModalProps } from './modal';
 
 import {
-  computed,
-  nextTick,
-  onDeactivated,
-  provide,
-  ref,
-  unref,
-  useId,
-  watch,
-} from 'vue';
-
-import {
   useIsMobile,
   usePriorityValues,
   useSimpleLocale,
 } from '@vben-core/composables';
+
 import { Expand, Shrink } from '@vben-core/icons';
 import {
   Dialog,
@@ -34,6 +24,16 @@ import {
 import { ELEMENT_ID_MAIN_CONTENT } from '@vben-core/shared/constants';
 import { globalShareState } from '@vben-core/shared/global-state';
 import { cn } from '@vben-core/shared/utils';
+import {
+  computed,
+  nextTick,
+  onDeactivated,
+  provide,
+  ref,
+  unref,
+  useId,
+  watch,
+} from 'vue';
 
 import { useModalDraggable } from './use-modal-draggable';
 
@@ -126,9 +126,11 @@ watch(
   async (v) => {
     if (v) {
       isClosed.value = false;
-      if (!firstOpened.value) firstOpened.value = true;
+      if (!firstOpened.value)
+        firstOpened.value = true;
       await nextTick();
-      if (!contentRef.value) return;
+      if (!contentRef.value)
+        return;
       const innerContentRef = contentRef.value.getContentRef();
       dialogRef.value = innerContentRef.$el;
       // reopen modal reassign value
@@ -192,9 +194,9 @@ function pointerDownOutside(e: Event) {
   const target = e.target as HTMLElement;
   const isDismissableModal = target?.dataset.dismissableModal;
   if (
-    !closeOnClickModal.value ||
-    isDismissableModal !== id ||
-    submitting.value
+    !closeOnClickModal.value
+    || isDismissableModal !== id
+    || submitting.value
   ) {
     e.preventDefault();
     e.stopPropagation();
@@ -215,6 +217,7 @@ function handleClosed() {
   props.modalApi?.onClosed();
 }
 </script>
+
 <template>
   <Dialog
     :modal="false"
@@ -236,7 +239,7 @@ function handleClosed() {
               shouldFullscreen,
             'top-1/2 !-translate-y-1/2': centered && !shouldFullscreen,
             'duration-300': !dragging,
-            hidden: isClosed,
+            'hidden': isClosed,
           },
         )
       "
@@ -247,9 +250,9 @@ function handleClosed() {
       :z-index="zIndex"
       :overlay-blur="overlayBlur"
       close-class="top-3"
+      :close-disabled="submitting"
       @close-auto-focus="handleFocusOutside"
       @closed="handleClosed"
-      :close-disabled="submitting"
       @escape-key-down="escapeKeyDown"
       @focus-outside="handleFocusOutside"
       @interact-outside="interactOutside"
@@ -264,7 +267,7 @@ function handleClosed() {
             'px-5 py-4',
             {
               'border-b': bordered,
-              hidden: !header,
+              'hidden': !header,
               'cursor-move select-none': shouldDraggable,
             },
             headerClass,
@@ -300,12 +303,12 @@ function handleClosed() {
           })
         "
       >
-        <slot></slot>
+        <slot />
       </div>
       <VbenLoading v-if="showLoading || submitting" spinning />
       <VbenIconButton
         v-if="fullscreenButton"
-        class="hover:bg-accent hover:text-accent-foreground text-foreground/80 flex-center absolute right-10 top-3 hidden size-6 rounded-full px-1 text-lg opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none sm:block"
+        class="flex-center text-foreground/80 hover:bg-accent hover:text-accent-foreground text-lg px-1 rounded-full opacity-70 size-6 hidden transition-opacity right-10 top-3 absolute focus:outline-none hover:opacity-100 sm:block disabled:pointer-events-none"
         @click="handleFullscreen"
       >
         <Shrink v-if="fullscreen" class="size-3.5" />
@@ -325,7 +328,7 @@ function handleClosed() {
           )
         "
       >
-        <slot name="prepend-footer"></slot>
+        <slot name="prepend-footer" />
         <slot name="footer">
           <component
             :is="components.DefaultButton || VbenButton"
@@ -338,7 +341,7 @@ function handleClosed() {
               {{ cancelText || $t('cancel') }}
             </slot>
           </component>
-          <slot name="center-footer"></slot>
+          <slot name="center-footer" />
           <component
             :is="components.PrimaryButton || VbenButton"
             v-if="showConfirmButton"
@@ -351,7 +354,7 @@ function handleClosed() {
             </slot>
           </component>
         </slot>
-        <slot name="append-footer"></slot>
+        <slot name="append-footer" />
       </DialogFooter>
     </DialogContent>
   </Dialog>

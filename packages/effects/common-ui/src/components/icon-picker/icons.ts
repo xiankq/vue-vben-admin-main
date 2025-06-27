@@ -37,7 +37,7 @@ export async function fetchIconsData(prefix: string): Promise<string[]> {
       const response: IconifyResponse = await fetch(
         `https://api.iconify.design/collection?prefix=${prefix}`,
         { signal: controller.signal },
-      ).then((res) => res.json());
+      ).then(res => res.json());
       clearTimeout(timeoutId);
       const list = response.uncategorized || [];
       if (response.categories) {
@@ -45,8 +45,9 @@ export async function fetchIconsData(prefix: string): Promise<string[]> {
           list.push(...(response.categories[category] || []));
         }
       }
-      ICONS_MAP[prefix] = list.map((v) => `${prefix}:${v}`);
-    } catch (error) {
+      ICONS_MAP[prefix] = list.map(v => `${prefix}:${v}`);
+    }
+    catch (error) {
       console.error(`Failed to fetch icons for prefix ${prefix}:`, error);
       return [] as string[];
     }

@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import type { NotificationItem } from './types';
 
-import { Bell, MailCheck } from '@vben/icons';
-import { $t } from '@vben/locales';
-
 import {
   VbenButton,
   VbenIconButton,
   VbenPopover,
   VbenScrollbar,
 } from '@vben-core/shadcn-ui';
+import { Bell, MailCheck } from '@vben/icons';
+
+import { $t } from '@vben/locales';
 
 import { useToggle } from '@vueuse/core';
 
@@ -61,6 +61,7 @@ function handleClick(item: NotificationItem) {
   emit('read', item);
 }
 </script>
+
 <template>
   <VbenPopover
     v-model:open="open"
@@ -68,19 +69,21 @@ function handleClick(item: NotificationItem) {
   >
     <template #trigger>
       <div class="flex-center mr-2 h-full" @click.stop="toggle()">
-        <VbenIconButton class="bell-button text-foreground relative">
+        <VbenIconButton class="text-foreground bell-button relative">
           <span
             v-if="dot"
-            class="bg-primary absolute right-0.5 top-0.5 h-2 w-2 rounded"
-          ></span>
+            class="bg-primary rounded h-2 w-2 right-0.5 top-0.5 absolute"
+          />
           <Bell class="size-4" />
         </VbenIconButton>
       </div>
     </template>
 
     <div class="relative">
-      <div class="flex items-center justify-between p-4 py-3">
-        <div class="text-foreground">{{ $t('ui.widgets.notifications') }}</div>
+      <div class="p-4 py-3 flex items-center justify-between">
+        <div class="text-foreground">
+          {{ $t('ui.widgets.notifications') }}
+        </div>
         <VbenIconButton
           :disabled="notifications.length <= 0"
           :tooltip="$t('ui.widgets.markAllAsRead')"
@@ -90,32 +93,34 @@ function handleClick(item: NotificationItem) {
         </VbenIconButton>
       </div>
       <VbenScrollbar v-if="notifications.length > 0">
-        <ul class="!flex max-h-[360px] w-full flex-col">
+        <ul class="flex-col max-h-[360px] w-full !flex">
           <template v-for="item in notifications" :key="item.title">
             <li
-              class="hover:bg-accent border-border relative flex w-full cursor-pointer items-start gap-5 border-t px-3 py-3"
+              class="hover:bg-accent border-border px-3 py-3 border-t flex gap-5 w-full cursor-pointer items-start relative"
               @click="handleClick(item)"
             >
               <span
                 v-if="!item.isRead"
-                class="bg-primary absolute right-2 top-2 h-2 w-2 rounded"
-              ></span>
+                class="bg-primary rounded h-2 w-2 right-2 top-2 absolute"
+              />
 
               <span
-                class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full"
+                class="rounded-full flex shrink-0 h-10 w-10 relative overflow-hidden"
               >
                 <img
                   :src="item.avatar"
-                  class="aspect-square h-full w-full object-cover"
+                  class="h-full w-full aspect-square object-cover"
                   role="img"
-                />
+                >
               </span>
-              <div class="flex flex-col gap-1 leading-none">
-                <p class="font-semibold">{{ item.title }}</p>
-                <p class="text-muted-foreground my-1 line-clamp-2 text-xs">
+              <div class="leading-none flex flex-col gap-1">
+                <p class="font-semibold">
+                  {{ item.title }}
+                </p>
+                <p class="text-muted-foreground text-xs my-1 line-clamp-2">
                   {{ item.message }}
                 </p>
-                <p class="text-muted-foreground line-clamp-2 text-xs">
+                <p class="text-muted-foreground text-xs line-clamp-2">
                   {{ item.date }}
                 </p>
               </div>
@@ -131,7 +136,7 @@ function handleClick(item: NotificationItem) {
       </template>
 
       <div
-        class="border-border flex items-center justify-between border-t px-4 py-3"
+        class="border-border px-4 py-3 border-t flex items-center justify-between"
       >
         <VbenButton
           :disabled="notifications.length <= 0"

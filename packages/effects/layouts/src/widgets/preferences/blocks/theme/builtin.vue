@@ -2,14 +2,14 @@
 import type { BuiltinThemePreset } from '@vben/preferences';
 import type { BuiltinThemeType } from '@vben/types';
 
-import { computed, ref, watch } from 'vue';
-
 import { UserRoundPen } from '@vben/icons';
+
 import { $t } from '@vben/locales';
 import { BUILT_IN_THEME_PRESETS } from '@vben/preferences';
 import { convertToHsl, TinyColor } from '@vben/utils';
-
 import { useThrottleFn } from '@vueuse/core';
+
+import { computed, ref, watch } from 'vue';
 
 defineOptions({
   name: 'PreferenceBuiltinTheme',
@@ -106,7 +106,7 @@ watch(
   () => [modelValue.value, props.isDark] as [BuiltinThemeType, boolean],
   ([themeType, isDark]) => {
     const theme = builtinThemePresets.value.find(
-      (item) => item.type === themeType,
+      item => item.type === themeType,
     );
     if (theme) {
       const primaryColor = isDark
@@ -120,9 +120,9 @@ watch(
 </script>
 
 <template>
-  <div class="flex w-full flex-wrap justify-between">
+  <div class="flex flex-wrap w-full justify-between">
     <template v-for="theme in builtinThemePresets" :key="theme.type">
-      <div class="flex cursor-pointer flex-col" @click="handleSelect(theme)">
+      <div class="flex flex-col cursor-pointer" @click="handleSelect(theme)">
         <div
           :class="{
             'outline-box-active': theme.type === modelValue,
@@ -132,27 +132,27 @@ watch(
           <template v-if="theme.type !== 'custom'">
             <div
               :style="{ backgroundColor: theme.color }"
-              class="mx-10 my-2 size-5 rounded-md"
-            ></div>
+              class="mx-10 my-2 rounded-md size-5"
+            />
           </template>
           <template v-else>
-            <div class="size-full px-10 py-2" @click.stop="selectColor">
-              <div class="flex-center relative size-5 rounded-sm">
+            <div class="px-10 py-2 size-full" @click.stop="selectColor">
+              <div class="flex-center rounded-sm size-5 relative">
                 <UserRoundPen
-                  class="absolute z-10 size-5 opacity-60 group-hover:opacity-100"
+                  class="opacity-60 size-5 absolute z-10 group-hover:opacity-100"
                 />
                 <input
                   ref="colorInput"
                   :value="inputValue"
-                  class="absolute inset-0 opacity-0"
+                  class="opacity-0 inset-0 absolute"
                   type="color"
                   @input="handleInputChange"
-                />
+                >
               </div>
             </div>
           </template>
         </div>
-        <div class="text-muted-foreground my-2 text-center text-xs">
+        <div class="text-muted-foreground text-xs my-2 text-center">
           {{ typeView(theme.type) }}
         </div>
       </div>

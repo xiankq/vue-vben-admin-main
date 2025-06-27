@@ -31,8 +31,8 @@ export function useLayout(props: VbenLayoutProps) {
    */
   const isMixedNav = computed(
     () =>
-      currentLayout.value === 'mixed-nav' ||
-      currentLayout.value === 'header-sidebar-nav',
+      currentLayout.value === 'mixed-nav'
+      || currentLayout.value === 'header-sidebar-nav',
   );
 
   /**

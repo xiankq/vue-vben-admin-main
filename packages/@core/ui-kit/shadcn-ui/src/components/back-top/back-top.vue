@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type { BacktopProps } from './backtop';
 
-import { computed } from 'vue';
-
 import { ArrowUpToLine } from '@vben-core/icons';
+
+import { computed } from 'vue';
 
 import { VbenButton } from '../button';
 import { useBackTop } from './use-backtop';
@@ -27,12 +27,13 @@ const backTopStyle = computed(() => ({
 
 const { handleClick, visible } = useBackTop(props);
 </script>
+
 <template>
   <transition name="fade-down">
     <VbenButton
       v-if="visible"
       :style="backTopStyle"
-      class="dark:bg-accent dark:hover:bg-heavy bg-background hover:bg-heavy data shadow-float z-popup fixed bottom-10 size-10 rounded-full duration-500"
+      class="bg-background data shadow-float z-popup hover:bg-heavy dark:bg-accent dark:hover:bg-heavy rounded-full size-10 duration-500 bottom-10 fixed"
       size="icon"
       variant="icon"
       @click="handleClick"

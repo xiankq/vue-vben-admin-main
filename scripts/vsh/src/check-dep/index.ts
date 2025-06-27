@@ -78,10 +78,10 @@ function cleanDepcheckResult(unused: DepcheckResult): void {
  * @param unused - 依赖检查结果
  */
 function formatDepcheckResult(pkgName: string, unused: DepcheckResult): void {
-  const hasIssues =
-    Object.keys(unused.missing).length > 0 ||
-    unused.dependencies.length > 0 ||
-    unused.devDependencies.length > 0;
+  const hasIssues
+    = Object.keys(unused.missing).length > 0
+      || unused.dependencies.length > 0
+      || unused.devDependencies.length > 0;
 
   if (!hasIssues) {
     return;
@@ -93,18 +93,18 @@ function formatDepcheckResult(pkgName: string, unused: DepcheckResult): void {
     console.log('❌ Missing dependencies:');
     Object.entries(unused.missing).forEach(([dep, files]) => {
       console.log(`  - ${dep}:`);
-      files.forEach((file) => console.log(`    → ${file}`));
+      files.forEach(file => console.log(`    → ${file}`));
     });
   }
 
   if (unused.dependencies.length > 0) {
     console.log('⚠️ Unused dependencies:');
-    unused.dependencies.forEach((dep) => console.log(`  - ${dep}`));
+    unused.dependencies.forEach(dep => console.log(`  - ${dep}`));
   }
 
   if (unused.devDependencies.length > 0) {
     console.log('⚠️ Unused devDependencies:');
-    unused.devDependencies.forEach((dep) => console.log(`  - ${dep}`));
+    unused.devDependencies.forEach(dep => console.log(`  - ${dep}`));
   }
 }
 
@@ -137,10 +137,10 @@ async function runDepcheck(config: DepcheckConfig = {}): Promise<void> {
 
         cleanDepcheckResult(unused);
 
-        const pkgHasIssues =
-          Object.keys(unused.missing).length > 0 ||
-          unused.dependencies.length > 0 ||
-          unused.devDependencies.length > 0;
+        const pkgHasIssues
+          = Object.keys(unused.missing).length > 0
+            || unused.dependencies.length > 0
+            || unused.devDependencies.length > 0;
 
         if (pkgHasIssues) {
           hasIssues = true;
@@ -152,7 +152,8 @@ async function runDepcheck(config: DepcheckConfig = {}): Promise<void> {
     if (!hasIssues) {
       console.log('\n✅ Dependency check completed, no issues found');
     }
-  } catch (error) {
+  }
+  catch (error) {
     console.error(
       '❌ Dependency check failed:',
       error instanceof Error ? error.message : error,

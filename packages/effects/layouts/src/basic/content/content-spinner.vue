@@ -7,6 +7,7 @@ defineOptions({ name: 'LayoutContentSpinner' });
 
 const { spinning } = useContentSpinner();
 </script>
+
 <template>
   <VbenSpinner :spinning="spinning" />
 </template>

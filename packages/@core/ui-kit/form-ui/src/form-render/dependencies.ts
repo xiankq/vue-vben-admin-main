@@ -4,11 +4,11 @@ import type {
   MaybeComponentProps,
 } from '../types';
 
-import { computed, ref, watch } from 'vue';
-
 import { isBoolean, isFunction } from '@vben-core/shared/utils';
 
 import { useFormValues } from 'vee-validate';
+
+import { computed, ref, watch } from 'vue';
 
 import { injectRenderFormProps } from './context';
 
@@ -73,19 +73,25 @@ export default function useDependencies(
       if (isFunction(whenIf)) {
         isIf.value = !!(await whenIf(formValues, formApi));
         // 不渲染
-        if (!isIf.value) return;
-      } else if (isBoolean(whenIf)) {
+        if (!isIf.value)
+          return;
+      }
+      else if (isBoolean(whenIf)) {
         isIf.value = whenIf;
-        if (!isIf.value) return;
+        if (!isIf.value)
+          return;
       }
 
       // 2. 判断show，如果show为false，则隐藏
       if (isFunction(show)) {
         isShow.value = !!(await show(formValues, formApi));
-        if (!isShow.value) return;
-      } else if (isBoolean(show)) {
+        if (!isShow.value)
+          return;
+      }
+      else if (isBoolean(show)) {
         isShow.value = show;
-        if (!isShow.value) return;
+        if (!isShow.value)
+          return;
       }
 
       if (isFunction(componentProps)) {
@@ -98,7 +104,8 @@ export default function useDependencies(
 
       if (isFunction(disabled)) {
         isDisabled.value = !!(await disabled(formValues, formApi));
-      } else if (isBoolean(disabled)) {
+      }
+      else if (isBoolean(disabled)) {
         isDisabled.value = disabled;
       }
 

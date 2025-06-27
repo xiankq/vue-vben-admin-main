@@ -1,21 +1,21 @@
+import type { LocaleSetupOptions, SupportedLanguagesType } from '@vben/locales';
+
 import type { Language } from 'element-plus/es/locale';
 
 import type { App } from 'vue';
-
-import type { LocaleSetupOptions, SupportedLanguagesType } from '@vben/locales';
-
-import { ref } from 'vue';
 
 import {
   $t,
   setupI18n as coreSetup,
   loadLocalesMapFromDir,
 } from '@vben/locales';
-import { preferences } from '@vben/preferences';
 
+import { preferences } from '@vben/preferences';
 import dayjs from 'dayjs';
+
 import enLocale from 'element-plus/es/locale/lang/en';
 import defaultLocale from 'element-plus/es/locale/lang/zh-cn';
+import { ref } from 'vue';
 
 const elementLocale = ref<Language>(defaultLocale);
 
@@ -68,7 +68,8 @@ async function loadDayjsLocale(lang: SupportedLanguagesType) {
   }
   if (locale) {
     dayjs.locale(locale);
-  } else {
+  }
+  else {
     console.error(`Failed to load dayjs locale for ${lang}`);
   }
 }

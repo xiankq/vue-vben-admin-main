@@ -6,9 +6,6 @@ import type {
   WorkbenchTrendItem,
 } from '@vben/common-ui';
 
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-
 import {
   AnalysisChartCard,
   WorkbenchHeader,
@@ -18,8 +15,11 @@ import {
   WorkbenchTrends,
 } from '@vben/common-ui';
 import { preferences } from '@vben/preferences';
+
 import { useUserStore } from '@vben/stores';
 import { openWindow } from '@vben/utils';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import AnalyticsVisitsSource from '../analytics/analytics-visits-source.vue';
 
@@ -227,7 +227,8 @@ function navTo(nav: WorkbenchProjectItem | WorkbenchQuickNavItem) {
     router.push(nav.url).catch((error) => {
       console.error('Navigation failed:', error);
     });
-  } else {
+  }
+  else {
     console.warn(`Unknown URL for navigation item: ${nav.title} -> ${nav.url}`);
   }
 }
@@ -241,7 +242,9 @@ function navTo(nav: WorkbenchProjectItem | WorkbenchQuickNavItem) {
       <template #title>
         早安, {{ userStore.userInfo?.realName }}, 开始您一天的工作吧！
       </template>
-      <template #description> 今日晴，20℃ - 32℃！ </template>
+      <template #description>
+        今日晴，20℃ - 32℃！
+      </template>
     </WorkbenchHeader>
 
     <div class="mt-5 flex flex-col lg:flex-row">

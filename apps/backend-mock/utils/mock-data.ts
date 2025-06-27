@@ -82,7 +82,7 @@ const dashboardMenus = [
   },
 ];
 
-const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
+function createDemosMenus(role: 'admin' | 'super' | 'user') {
   const roleWithMenus = {
     admin: {
       component: '/demos/access/admin-visible',
@@ -169,7 +169,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
       ],
     },
   ];
-};
+}
 
 export const MOCK_MENUS = [
   {

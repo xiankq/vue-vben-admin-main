@@ -11,6 +11,7 @@ vi.mock('@vben-core/shared/store', () => {
       get state() {
         return this._state;
       }
+
       private _state: ModalState;
 
       private options: any;
@@ -89,7 +90,7 @@ describe('modalApi', () => {
   });
 
   it('should set state correctly using a function', () => {
-    modalApi.setState((prev) => ({ ...prev, confirmText: 'Yes' }));
+    modalApi.setState(prev => ({ ...prev, confirmText: 'Yes' }));
     expect(modalApi.store.state.confirmText).toBe('Yes');
   });
 

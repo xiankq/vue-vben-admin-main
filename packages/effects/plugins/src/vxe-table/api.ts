@@ -1,12 +1,11 @@
-import type { VxeGridInstance } from 'vxe-table';
-
 import type { ExtendedFormApi } from '@vben-core/form-ui';
+
+import type { VxeGridInstance } from 'vxe-table';
 
 import type { VxeGridProps } from './types';
 
-import { toRaw } from 'vue';
-
 import { Store } from '@vben-core/shared/store';
+
 import {
   bindMethods,
   isBoolean,
@@ -14,6 +13,7 @@ import {
   mergeWithArrayOverride,
   StateHandler,
 } from '@vben-core/shared/utils';
+import { toRaw } from 'vue';
 
 function getDefaultState(): VxeGridProps {
   return {
@@ -70,7 +70,8 @@ export class VxeGridApi<T extends Record<string, any> = any> {
   async query(params: Record<string, any> = {}) {
     try {
       await this.grid.commitProxy('query', toRaw(params));
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Error occurred while querying:', error);
     }
   }
@@ -78,7 +79,8 @@ export class VxeGridApi<T extends Record<string, any> = any> {
   async reload(params: Record<string, any> = {}) {
     try {
       await this.grid.commitProxy('reload', toRaw(params));
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Error occurred while reloading:', error);
     }
   }
@@ -106,8 +108,9 @@ export class VxeGridApi<T extends Record<string, any> = any> {
       this.store.setState((prev) => {
         return mergeWithArrayOverride(stateOrFn(prev), prev);
       });
-    } else {
-      this.store.setState((prev) => mergeWithArrayOverride(stateOrFn, prev));
+    }
+    else {
+      this.store.setState(prev => mergeWithArrayOverride(stateOrFn, prev));
     }
   }
 

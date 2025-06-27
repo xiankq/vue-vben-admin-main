@@ -3,6 +3,7 @@ import { useScrollLock } from '@vben-core/composables';
 
 useScrollLock();
 </script>
+
 <template>
-  <div class="bg-overlay z-popup inset-0"></div>
+  <div class="bg-overlay z-popup inset-0" />
 </template>

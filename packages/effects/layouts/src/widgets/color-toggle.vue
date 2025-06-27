@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { BuiltinThemeType } from '@vben/types';
 
+import { VbenIconButton } from '@vben-core/shadcn-ui';
 import { Palette } from '@vben/icons';
+
 import {
   COLOR_PRESETS,
   preferences,
   updatePreferences,
 } from '@vben/preferences';
-
-import { VbenIconButton } from '@vben-core/shadcn-ui';
 
 defineOptions({
   name: 'AuthenticationColorToggle',
@@ -25,9 +25,9 @@ function handleUpdate(colorPrimary: string, type: BuiltinThemeType) {
 </script>
 
 <template>
-  <div class="group relative flex items-center overflow-hidden">
+  <div class="group flex items-center relative overflow-hidden">
     <div
-      class="flex w-0 overflow-hidden transition-all duration-500 ease-out group-hover:w-60"
+      class="flex w-0 transition-all duration-500 ease-out overflow-hidden group-hover:w-60"
     >
       <template v-for="preset in COLOR_PRESETS" :key="preset.color">
         <VbenIconButton
@@ -36,11 +36,11 @@ function handleUpdate(colorPrimary: string, type: BuiltinThemeType) {
         >
           <div
             :style="{ backgroundColor: preset.color }"
-            class="flex-center relative size-5 rounded-full hover:scale-110"
+            class="flex-center rounded-full size-5 relative hover:scale-110"
           >
             <svg
               v-if="preferences.theme.builtinType === preset.type"
-              class="h-3.5 w-3.5 text-white"
+              class="text-white h-3.5 w-3.5"
               height="1em"
               viewBox="0 0 15 15"
               width="1em"

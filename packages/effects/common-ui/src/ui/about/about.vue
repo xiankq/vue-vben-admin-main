@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AboutProps, DescriptionItem } from './about';
 
-import { h } from 'vue';
+import { VbenRenderContent } from '@vben-core/shadcn-ui';
 
 import {
   VBEN_DOC_URL,
@@ -9,7 +9,7 @@ import {
   VBEN_PREVIEW_URL,
 } from '@vben/constants';
 
-import { VbenRenderContent } from '@vben-core/shadcn-ui';
+import { h } from 'vue';
 
 import { Page } from '../../components';
 
@@ -42,12 +42,13 @@ declare global {
   };
 }
 
-const renderLink = (href: string, text: string) =>
-  h(
+function renderLink(href: string, text: string) {
+  return h(
     'a',
     { href, target: '_blank', class: 'vben-link' },
     { default: () => text },
   );
+}
 
 const {
   authorEmail,
@@ -100,12 +101,12 @@ const vbenDescriptionItems: DescriptionItem[] = [
   },
 ];
 
-const dependenciesItems = Object.keys(dependencies).map((key) => ({
+const dependenciesItems = Object.keys(dependencies).map(key => ({
   content: dependencies[key],
   title: key,
 }));
 
-const devDependenciesItems = Object.keys(devDependencies).map((key) => ({
+const devDependenciesItems = Object.keys(devDependencies).map(key => ({
   content: devDependencies[key],
   title: key,
 }));
@@ -114,7 +115,7 @@ const devDependenciesItems = Object.keys(devDependencies).map((key) => ({
 <template>
   <Page :title="title">
     <template #description>
-      <p class="text-foreground mt-3 text-sm leading-6">
+      <p class="text-foreground text-sm leading-6 mt-3">
         <a :href="VBEN_GITHUB_URL" class="vben-link" target="_blank">
           {{ name }}
         </a>
@@ -123,16 +124,18 @@ const devDependenciesItems = Object.keys(devDependencies).map((key) => ({
     </template>
     <div class="card-box p-5">
       <div>
-        <h5 class="text-foreground text-lg">基本信息</h5>
+        <h5 class="text-foreground text-lg">
+          基本信息
+        </h5>
       </div>
       <div class="mt-4">
-        <dl class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <dl class="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3">
           <template v-for="item in vbenDescriptionItems" :key="item.title">
-            <div class="border-border border-t px-4 py-6 sm:col-span-1 sm:px-0">
-              <dt class="text-foreground text-sm font-medium leading-6">
+            <div class="border-border px-4 py-6 border-t sm:px-0 sm:col-span-1">
+              <dt class="text-foreground text-sm leading-6 font-medium">
                 {{ item.title }}
               </dt>
-              <dd class="text-foreground mt-1 text-sm leading-6 sm:mt-2">
+              <dd class="text-foreground text-sm leading-6 mt-1 sm:mt-2">
                 <VbenRenderContent :content="item.content" />
               </dd>
             </div>
@@ -143,16 +146,18 @@ const devDependenciesItems = Object.keys(devDependencies).map((key) => ({
 
     <div class="card-box mt-6 p-5">
       <div>
-        <h5 class="text-foreground text-lg">生产环境依赖</h5>
+        <h5 class="text-foreground text-lg">
+          生产环境依赖
+        </h5>
       </div>
       <div class="mt-4">
-        <dl class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <dl class="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3">
           <template v-for="item in dependenciesItems" :key="item.title">
-            <div class="border-border border-t px-4 py-3 sm:col-span-1 sm:px-0">
+            <div class="border-border px-4 py-3 border-t sm:px-0 sm:col-span-1">
               <dt class="text-foreground text-sm">
                 {{ item.title }}
               </dt>
-              <dd class="text-foreground/80 mt-1 text-sm sm:mt-2">
+              <dd class="text-foreground/80 text-sm mt-1 sm:mt-2">
                 <VbenRenderContent :content="item.content" />
               </dd>
             </div>
@@ -162,16 +167,18 @@ const devDependenciesItems = Object.keys(devDependencies).map((key) => ({
     </div>
     <div class="card-box mt-6 p-5">
       <div>
-        <h5 class="text-foreground text-lg">开发环境依赖</h5>
+        <h5 class="text-foreground text-lg">
+          开发环境依赖
+        </h5>
       </div>
       <div class="mt-4">
-        <dl class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <dl class="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3">
           <template v-for="item in devDependenciesItems" :key="item.title">
-            <div class="border-border border-t px-4 py-3 sm:col-span-1 sm:px-0">
+            <div class="border-border px-4 py-3 border-t sm:px-0 sm:col-span-1">
               <dt class="text-foreground text-sm">
                 {{ item.title }}
               </dt>
-              <dd class="text-foreground/80 mt-1 text-sm sm:mt-2">
+              <dd class="text-foreground/80 text-sm mt-1 sm:mt-2">
                 <VbenRenderContent :content="item.content" />
               </dd>
             </div>

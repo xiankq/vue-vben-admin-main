@@ -1,39 +1,39 @@
-import type { FieldOptions, FormContext, GenericObject } from 'vee-validate';
-import type { ZodTypeAny } from 'zod';
-
-import type { Component, HtmlHTMLAttributes, Ref } from 'vue';
-
 import type { VbenButtonProps } from '@vben-core/shadcn-ui';
 import type { ClassType, MaybeComputedRef } from '@vben-core/typings';
+
+import type { FieldOptions, FormContext, GenericObject } from 'vee-validate';
+
+import type { Component, HtmlHTMLAttributes, Ref } from 'vue';
+import type { ZodTypeAny } from 'zod';
 
 import type { FormApi } from './form-api';
 
 export type FormLayout = 'horizontal' | 'vertical';
 
-export type BaseFormComponentType =
-  | 'DefaultButton'
-  | 'PrimaryButton'
-  | 'VbenCheckbox'
-  | 'VbenInput'
-  | 'VbenInputPassword'
-  | 'VbenPinInput'
-  | 'VbenSelect'
-  | (Record<never, never> & string);
+export type BaseFormComponentType
+  = | 'DefaultButton'
+    | 'PrimaryButton'
+    | 'VbenCheckbox'
+    | 'VbenInput'
+    | 'VbenInputPassword'
+    | 'VbenPinInput'
+    | 'VbenSelect'
+    | (Record<never, never> & string);
 
 type Breakpoints = '2xl:' | '3xl:' | '' | 'lg:' | 'md:' | 'sm:' | 'xl:';
 
 type GridCols = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
 
-export type WrapperClassType =
-  | `${Breakpoints}grid-cols-${GridCols}`
-  | (Record<never, never> & string);
+export type WrapperClassType
+  = | `${Breakpoints}grid-cols-${GridCols}`
+    | (Record<never, never> & string);
 
-export type FormItemClassType =
-  | `${Breakpoints}cols-end-${'auto' | GridCols}`
-  | `${Breakpoints}cols-span-${'auto' | 'full' | GridCols}`
-  | `${Breakpoints}cols-start-${'auto' | GridCols}`
-  | (Record<never, never> & string)
-  | WrapperClassType;
+export type FormItemClassType
+  = | `${Breakpoints}cols-end-${'auto' | GridCols}`
+    | `${Breakpoints}cols-span-${'auto' | 'full' | GridCols}`
+    | `${Breakpoints}cols-start-${'auto' | GridCols}`
+    | (Record<never, never> & string)
+    | WrapperClassType;
 
 export type FormFieldOptions = Partial<
   FieldOptions & {
@@ -54,12 +54,12 @@ export interface FormShape {
   rules?: ZodTypeAny;
 }
 
-export type MaybeComponentPropKey =
-  | 'options'
-  | 'placeholder'
-  | 'title'
-  | keyof HtmlHTMLAttributes
-  | (Record<never, never> & string);
+export type MaybeComponentPropKey
+  = | 'options'
+    | 'placeholder'
+    | 'title'
+    | keyof HtmlHTMLAttributes
+    | (Record<never, never> & string);
 
 export type MaybeComponentProps = { [K in MaybeComponentPropKey]?: any };
 
@@ -67,12 +67,12 @@ export type FormActions = FormContext<GenericObject>;
 
 export type CustomRenderType = (() => Component | string) | string;
 
-export type FormSchemaRuleType =
-  | 'required'
-  | 'selectRequired'
-  | null
-  | (Record<never, never> & string)
-  | ZodTypeAny;
+export type FormSchemaRuleType
+  = | 'required'
+    | 'selectRequired'
+    | null
+    | (Record<never, never> & string)
+    | ZodTypeAny;
 
 type FormItemDependenciesCondition<T = boolean | PromiseLike<boolean>> = (
   value: Partial<Record<string, any>>,
@@ -129,11 +129,11 @@ export interface FormItemDependencies {
   triggerFields: string[];
 }
 
-type ComponentProps =
-  | ((
-      value: Partial<Record<string, any>>,
-      actions: FormActions,
-    ) => MaybeComponentProps)
+type ComponentProps
+  = | ((
+    value: Partial<Record<string, any>>,
+    actions: FormActions,
+  ) => MaybeComponentProps)
   | MaybeComponentProps;
 
 export interface FormCommonConfig {
@@ -235,7 +235,7 @@ export type FieldMappingTime = [
 export type ArrayToStringFields = Array<
   | [string[], string?] // 嵌套数组格式，可选分隔符
   | string // 单个字段，使用默认分隔符
-  | string[] // 简单数组格式，最后一个元素可以是分隔符
+  | string[]
 >;
 
 export interface FormSchema<

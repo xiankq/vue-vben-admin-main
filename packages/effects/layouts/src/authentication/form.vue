@@ -6,9 +6,9 @@ defineOptions({
 
 <template>
   <div
-    class="flex-col-center dark:bg-background-deep bg-background relative px-6 py-10 lg:flex-initial lg:px-8"
+    class="flex-col-center bg-background dark:bg-background-deep px-6 py-10 relative lg:px-8 lg:flex-initial"
   >
-    <slot></slot>
+    <slot />
     <!-- Router View with Transition and KeepAlive -->
     <RouterView v-slot="{ Component, route }">
       <Transition appear mode="out-in" name="slide-right">
@@ -25,9 +25,9 @@ defineOptions({
     <!-- Footer Copyright -->
 
     <div
-      class="text-muted-foreground absolute bottom-3 flex text-center text-xs"
+      class="text-muted-foreground text-xs text-center flex bottom-3 absolute"
     >
-      <slot name="copyright"> </slot>
+      <slot name="copyright" />
     </div>
   </div>
 </template>

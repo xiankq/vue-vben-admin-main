@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { VbenFormProps } from './types';
 
-import { ref, watchEffect } from 'vue';
-
 import { useForwardPropsEmits } from '@vben-core/composables';
+
+import { ref, watchEffect } from 'vue';
 
 import FormActions from './components/form-actions.vue';
 import {
@@ -39,9 +39,9 @@ const { delegatedSlots, form } = useFormInitial(props);
 
 provideFormProps([props, form]);
 
-const handleUpdateCollapsed = (value: boolean) => {
+function handleUpdateCollapsed(value: boolean) {
   currentCollapsed.value = !!value;
-};
+}
 
 watchEffect(() => {
   currentCollapsed.value = props.collapsed;
@@ -62,7 +62,7 @@ watchEffect(() => {
       :key="slotName"
       #[slotName]="slotProps"
     >
-      <slot :name="slotName" v-bind="slotProps"></slot>
+      <slot :name="slotName" v-bind="slotProps" />
     </template>
     <template #default="slotProps">
       <slot v-bind="slotProps">

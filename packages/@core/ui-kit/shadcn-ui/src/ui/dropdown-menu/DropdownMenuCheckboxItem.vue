@@ -4,16 +4,16 @@ import type {
   DropdownMenuCheckboxItemProps,
 } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { Check } from 'lucide-vue-next';
+
 import {
   DropdownMenuCheckboxItem,
   DropdownMenuItemIndicator,
   useForwardPropsEmits,
 } from 'radix-vue';
+import { computed } from 'vue';
 
 const props = defineProps<DropdownMenuCheckboxItemProps & { class?: any }>();
 const emits = defineEmits<DropdownMenuCheckboxItemEmits>();
@@ -37,11 +37,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       )
     "
   >
-    <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span class="flex h-3.5 w-3.5 items-center left-2 justify-center absolute">
       <DropdownMenuItemIndicator>
         <Check class="h-4 w-4" />
       </DropdownMenuItemIndicator>
     </span>
-    <slot></slot>
+    <slot />
   </DropdownMenuCheckboxItem>
 </template>

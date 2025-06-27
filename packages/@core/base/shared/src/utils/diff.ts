@@ -3,7 +3,8 @@
 // 比较两个数组是否相等
 
 function arraysEqual<T>(a: T[], b: T[]): boolean {
-  if (a.length !== b.length) return false;
+  if (a.length !== b.length)
+    return false;
   const counter = new Map<T, number>();
   for (const value of a) {
     counter.set(value, (counter.get(value) || 0) + 1);
@@ -69,10 +70,10 @@ function diff<T extends Record<string, any>>(obj1: T, obj2: T): DiffResult<T> {
     }
 
     if (
-      typeof o1 === 'object' &&
-      typeof o2 === 'object' &&
-      o1 !== null &&
-      o2 !== null
+      typeof o1 === 'object'
+      && typeof o2 === 'object'
+      && o1 !== null
+      && o2 !== null
     ) {
       const diffResult: any = {};
 

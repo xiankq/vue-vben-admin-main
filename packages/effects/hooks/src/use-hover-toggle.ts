@@ -2,11 +2,11 @@ import type { Arrayable, MaybeElementRef } from '@vueuse/core';
 
 import type { Ref } from 'vue';
 
-import { computed, onUnmounted, ref, unref, watch } from 'vue';
-
 import { isFunction } from '@vben/utils';
 
 import { useElementHover } from '@vueuse/core';
+
+import { computed, onUnmounted, ref, unref, watch } from 'vue';
 
 interface HoverDelayOptions {
   /** 鼠标进入延迟时间 */
@@ -29,8 +29,8 @@ export function useHoverToggle(
   delay: (() => number) | HoverDelayOptions | number = DEFAULT_LEAVE_DELAY,
 ) {
   // 兼容旧版本API
-  const normalizedOptions: HoverDelayOptions =
-    typeof delay === 'number' || isFunction(delay)
+  const normalizedOptions: HoverDelayOptions
+    = typeof delay === 'number' || isFunction(delay)
       ? { enterDelay: DEFAULT_ENTER_DELAY, leaveDelay: delay }
       : {
           enterDelay: DEFAULT_ENTER_DELAY,
@@ -51,7 +51,7 @@ export function useHoverToggle(
     const isHover = useElementHover(eleRef);
     isHovers.push(isHover);
   });
-  const isOutsideAll = computed(() => isHovers.every((v) => !v.value));
+  const isOutsideAll = computed(() => isHovers.every(v => !v.value));
 
   function clearTimers() {
     if (enterTimer.value) {
@@ -74,20 +74,23 @@ export function useHoverToggle(
 
       if (delayTime <= 0) {
         value.value = true;
-      } else {
+      }
+      else {
         enterTimer.value = setTimeout(() => {
           value.value = true;
           enterTimer.value = undefined;
         }, delayTime);
       }
-    } else {
+    }
+    else {
       // 鼠标离开
       const leaveDelay = normalizedOptions.leaveDelay ?? DEFAULT_LEAVE_DELAY;
       const delayTime = isFunction(leaveDelay) ? leaveDelay() : leaveDelay;
 
       if (delayTime <= 0) {
         value.value = false;
-      } else {
+      }
+      else {
         leaveTimer.value = setTimeout(() => {
           value.value = false;
           leaveTimer.value = undefined;

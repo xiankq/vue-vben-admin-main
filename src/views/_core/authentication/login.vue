@@ -2,12 +2,12 @@
 import type { VbenFormSchema } from '@vben/common-ui';
 import type { BasicOption } from '@vben/types';
 
-import { computed, markRaw } from 'vue';
+import { useAuthStore } from '#/store';
 
 import { AuthenticationLogin, SliderCaptcha, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
-import { useAuthStore } from '#/store';
+import { computed, markRaw } from 'vue';
 
 defineOptions({ name: 'Login' });
 
@@ -53,7 +53,7 @@ const formSchema = computed((): VbenFormSchema[] => {
         trigger(values, form) {
           if (values.selectAccount) {
             const findUser = MOCK_USER_OPTIONS.find(
-              (item) => item.value === values.selectAccount,
+              item => item.value === values.selectAccount,
             );
             if (findUser) {
               form.setValues({
@@ -81,7 +81,7 @@ const formSchema = computed((): VbenFormSchema[] => {
     {
       component: markRaw(SliderCaptcha),
       fieldName: 'captcha',
-      rules: z.boolean().refine((value) => value, {
+      rules: z.boolean().refine(value => value, {
         message: $t('authentication.verifyRequiredTip'),
       }),
     },

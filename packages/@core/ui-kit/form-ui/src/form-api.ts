@@ -1,3 +1,5 @@
+import type { Recordable } from '@vben-core/typings';
+
 import type {
   FormState,
   GenericObject,
@@ -7,13 +9,10 @@ import type {
 
 import type { ComponentPublicInstance } from 'vue';
 
-import type { Recordable } from '@vben-core/typings';
-
 import type { FormActions, FormSchema, VbenFormProps } from './types';
 
-import { isRef, toRaw } from 'vue';
-
 import { Store } from '@vben-core/shared/store';
+
 import {
   bindMethods,
   createMerge,
@@ -25,6 +24,7 @@ import {
   mergeWithArrayOverride,
   StateHandler,
 } from '@vben-core/shared/utils';
+import { isRef, toRaw } from 'vue';
 
 function getDefaultState(): VbenFormProps {
   return {
@@ -104,18 +104,19 @@ export class FormApi {
       ? (this.componentRefMap.get(fieldName) as ComponentPublicInstance)
       : undefined;
     if (
-      target &&
-      target.$.type.name === 'AsyncComponentWrapper' &&
-      target.$.subTree.ref
+      target
+      && target.$.type.name === 'AsyncComponentWrapper'
+      && target.$.subTree.ref
     ) {
       if (Array.isArray(target.$.subTree.ref)) {
         if (
-          target.$.subTree.ref.length > 0 &&
-          isRef(target.$.subTree.ref[0]?.r)
+          target.$.subTree.ref.length > 0
+          && isRef(target.$.subTree.ref[0]?.r)
         ) {
           target = target.$.subTree.ref[0]?.r.value as ComponentPublicInstance;
         }
-      } else if (isRef(target.$.subTree.ref.r)) {
+      }
+      else if (isRef(target.$.subTree.ref.r)) {
         target = target.$.subTree.ref.r.value as ComponentPublicInstance;
       }
     }
@@ -132,15 +133,16 @@ export class FormApi {
         let el: HTMLElement | null = null;
         if (ref instanceof HTMLElement) {
           el = ref;
-        } else if (ref.$el instanceof HTMLElement) {
+        }
+        else if (ref.$el instanceof HTMLElement) {
           el = ref.$el;
         }
         if (!el) {
           continue;
         }
         if (
-          el === document.activeElement ||
-          el.contains(document.activeElement)
+          el === document.activeElement
+          || el.contains(document.activeElement)
         ) {
           return fieldName;
         }
@@ -195,7 +197,8 @@ export class FormApi {
                 return mergedResults;
               }
               return results;
-            } catch (error) {
+            }
+            catch (error) {
               console.error('Validation error:', error);
             }
           };
@@ -227,7 +230,7 @@ export class FormApi {
     const fieldSet = new Set(fields);
     const schema = this.state?.schema ?? [];
 
-    const filterSchema = schema.filter((item) => !fieldSet.has(item.fieldName));
+    const filterSchema = schema.filter(item => !fieldSet.has(item.fieldName));
 
     this.setState({
       schema: filterSchema,
@@ -271,8 +274,9 @@ export class FormApi {
       this.store.setState((prev) => {
         return mergeWithArrayOverride(stateOrFn(prev), prev);
       });
-    } else {
-      this.store.setState((prev) => mergeWithArrayOverride(stateOrFn, prev));
+    }
+    else {
+      this.store.setState(prev => mergeWithArrayOverride(stateOrFn, prev));
     }
   }
 
@@ -301,11 +305,11 @@ export class FormApi {
      */
     const fieldMergeFn = createMerge((obj, key, value) => {
       if (key in obj) {
-        obj[key] =
-          !Array.isArray(obj[key]) &&
-          isObject(obj[key]) &&
-          !isDayjsObject(obj[key]) &&
-          !isDate(obj[key])
+        obj[key]
+          = !Array.isArray(obj[key])
+            && isObject(obj[key])
+            && !isDayjsObject(obj[key])
+            && !isDate(obj[key])
             ? fieldMergeFn(obj[key], value)
             : value;
       }
@@ -339,7 +343,7 @@ export class FormApi {
   updateSchema(schema: Partial<FormSchema>[]) {
     const updated: Partial<FormSchema>[] = [...schema];
     const hasField = updated.every(
-      (item) => Reflect.has(item, 'fieldName') && item.fieldName,
+      item => Reflect.has(item, 'fieldName') && item.fieldName,
     );
 
     if (!hasField) {
@@ -419,16 +423,15 @@ export class FormApi {
 
     const processFields = (fields: string[], separator: string = ',') => {
       this.processFields(fields, separator, originValues, (value, sep) =>
-        Array.isArray(value) ? value.join(sep) : value,
-      );
+        Array.isArray(value) ? value.join(sep) : value);
     };
 
     // 处理简单数组格式 ['field1', 'field2', ';'] 或 ['field1', 'field2']
-    if (arrayToStringFields.every((item) => typeof item === 'string')) {
-      const lastItem =
-        arrayToStringFields[arrayToStringFields.length - 1] || '';
-      const fields =
-        lastItem.length === 1
+    if (arrayToStringFields.every(item => typeof item === 'string')) {
+      const lastItem
+        = arrayToStringFields[arrayToStringFields.length - 1] || '';
+      const fields
+        = lastItem.length === 1
           ? arrayToStringFields.slice(0, -1)
           : arrayToStringFields;
       const separator = lastItem.length === 1 ? lastItem : ',';
@@ -481,10 +484,12 @@ export class FormApi {
         if (format === null) {
           values[startTimeKey] = startTime;
           values[endTimeKey] = endTime;
-        } else if (isFunction(format)) {
+        }
+        else if (isFunction(format)) {
           values[startTimeKey] = format(startTime, startTimeKey);
           values[endTimeKey] = format(endTime, endTimeKey);
-        } else {
+        }
+        else {
           const [startTimeFormat, endTimeFormat] = Array.isArray(format)
             ? format
             : [format, format];
@@ -528,11 +533,11 @@ export class FormApi {
     };
 
     // 处理简单数组格式 ['field1', 'field2', ';'] 或 ['field1', 'field2']
-    if (arrayToStringFields.every((item) => typeof item === 'string')) {
-      const lastItem =
-        arrayToStringFields[arrayToStringFields.length - 1] || '';
-      const fields =
-        lastItem.length === 1
+    if (arrayToStringFields.every(item => typeof item === 'string')) {
+      const lastItem
+        = arrayToStringFields[arrayToStringFields.length - 1] || '';
+      const fields
+        = lastItem.length === 1
           ? arrayToStringFields.slice(0, -1)
           : arrayToStringFields;
       const separator = lastItem.length === 1 ? lastItem : ',';
@@ -546,11 +551,13 @@ export class FormApi {
         const [fields, separator = ','] = fieldConfig;
         if (Array.isArray(fields)) {
           processFields(fields, separator);
-        } else if (typeof originValues[fields] === 'string') {
+        }
+        else if (typeof originValues[fields] === 'string') {
           const value = originValues[fields];
           if (value === '') {
             originValues[fields] = [];
-          } else {
+          }
+          else {
             const escapedSeparator = separator.replaceAll(
               /[.*+?^${}()|[\]\\]/g,
               String.raw`\$&`,
@@ -583,10 +590,10 @@ export class FormApi {
     // 进行了删除schema操作
     if (currentSchema.length < prevSchema.length) {
       const currentFields = new Set(
-        currentSchema.map((item) => item.fieldName),
+        currentSchema.map(item => item.fieldName),
       );
       const deletedSchema = prevSchema.filter(
-        (item) => !currentFields.has(item.fieldName),
+        item => !currentFields.has(item.fieldName),
       );
       for (const schema of deletedSchema) {
         this.form?.setFieldValue?.(schema.fieldName, undefined);

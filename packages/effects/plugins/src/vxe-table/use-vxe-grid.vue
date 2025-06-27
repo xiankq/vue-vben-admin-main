@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+import type { VbenFormProps } from '@vben-core/form-ui';
+
+import type { SetupContext } from 'vue';
+
 import type {
   VxeGridDefines,
   VxeGridInstance,
@@ -8,22 +12,9 @@ import type {
   VxeToolbarPropTypes,
 } from 'vxe-table';
 
-import type { SetupContext } from 'vue';
-
-import type { VbenFormProps } from '@vben-core/form-ui';
-
 import type { ExtendedVxeGridApi, VxeGridProps } from './types';
 
-import {
-  computed,
-  nextTick,
-  onMounted,
-  onUnmounted,
-  toRaw,
-  useSlots,
-  useTemplateRef,
-  watch,
-} from 'vue';
+import { VbenHelpTooltip, VbenLoading } from '@vben-core/shadcn-ui';
 
 import { usePriorityValues } from '@vben/hooks';
 import { EmptyIcon } from '@vben/icons';
@@ -37,7 +28,16 @@ import {
   mergeWithArrayOverride,
 } from '@vben/utils';
 
-import { VbenHelpTooltip, VbenLoading } from '@vben-core/shadcn-ui';
+import {
+  computed,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  toRaw,
+  useSlots,
+  useTemplateRef,
+  watch,
+} from 'vue';
 
 import { VxeButton } from 'vxe-pc-ui';
 import { VxeGrid, VxeUI } from 'vxe-table';
@@ -80,9 +80,9 @@ const {
 const { isMobile } = usePreferences();
 const isSeparator = computed(() => {
   if (
-    !formOptions.value ||
-    showSearchForm.value === false ||
-    separator.value === false
+    !formOptions.value
+    || showSearchForm.value === false
+    || separator.value === false
   ) {
     return false;
   }
@@ -92,9 +92,9 @@ const isSeparator = computed(() => {
   return separator.value.show !== false;
 });
 const separatorBg = computed(() => {
-  return !separator.value ||
-    isBoolean(separator.value) ||
-    !separator.value.backgroundColor
+  return !separator.value
+    || isBoolean(separator.value)
+    || !separator.value.backgroundColor
     ? undefined
     : separator.value.backgroundColor;
 });
@@ -135,9 +135,9 @@ const showTableTitle = computed(() => {
 
 const showToolbar = computed(() => {
   return (
-    !!slots[TOOLBAR_ACTIONS]?.() ||
-    !!slots[TOOLBAR_TOOLS]?.() ||
-    showTableTitle.value
+    !!slots[TOOLBAR_ACTIONS]?.()
+    || !!slots[TOOLBAR_TOOLS]?.()
+    || showTableTitle.value
   );
 });
 
@@ -155,8 +155,8 @@ const toolbarOptions = computed(() => {
   };
   // 将搜索按钮合并到用户配置的toolbarConfig.tools中
   const toolbarConfig: VxeGridPropTypes.ToolbarConfig = {
-    tools: (gridOptions.value?.toolbarConfig?.tools ??
-      []) as VxeToolbarPropTypes.ToolConfig[],
+    tools: (gridOptions.value?.toolbarConfig?.tools
+      ?? []) as VxeToolbarPropTypes.ToolConfig[],
   };
   if (gridOptions.value?.toolbarConfig?.search && !!formOptions.value) {
     toolbarConfig.tools = Array.isArray(toolbarConfig.tools)
@@ -275,7 +275,7 @@ const delegatedFormSlots = computed(() => {
       resultSlots.push(key);
     }
   }
-  return resultSlots.map((key) => key.replace(FORM_SLOT_PREFIX, ''));
+  return resultSlots.map(key => key.replace(FORM_SLOT_PREFIX, ''));
 });
 
 const showDefaultEmpty = computed(() => {
@@ -318,8 +318,7 @@ async function init() {
   props.api?.setState?.({ gridOptions: defaultGridOptions });
   // form 由 vben-form 代替，所以需要保证query相关事件可以拿到参数
   extendProxyOptions(props.api, defaultGridOptions, () =>
-    formApi.getLatestSubmissionValues(),
-  );
+    formApi.getLatestSubmissionValues());
 }
 
 // formOptions支持响应式
@@ -377,14 +376,14 @@ onUnmounted(() => {
       <!-- 左侧操作区域或者title -->
       <template v-if="showToolbar" #toolbar-actions="slotProps">
         <slot v-if="showTableTitle" name="table-title">
-          <div class="mr-1 pl-1 text-[1rem]">
+          <div class="text-[1rem] mr-1 pl-1">
             {{ tableTitle }}
             <VbenHelpTooltip v-if="tableTitleHelp" trigger-class="pb-1">
               {{ tableTitleHelp }}
             </VbenHelpTooltip>
           </div>
         </slot>
-        <slot name="toolbar-actions" v-bind="slotProps"> </slot>
+        <slot name="toolbar-actions" v-bind="slotProps" />
       </template>
 
       <!-- 继承默认的slot -->
@@ -393,15 +392,15 @@ onUnmounted(() => {
         :key="slotName"
         #[slotName]="slotProps"
       >
-        <slot :name="slotName" v-bind="slotProps"></slot>
+        <slot :name="slotName" v-bind="slotProps" />
       </template>
       <template #toolbar-tools="slotProps">
-        <slot name="toolbar-tools" v-bind="slotProps"></slot>
+        <slot name="toolbar-tools" v-bind="slotProps" />
         <VxeButton
+          v-if="gridOptions?.toolbarConfig?.search && !!formOptions"
           icon="vxe-icon-search"
           circle
           class="ml-2"
-          v-if="gridOptions?.toolbarConfig?.search && !!formOptions"
           :status="showSearchForm ? 'primary' : undefined"
           :title="$t('common.search')"
           @click="onSearchBtnClick"
@@ -436,19 +435,19 @@ onUnmounted(() => {
                 <slot
                   :name="`${FORM_SLOT_PREFIX}${slotName}`"
                   v-bind="slotProps"
-                ></slot>
+                />
               </template>
               <template #reset-before="slotProps">
-                <slot name="reset-before" v-bind="slotProps"></slot>
+                <slot name="reset-before" v-bind="slotProps" />
               </template>
               <template #submit-before="slotProps">
-                <slot name="submit-before" v-bind="slotProps"></slot>
+                <slot name="submit-before" v-bind="slotProps" />
               </template>
               <template #expand-before="slotProps">
-                <slot name="expand-before" v-bind="slotProps"></slot>
+                <slot name="expand-before" v-bind="slotProps" />
               </template>
               <template #expand-after="slotProps">
-                <slot name="expand-after" v-bind="slotProps"></slot>
+                <slot name="expand-after" v-bind="slotProps" />
               </template>
             </Form>
           </slot>
@@ -457,8 +456,8 @@ onUnmounted(() => {
             :style="{
               ...(separatorBg ? { backgroundColor: separatorBg } : undefined),
             }"
-            class="bg-background-deep z-100 absolute -left-2 bottom-1 h-2 w-[calc(100%+1rem)] overflow-hidden md:bottom-2 md:h-3"
-          ></div>
+            class="bg-background-deep h-2 w-[calc(100%+1rem)] bottom-1 absolute z-100 overflow-hidden md:h-3 -left-2 md:bottom-2"
+          />
         </div>
       </template>
       <!-- loading -->
@@ -471,7 +470,9 @@ onUnmounted(() => {
       <template v-if="showDefaultEmpty" #empty>
         <slot name="empty">
           <EmptyIcon class="mx-auto" />
-          <div class="mt-2">{{ $t('common.noData') }}</div>
+          <div class="mt-2">
+            {{ $t('common.noData') }}
+          </div>
         </slot>
       </template>
     </VxeGrid>

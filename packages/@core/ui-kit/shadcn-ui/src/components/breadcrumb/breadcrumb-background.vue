@@ -17,6 +17,7 @@ function handleClick(index: number, path?: string) {
   emit('select', path);
 }
 </script>
+
 <template>
   <ul class="flex">
     <TransitionGroup name="breadcrumb-transition">
@@ -29,18 +30,18 @@ function handleClick(index: number, path?: string) {
             href="javascript:void 0"
             @click.stop="handleClick(index, item.path)"
           >
-            <span class="flex-center z-10 h-full">
+            <span class="flex-center h-full z-10">
               <VbenIcon
                 v-if="showIcon"
                 :icon="item.icon"
-                class="mr-1 size-4 flex-shrink-0"
+                class="mr-1 flex-shrink-0 size-4"
               />
               <span
                 :class="{
                   'text-foreground font-normal':
                     index === breadcrumbs.length - 1,
                 }"
-                >{{ item.title }}
+              >{{ item.title }}
               </span>
             </span>
           </a>
@@ -49,6 +50,7 @@ function handleClick(index: number, path?: string) {
     </TransitionGroup>
   </ul>
 </template>
+
 <style scoped>
 li {
   @apply h-7;

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { TabsIndicatorProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { TabsIndicator, useForwardProps } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<TabsIndicatorProps & { class?: any }>();
 
@@ -29,9 +29,9 @@ const forwardedProps = useForwardProps(delegatedProps);
     "
   >
     <div
-      class="bg-background text-foreground inline-flex h-full w-full items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+      class="bg-background text-foreground text-sm font-medium px-3 py-1 rounded-md inline-flex h-full w-full whitespace-nowrap items-center justify-center focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
-      <slot></slot>
+      <slot />
     </div>
   </TabsIndicator>
 </template>

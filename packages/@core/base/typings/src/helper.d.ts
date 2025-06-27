@@ -32,9 +32,9 @@ type AnyNormalFunction<T extends any[] = any[], R = void> = (...arg: T) => R;
 /**
  * 任意类型的函数
  */
-type AnyFunction<T extends any[] = any[], R = void> =
-  | AnyNormalFunction<T, R>
-  | AnyPromiseFunction<T, R>;
+type AnyFunction<T extends any[] = any[], R = void>
+  = | AnyNormalFunction<T, R>
+    | AnyPromiseFunction<T, R>;
 
 /**
  *  T | null 包装

@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router';
-
 import { createPinia, setActivePinia } from 'pinia';
+
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import { useTabbarStore } from './tabbar';
 
@@ -278,7 +278,7 @@ describe('useAccessStore', () => {
 
     expect(store.tabs).toHaveLength(2);
     expect(
-      store.tabs.find((tab) => tab.fullPath === keyToClose),
+      store.tabs.find(tab => tab.fullPath === keyToClose),
     ).toBeUndefined();
   });
 

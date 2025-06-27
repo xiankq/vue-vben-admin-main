@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { useVbenDrawer } from '@vben-core/popup-ui';
 
+import { VbenButton } from '@vben-core/shadcn-ui';
 import { Settings } from '@vben/icons';
 import { $t, loadLocaleMessages } from '@vben/locales';
 import { preferences, updatePreferences } from '@vben/preferences';
-import { capitalizeFirstLetter } from '@vben/utils';
 
-import { useVbenDrawer } from '@vben-core/popup-ui';
-import { VbenButton } from '@vben-core/shadcn-ui';
+import { capitalizeFirstLetter } from '@vben/utils';
+import { computed } from 'vue';
 
 import PreferencesDrawer from './preferences-drawer.vue';
 
@@ -47,13 +47,15 @@ const listen = computed(() => {
           }
         };
       }
-    } else {
+    }
+    else {
       result[key] = value;
     }
   }
   return result;
 });
 </script>
+
 <template>
   <div>
     <Drawer v-bind="{ ...$attrs, ...attrs }" v-on="listen" />
@@ -62,7 +64,7 @@ const listen = computed(() => {
       <slot>
         <VbenButton
           :title="$t('preferences.title')"
-          class="bg-primary flex-col-center size-10 cursor-pointer rounded-l-lg rounded-r-none border-none"
+          class="bg-primary flex-col-center rounded-l-lg rounded-r-none border-none size-10 cursor-pointer"
         >
           <Settings class="size-5" />
         </VbenButton>

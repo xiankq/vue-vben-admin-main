@@ -1,6 +1,6 @@
-import type { VxeGridProps, VxeUIExport } from 'vxe-table';
-
 import type { Recordable } from '@vben/types';
+
+import type { VxeGridProps, VxeUIExport } from 'vxe-table';
 
 import type { VxeGridApi } from './api';
 

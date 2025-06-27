@@ -5,9 +5,9 @@
 
 import type { ComputedRef, Ref } from 'vue';
 
-import { onBeforeUnmount, onMounted, reactive, ref, watchEffect } from 'vue';
-
 import { unrefElement } from '@vueuse/core';
+
+import { onBeforeUnmount, onMounted, reactive, ref, watchEffect } from 'vue';
 
 export function useModalDraggable(
   targetRef: Ref<HTMLElement | undefined>,
@@ -52,7 +52,8 @@ export function useModalDraggable(
       maxLeft = containerRect.right - targetLeft - targetWidth + offsetX;
       minTop = containerRect.top - targetTop + offsetY;
       maxTop = containerRect.bottom - targetTop - targetHeight + offsetY;
-    } else {
+    }
+    else {
       const docElement = document.documentElement;
       const clientWidth = docElement.clientWidth;
       const clientHeight = docElement.clientHeight;
@@ -116,7 +117,8 @@ export function useModalDraggable(
     watchEffect(() => {
       if (draggable.value) {
         onDraggable();
-      } else {
+      }
+      else {
         offDraggable();
       }
     });

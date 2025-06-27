@@ -11,19 +11,19 @@ import {
 } from '../inference';
 
 describe('isHttpUrl', () => {
-  it("should return true when given 'http://example.com'", () => {
+  it('should return true when given \'http://example.com\'', () => {
     expect(isHttpUrl('http://example.com')).toBe(true);
   });
 
-  it("should return true when given 'https://example.com'", () => {
+  it('should return true when given \'https://example.com\'', () => {
     expect(isHttpUrl('https://example.com')).toBe(true);
   });
 
-  it("should return false when given 'ftp://example.com'", () => {
+  it('should return false when given \'ftp://example.com\'', () => {
     expect(isHttpUrl('ftp://example.com')).toBe(false);
   });
 
-  it("should return false when given 'example.com'", () => {
+  it('should return false when given \'example.com\'', () => {
     expect(isHttpUrl('example.com')).toBe(false);
   });
 });

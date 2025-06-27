@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { computed, useSlots } from 'vue';
+import { VbenFullScreen, VbenIconButton } from '@vben-core/shadcn-ui';
 
 import { useRefresh } from '@vben/hooks';
 import { RotateCw } from '@vben/icons';
 import { preferences, usePreferences } from '@vben/preferences';
 import { useAccessStore } from '@vben/stores';
 
-import { VbenFullScreen, VbenIconButton } from '@vben-core/shadcn-ui';
+import { computed, useSlots } from 'vue';
 
 import {
   GlobalSearch,
@@ -126,21 +126,21 @@ function clearPreferencesAndLogout() {
     </slot>
   </template>
   <div class="flex-center hidden lg:block">
-    <slot name="breadcrumb"></slot>
+    <slot name="breadcrumb" />
   </div>
   <template
     v-for="slot in leftSlots.filter((item) => item.index > REFERENCE_VALUE)"
     :key="slot.name"
   >
-    <slot :name="slot.name"></slot>
+    <slot :name="slot.name" />
   </template>
   <div
     :class="`menu-align-${preferences.header.menuAlign}`"
-    class="flex h-full min-w-0 flex-1 items-center"
+    class="flex flex-1 h-full min-w-0 items-center"
   >
-    <slot name="menu"></slot>
+    <slot name="menu" />
   </div>
-  <div class="flex h-full min-w-0 flex-shrink-0 items-center">
+  <div class="flex flex-shrink-0 h-full min-w-0 items-center">
     <template v-for="slot in rightSlots" :key="slot.name">
       <slot :name="slot.name">
         <template v-if="slot.name === 'global-search'">
@@ -170,6 +170,7 @@ function clearPreferencesAndLogout() {
     </template>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .menu-align-start {
   --menu-align: start;

@@ -1,13 +1,13 @@
-import type { ComputedRef } from 'vue';
-
 import type { MenuRecordRaw } from '@vben/types';
 
-import { computed, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import type { ComputedRef } from 'vue';
 
 import { preferences } from '@vben/preferences';
 import { useAccessStore } from '@vben/stores';
+
 import { findRootMenuByPath } from '@vben/utils';
+import { computed, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 import { useNavigation } from './use-navigation';
 
@@ -44,7 +44,8 @@ function useExtraMenu(useRootMenus?: ComputedRef<MenuRecordRaw[]>) {
 
     if (!hasChildren) {
       await navigation(menu.path);
-    } else if (preferences.sidebar.autoActivateChild) {
+    }
+    else if (preferences.sidebar.autoActivateChild) {
       await navigation(
         defaultSubMap.has(menu.path)
           ? (defaultSubMap.get(menu.path) as string)
@@ -103,7 +104,8 @@ function useExtraMenu(useRootMenus?: ComputedRef<MenuRecordRaw[]>) {
       parentLevel.value,
     );
     extraRootMenus.value = rootMenu?.children ?? [];
-    if (rootMenuPath) defaultSubMap.set(rootMenuPath, currentPath);
+    if (rootMenuPath)
+      defaultSubMap.set(rootMenuPath, currentPath);
     extraActiveMenu.value = rootMenuPath ?? findMenu?.path ?? '';
     extraMenus.value = rootMenu?.children ?? [];
     if (preferences.sidebar.expandOnHover) {

@@ -1,17 +1,17 @@
 <script setup lang="ts">
+import type { ClassType } from '@vben-core/typings';
+
 import type {
   ContextMenuContentProps,
   ContextMenuRootEmits,
   ContextMenuRootProps,
 } from 'radix-vue';
 
-import type { ClassType } from '@vben-core/typings';
-
 import type { IContextMenuItem } from './interface';
 
-import { computed } from 'vue';
-
 import { useForwardPropsEmits } from 'radix-vue';
+
+import { computed } from 'vue';
 
 import {
   ContextMenu,
@@ -64,12 +64,12 @@ function handleClick(menu: IContextMenuItem) {
 <template>
   <ContextMenu v-bind="forwarded">
     <ContextMenuTrigger as-child>
-      <slot></slot>
+      <slot />
     </ContextMenuTrigger>
     <ContextMenuContent
       :class="contentClass"
       v-bind="contentProps"
-      class="side-content z-popup"
+      class="z-popup side-content"
     >
       <template v-for="menu in menusView" :key="menu.key">
         <ContextMenuItem
@@ -82,7 +82,7 @@ function handleClick(menu: IContextMenuItem) {
           <component
             :is="menu.icon"
             v-if="menu.icon"
-            class="mr-2 size-4 text-lg"
+            class="text-lg mr-2 size-4"
           />
 
           {{ menu.text }}

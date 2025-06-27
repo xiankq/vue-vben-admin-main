@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue';
 
-import { computed, shallowRef, useSlots, watchEffect } from 'vue';
-
 import { VbenScrollbar } from '@vben-core/shadcn-ui';
 
 import { useScrollLock } from '@vueuse/core';
+
+import { computed, shallowRef, useSlots, watchEffect } from 'vue';
 
 import { SidebarCollapseButton, SidebarFixedButton } from './widgets';
 
@@ -124,9 +124,9 @@ const style = computed((): CSSProperties => {
   return {
     '--scroll-shadow': 'var(--sidebar)',
     ...calcMenuWidthStyle(false),
-    height: `calc(100% - ${marginTop}px)`,
-    marginTop: `${marginTop}px`,
-    paddingTop: `${paddingTop}px`,
+    'height': `calc(100% - ${marginTop}px)`,
+    'marginTop': `${marginTop}px`,
+    'paddingTop': `${paddingTop}px`,
     zIndex,
     ...(isSidebarMixed && extraVisible.value ? { transition: 'none' } : {}),
   };
@@ -198,8 +198,8 @@ watchEffect(() => {
 function calcMenuWidthStyle(isHiddenDom: boolean): CSSProperties {
   const { extraWidth, fixedExtra, isSidebarMixed, show, width } = props;
 
-  let widthValue =
-    width === 0
+  let widthValue
+    = width === 0
       ? '0px'
       : `${width + (isSidebarMixed && fixedExtra && extraVisible.value ? extraWidth : 0)}px`;
 
@@ -258,7 +258,7 @@ function handleMouseleave() {
     :class="theme"
     :style="hiddenSideStyle"
     class="h-full transition-all duration-150"
-  ></div>
+  />
   <aside
     :class="[
       theme,
@@ -268,7 +268,7 @@ function handleMouseleave() {
       },
     ]"
     :style="style"
-    class="fixed left-0 top-0 h-full transition-all duration-150"
+    class="h-full transition-all duration-150 left-0 top-0 fixed"
     @mouseenter="handleMouseenter"
     @mouseleave="handleMouseleave"
   >
@@ -277,13 +277,13 @@ function handleMouseleave() {
       v-model:expand-on-hover="expandOnHover"
     />
     <div v-if="slots.logo" :style="headerStyle">
-      <slot name="logo"></slot>
+      <slot name="logo" />
     </div>
-    <VbenScrollbar :style="contentStyle" shadow shadow-border>
-      <slot></slot>
+    <VbenScrollbar :style="contentStyle" shadow-border shadow>
+      <slot />
     </VbenScrollbar>
 
-    <div :style="collapseStyle"></div>
+    <div :style="collapseStyle" />
     <SidebarCollapseButton
       v-if="showCollapseButton && !isSidebarMixed"
       v-model:collapsed="collapse"
@@ -295,7 +295,7 @@ function handleMouseleave() {
         'border-l': extraVisible,
       }"
       :style="extraStyle"
-      class="border-border bg-sidebar fixed top-0 h-full overflow-hidden border-r transition-all duration-200"
+      class="bg-sidebar border-border border-r h-full transition-all duration-200 top-0 fixed overflow-hidden"
     >
       <SidebarCollapseButton
         v-if="isSidebarMixed && expandOnHover"
@@ -307,15 +307,16 @@ function handleMouseleave() {
         v-model:expand-on-hover="expandOnHover"
       />
       <div v-if="!extraCollapse" :style="extraTitleStyle" class="pl-2">
-        <slot name="extra-title"></slot>
+        <slot name="extra-title" />
       </div>
       <VbenScrollbar
         :style="extraContentStyle"
         class="border-border py-2"
-        shadow
+
         shadow-border
+        shadow
       >
-        <slot name="extra"></slot>
+        <slot name="extra" />
       </VbenScrollbar>
     </div>
   </aside>

@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import type { NotificationItem } from '@vben/layouts';
 
-import { computed, ref, watch } from 'vue';
+import { $t } from '#/locales';
 
+import { useAuthStore } from '#/store';
+import LoginForm from '#/views/_core/authentication/login.vue';
 import { AuthenticationLoginExpiredModal } from '@vben/common-ui';
 import { VBEN_DOC_URL, VBEN_GITHUB_URL } from '@vben/constants';
 import { useWatermark } from '@vben/hooks';
@@ -14,12 +16,10 @@ import {
   UserDropdown,
 } from '@vben/layouts';
 import { preferences } from '@vben/preferences';
+
 import { useAccessStore, useUserStore } from '@vben/stores';
 import { openWindow } from '@vben/utils';
-
-import { $t } from '#/locales';
-import { useAuthStore } from '#/store';
-import LoginForm from '#/views/_core/authentication/login.vue';
+import { computed, ref, watch } from 'vue';
 
 const notifications = ref<NotificationItem[]>([
   {
@@ -57,7 +57,7 @@ const authStore = useAuthStore();
 const accessStore = useAccessStore();
 const { destroyWatermark, updateWatermark } = useWatermark();
 const showDot = computed(() =>
-  notifications.value.some((item) => !item.isRead),
+  notifications.value.some(item => !item.isRead),
 );
 
 const menus = computed(() => [
@@ -103,7 +103,7 @@ function handleNoticeClear() {
 }
 
 function handleMakeAll() {
-  notifications.value.forEach((item) => (item.isRead = true));
+  notifications.value.forEach(item => (item.isRead = true));
 }
 watch(
   () => preferences.app.watermark,
@@ -112,7 +112,8 @@ watch(
       await updateWatermark({
         content: `${userStore.userInfo?.username} - ${userStore.userInfo?.realName}`,
       });
-    } else {
+    }
+    else {
       destroyWatermark();
     }
   },

@@ -3,9 +3,8 @@ import type { Component } from 'vue';
 
 import type { AlertProps } from './alert';
 
-import { computed, h, nextTick, ref } from 'vue';
-
 import { useSimpleLocale } from '@vben-core/composables';
+
 import {
   CircleAlert,
   CircleCheckBig,
@@ -27,6 +26,7 @@ import {
 } from '@vben-core/shadcn-ui';
 import { globalShareState } from '@vben-core/shared/global-state';
 import { cn } from '@vben-core/shared/utils';
+import { computed, h, nextTick, ref } from 'vue';
 
 import { provideAlertContext } from './alert';
 
@@ -87,7 +87,8 @@ const getIconRender = computed(() => {
         }
       }
     }
-  } else {
+  }
+  else {
     iconRender = props.icon ?? null;
   }
   return iconRender;
@@ -127,23 +128,23 @@ async function handleOpenChange(val: boolean) {
       if (res !== false) {
         open.value = false;
       }
-    } finally {
+    }
+    finally {
       loading.value = false;
     }
-  } else {
+  }
+  else {
     open.value = val;
   }
 }
 </script>
+
 <template>
   <AlertDialog :open="open" @update:open="handleOpenChange">
     <AlertDialogContent
       :open="open"
       :centered="centered"
       :overlay-blur="overlayBlur"
-      @opened="emits('opened')"
-      @closed="onAlertClosed"
-      @escape-key-down="onEscapeKeyDown"
       :class="
         cn(
           containerClass,
@@ -154,6 +155,9 @@ async function handleOpenChange(val: boolean) {
           },
         )
       "
+      @opened="emits('opened')"
+      @closed="onAlertClosed"
+      @escape-key-down="onEscapeKeyDown"
     >
       <div :class="cn('relative flex-1 overflow-y-auto p-3', contentClass)">
         <AlertDialogTitle v-if="title">
@@ -180,7 +184,7 @@ async function handleOpenChange(val: boolean) {
           <VbenLoading v-if="loading && contentMasking" :spinning="loading" />
         </AlertDialogDescription>
         <div
-          class="flex items-center justify-end gap-x-2"
+          class="flex gap-x-2 items-center justify-end"
           :class="`justify-${buttonAlign}`"
         >
           <VbenRenderContent :content="footer" />

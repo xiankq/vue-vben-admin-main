@@ -57,6 +57,7 @@ function menuIcon(menu: MenuRecordRaw) {
     </template>
   </ul>
 </template>
+
 <style lang="scss" scoped>
 $namespace: vben;
 

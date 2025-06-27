@@ -1,19 +1,19 @@
 <script lang="ts" setup>
 import type { ThemeModeType } from '@vben/types';
 
-import { MoonStar, Sun, SunMoon } from '@vben/icons';
-import { $t } from '@vben/locales';
-import {
-  preferences,
-  updatePreferences,
-  usePreferences,
-} from '@vben/preferences';
-
 import {
   ToggleGroup,
   ToggleGroupItem,
   VbenTooltip,
 } from '@vben-core/shadcn-ui';
+import { MoonStar, Sun, SunMoon } from '@vben/icons';
+import { $t } from '@vben/locales';
+
+import {
+  preferences,
+  updatePreferences,
+  usePreferences,
+} from '@vben/preferences';
 
 import ThemeButton from './theme-button.vue';
 
@@ -51,6 +51,7 @@ const PRESETS = [
   },
 ];
 </script>
+
 <template>
   <div>
     <VbenTooltip :disabled="!shouldOnHover" side="bottom">

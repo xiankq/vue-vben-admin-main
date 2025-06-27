@@ -1,25 +1,15 @@
 {
   "name": "@vben-core/design",
+  "type": "module",
   "version": "5.5.7",
+  "license": "MIT",
   "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
     "directory": "packages/@vben-core/base/design"
   },
-  "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "build": "pnpm vite build",
-    "prepublishOnly": "npm run build"
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
+  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "exports": {
     "./bem": {
       "development": "./src/scss-bem/bem.scss",
@@ -30,6 +20,16 @@
       "development": "./src/index.ts",
       "default": "./dist/design.css"
     }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "pnpm vite build",
+    "prepublishOnly": "npm run build"
   },
   "publishConfig": {
     "exports": {

@@ -1,14 +1,14 @@
-import type { Component, VNode } from 'vue';
-
 import type { Recordable } from '@vben-core/typings';
+
+import type { Component, VNode } from 'vue';
 
 import type { AlertProps, BeforeCloseScope, PromptProps } from './alert';
 
-import { h, nextTick, ref, render } from 'vue';
-
 import { useSimpleLocale } from '@vben-core/composables';
+
 import { Input, VbenRenderContent } from '@vben-core/shadcn-ui';
 import { isFunction, isString } from '@vben-core/shared/utils';
+import { h, nextTick, ref, render } from 'vue';
 
 import Alert from './alert.vue';
 
@@ -41,7 +41,8 @@ export function vbenAlert(
     if (arg1) {
       if (isString(arg1)) {
         options.title = arg1;
-      } else if (!isString(arg1)) {
+      }
+      else if (!isString(arg1)) {
         // 如果第二个参数是对象，则合并到选项中
         Object.assign(options, arg1);
       }
@@ -61,7 +62,7 @@ export function vbenAlert(
       onClosed: (isConfirm: boolean) => {
         // 移除组件实例以及创建的所有dom（恢复页面到打开前的状态）
         // 从alerts数组中移除该实例
-        alerts.value = alerts.value.filter((item) => item !== alertRef);
+        alerts.value = alerts.value.filter(item => item !== alertRef);
 
         // 从DOM中移除容器
         render(null, container);
@@ -72,7 +73,8 @@ export function vbenAlert(
         // 解析 Promise，传递用户操作结果
         if (isConfirm) {
           resolve();
-        } else {
+        }
+        else {
           reject(new Error('dialog cancelled'));
         }
       },
@@ -118,7 +120,8 @@ export function vbenConfirm(
     return isString(arg0)
       ? vbenAlert(arg0, defaultProps)
       : vbenAlert({ ...defaultProps, ...arg0 });
-  } else if (!arg2) {
+  }
+  else if (!arg2) {
     return isString(arg1)
       ? vbenAlert(arg0 as string, arg1, defaultProps)
       : vbenAlert(arg0 as string, { ...defaultProps, ...arg1 });
@@ -196,29 +199,32 @@ export async function vbenPrompt<T = any>(
       const componentRef: null | VNode = inputComponentRef.value;
       if (componentRef) {
         if (
-          componentRef.component?.exposed &&
-          isFunction(componentRef.component.exposed.focus)
+          componentRef.component?.exposed
+          && isFunction(componentRef.component.exposed.focus)
         ) {
           componentRef.component.exposed.focus();
-        } else {
+        }
+        else {
           if (componentRef.el) {
             if (
-              isFunction(componentRef.el.focus) &&
-              ['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA'].includes(
+              isFunction(componentRef.el.focus)
+              && ['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA'].includes(
                 componentRef.el.tagName,
               )
             ) {
               componentRef.el.focus();
-            } else if (isFunction(componentRef.el.querySelector)) {
+            }
+            else if (isFunction(componentRef.el.querySelector)) {
               const focusableElement = componentRef.el.querySelector(
                 'input, select, textarea, button',
               );
               if (focusableElement && isFunction(focusableElement.focus)) {
                 focusableElement.focus();
               }
-            } else if (
-              componentRef.el.nextElementSibling &&
-              isFunction(componentRef.el.nextElementSibling.focus)
+            }
+            else if (
+              componentRef.el.nextElementSibling
+              && isFunction(componentRef.el.nextElementSibling.focus)
             ) {
               componentRef.el.nextElementSibling.focus();
             }

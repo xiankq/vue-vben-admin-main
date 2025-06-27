@@ -2,11 +2,11 @@
 import type { VariantProps } from 'class-variance-authority';
 import type { ToggleGroupItemProps } from 'radix-vue';
 
-import { computed, inject } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { ToggleGroupItem, useForwardProps } from 'radix-vue';
+
+import { computed, inject } from 'vue';
 
 import { toggleVariants } from '../toggle';
 
@@ -43,6 +43,6 @@ const forwardedProps = useForwardProps(delegatedProps);
       )
     "
   >
-    <slot></slot>
+    <slot />
   </ToggleGroupItem>
 </template>

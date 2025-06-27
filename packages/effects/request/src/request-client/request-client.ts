@@ -73,10 +73,10 @@ class RequestClient {
 
     // 实例化拦截器管理器
     const interceptorManager = new InterceptorManager(this.instance);
-    this.addRequestInterceptor =
-      interceptorManager.addRequestInterceptor.bind(interceptorManager);
-    this.addResponseInterceptor =
-      interceptorManager.addResponseInterceptor.bind(interceptorManager);
+    this.addRequestInterceptor
+      = interceptorManager.addRequestInterceptor.bind(interceptorManager);
+    this.addResponseInterceptor
+      = interceptorManager.addResponseInterceptor.bind(interceptorManager);
 
     // 实例化文件上传器
     const fileUploader = new FileUploader(this);
@@ -141,7 +141,8 @@ class RequestClient {
           : {}),
       });
       return response as T;
-    } catch (error: any) {
+    }
+    catch (error: any) {
       throw error.response ? error.response.data : error;
     }
   }

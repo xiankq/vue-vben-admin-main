@@ -35,6 +35,6 @@ defineExpose({
     ref="barRef"
     :class="toLeft && 'transition-width !w-0 duration-300'"
     :style="style"
-    class="bg-success absolute h-full"
-  ></div>
+    class="bg-success h-full absolute"
+  />
 </template>

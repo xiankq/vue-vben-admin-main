@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import type { CheckboxRootEmits, CheckboxRootProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { Check, Minus } from 'lucide-vue-next';
+
 import {
   CheckboxIndicator,
   CheckboxRoot,
   useForwardPropsEmits,
 } from 'radix-vue';
+import { computed } from 'vue';
 
 const props = defineProps<
   CheckboxRootProps & { class?: any; indeterminate?: boolean }
@@ -37,7 +37,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     "
   >
     <CheckboxIndicator
-      class="flex h-full w-full items-center justify-center text-current"
+      class="text-current flex h-full w-full items-center justify-center"
     >
       <slot>
         <component :is="indeterminate ? Minus : Check" class="h-4 w-4" />

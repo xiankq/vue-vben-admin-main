@@ -56,7 +56,8 @@ export function useWatermark() {
         ...cachedOptions.value,
         ...options,
       });
-    } else {
+    }
+    else {
       await initWatermark(options);
     }
   }

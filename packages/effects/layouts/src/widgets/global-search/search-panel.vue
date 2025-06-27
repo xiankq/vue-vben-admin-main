@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import type { MenuRecordRaw } from '@vben/types';
 
-import { nextTick, onMounted, ref, shallowRef, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { VbenIcon, VbenScrollbar } from '@vben-core/shadcn-ui';
+import { isHttpUrl } from '@vben-core/shared/utils';
 
 import { SearchX, X } from '@vben/icons';
 import { $t } from '@vben/locales';
 import { mapTree, traverseTreeValues, uniqueByField } from '@vben/utils';
 
-import { VbenIcon, VbenScrollbar } from '@vben-core/shadcn-ui';
-import { isHttpUrl } from '@vben-core/shared/utils';
-
 import { onKeyStroke, useLocalStorage, useThrottleFn } from '@vueuse/core';
+import { nextTick, onMounted, ref, shallowRef, watch } from 'vue';
+
+import { useRouter } from 'vue-router';
 
 defineOptions({
   name: 'SearchPanel',
@@ -103,7 +103,8 @@ async function handleEnter() {
     await nextTick();
     if (isHttpUrl(to.path)) {
       window.open(to.path, '_blank');
-    } else {
+    }
+    else {
       router.push({ path: to.path, replace: true });
     }
   }
@@ -148,7 +149,8 @@ function handleMouseenter(e: MouseEvent) {
 function removeItem(index: number) {
   if (props.keyword) {
     searchResults.value.splice(index, 1);
-  } else {
+  }
+  else {
     searchHistory.value.splice(index, 1);
   }
   activeIndex.value = Math.max(activeIndex.value - 1, 0);
@@ -185,7 +187,7 @@ function createSearchReg(key: string) {
   // 将输入的字符串拆分为单个字符
   // 对每个字符进行转义
   // 然后用'.*'连接所有字符，创建正则表达式
-  const keys = [...key].map((item) => transform(item)).join('.*');
+  const keys = [...key].map(item => transform(item)).join('.*');
   // 返回创建的正则表达式
   return new RegExp(`.*${keys}.*`);
 }
@@ -195,7 +197,8 @@ watch(
   (val) => {
     if (val) {
       handleSearch(val);
-    } else {
+    }
+    else {
       searchResults.value = [...searchHistory.value];
     }
   },
@@ -223,14 +226,14 @@ onMounted(() => {
 
 <template>
   <VbenScrollbar>
-    <div class="!flex h-full justify-center px-2 sm:max-h-[450px]">
+    <div class="px-2 h-full justify-center !flex sm:max-h-[450px]">
       <!-- 无搜索结果 -->
       <div
         v-if="keyword && searchResults.length === 0"
         class="text-muted-foreground text-center"
       >
         <SearchX class="mx-auto mt-4 size-12" />
-        <p class="mb-10 mt-6 text-xs">
+        <p class="text-xs mb-10 mt-6">
           {{ $t('ui.widgets.search.noResults') }}
           <span class="text-foreground text-sm font-medium">
             "{{ keyword }}"
@@ -242,7 +245,7 @@ onMounted(() => {
         v-if="!keyword && searchResults.length === 0"
         class="text-muted-foreground text-center"
       >
-        <p class="my-10 text-xs">
+        <p class="text-xs my-10">
           {{ $t('ui.widgets.search.noRecent') }}
         </p>
       </div>
@@ -250,7 +253,7 @@ onMounted(() => {
       <ul v-show="searchResults.length > 0" class="w-full">
         <li
           v-if="searchHistory.length > 0 && !keyword"
-          class="text-muted-foreground mb-2 text-xs"
+          class="text-muted-foreground text-xs mb-2"
         >
           {{ $t('ui.widgets.search.recent') }}
         </li>
@@ -264,19 +267,19 @@ onMounted(() => {
           "
           :data-index="index"
           :data-search-item="index"
-          class="bg-accent flex-center group mb-3 w-full cursor-pointer rounded-lg px-4 py-4"
+          class="bg-accent flex-center group mb-3 px-4 py-4 rounded-lg w-full cursor-pointer"
           @click="handleEnter"
           @mouseenter="handleMouseenter"
         >
           <VbenIcon
             :icon="item.icon"
-            class="mr-2 size-5 flex-shrink-0"
+            class="mr-2 flex-shrink-0 size-5"
             fallback
           />
 
           <span class="flex-1">{{ item.name }}</span>
           <div
-            class="flex-center dark:hover:bg-accent hover:text-primary-foreground rounded-full p-1 hover:scale-110"
+            class="flex-center hover:text-primary-foreground dark:hover:bg-accent p-1 rounded-full hover:scale-110"
             @click.stop="removeItem(index)"
           >
             <X class="size-4" />

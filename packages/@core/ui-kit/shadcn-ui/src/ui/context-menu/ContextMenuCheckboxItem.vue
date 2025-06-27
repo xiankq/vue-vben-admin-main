@@ -4,16 +4,16 @@ import type {
   ContextMenuCheckboxItemProps,
 } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { Check } from 'lucide-vue-next';
+
 import {
   ContextMenuCheckboxItem,
   ContextMenuItemIndicator,
   useForwardPropsEmits,
 } from 'radix-vue';
+import { computed } from 'vue';
 
 const props = defineProps<ContextMenuCheckboxItemProps & { class?: any }>();
 const emits = defineEmits<ContextMenuCheckboxItemEmits>();
@@ -37,11 +37,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       )
     "
   >
-    <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span class="flex h-3.5 w-3.5 items-center left-2 justify-center absolute">
       <ContextMenuItemIndicator>
         <Check class="h-4 w-4" />
       </ContextMenuItemIndicator>
     </span>
-    <slot></slot>
+    <slot />
   </ContextMenuCheckboxItem>
 </template>

@@ -62,7 +62,8 @@ async function handleSend(e: Event) {
     await handleSendCode();
     countdown.value = maxTime;
     startCountdown();
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Failed to send code:', error);
     // Consider emitting an error event or showing a notification
     emit('sendError', error);
@@ -97,7 +98,7 @@ const id = useId();
     type="number"
     @complete="handleComplete"
   >
-    <div class="relative flex w-full">
+    <div class="flex w-full relative">
       <PinInputGroup class="mr-2">
         <PinInputInput
           v-for="(item, index) in codeLength"

@@ -1,23 +1,23 @@
 <script lang="ts" setup>
-import type { Component } from 'vue';
-
 import type { AnyPromiseFunction } from '@vben/types';
 
-import { computed, nextTick, ref, unref, useAttrs, watch } from 'vue';
-
-import { LoaderCircle } from '@vben/icons';
+import type { Component } from 'vue';
 
 import { cloneDeep, get, isEqual, isFunction } from '@vben-core/shared/utils';
 
+import { LoaderCircle } from '@vben/icons';
+
 import { objectOmit } from '@vueuse/core';
 
-type OptionsItem = {
+import { computed, nextTick, ref, unref, useAttrs, watch } from 'vue';
+
+interface OptionsItem {
   [name: string]: any;
   children?: OptionsItem[];
   disabled?: boolean;
   label?: string;
   value?: string;
-};
+}
 
 interface Props {
   /** 组件 */
@@ -181,11 +181,13 @@ async function fetchApi() {
       refOptions.value = get(res, resultField) || [];
     }
     emitChange();
-  } catch (error) {
+  }
+  catch (error) {
     console.warn(error);
     // reset status
     isFirstLoaded.value = false;
-  } finally {
+  }
+  finally {
     loading.value = false;
     // 如果有待处理的请求，立即触发新的请求
     if (hasPendingRequest.value) {
@@ -201,7 +203,8 @@ async function handleFetchForVisible(visible: boolean) {
   if (visible) {
     if (props.alwaysLoad) {
       await fetchApi();
-    } else if (!props.immediate && !unref(isFirstLoaded)) {
+    }
+    else if (!props.immediate && !unref(isFirstLoaded)) {
       await fetchApi();
     }
   }
@@ -227,14 +230,15 @@ watch(
 
 function emitChange() {
   if (
-    modelValue.value === undefined &&
-    props.autoSelect &&
-    unref(getOptions).length > 0
+    modelValue.value === undefined
+    && props.autoSelect
+    && unref(getOptions).length > 0
   ) {
     let firstOption;
     if (isFunction(props.autoSelect)) {
       firstOption = props.autoSelect(unref(getOptions));
-    } else {
+    }
+    else {
       switch (props.autoSelect) {
         case 'first': {
           firstOption = unref(getOptions)[0];
@@ -253,7 +257,8 @@ function emitChange() {
       }
     }
 
-    if (firstOption) modelValue.value = firstOption.value;
+    if (firstOption)
+      modelValue.value = firstOption.value;
   }
   emit('optionsChange', unref(getOptions));
 }
@@ -264,22 +269,23 @@ defineExpose({
   /** 获取当前值 */
   getValue: () => unref(modelValue),
   /** 获取被包装的组件实例 */
-  getComponentRef: <T = any,>() => componentRef.value as T,
+  getComponentRef: <T = any>() => componentRef.value as T,
   /** 更新Api参数 */
   updateParam(newParams: Record<string, any>) {
     innerParams.value = newParams;
   },
 });
 </script>
+
 <template>
   <component
     :is="component"
     v-bind="bindProps"
-    :placeholder="$attrs.placeholder"
     ref="componentRef"
+    :placeholder="$attrs.placeholder"
   >
     <template v-for="item in Object.keys($slots)" #[item]="data">
-      <slot :name="item" v-bind="data || {}"></slot>
+      <slot :name="item" v-bind="data || {}" />
     </template>
     <template v-if="loadingSlot && loading" #[loadingSlot]>
       <LoaderCircle class="animate-spin" />

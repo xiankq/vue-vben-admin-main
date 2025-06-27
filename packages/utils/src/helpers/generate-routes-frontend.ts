@@ -38,7 +38,7 @@ function hasAuthority(route: RouteRecordRaw, access: string[]) {
   if (!authority) {
     return true;
   }
-  const canAccess = access.some((value) => authority.includes(value));
+  const canAccess = access.some(value => authority.includes(value));
 
   return canAccess || (!canAccess && menuHasVisibleWithForbidden(route));
 }
@@ -49,9 +49,9 @@ function hasAuthority(route: RouteRecordRaw, access: string[]) {
  */
 function menuHasVisibleWithForbidden(route: RouteRecordRaw) {
   return (
-    !!route.meta?.authority &&
-    Reflect.has(route.meta || {}, 'menuVisibleWithForbidden') &&
-    !!route.meta?.menuVisibleWithForbidden
+    !!route.meta?.authority
+    && Reflect.has(route.meta || {}, 'menuVisibleWithForbidden')
+    && !!route.meta?.menuVisibleWithForbidden
   );
 }
 

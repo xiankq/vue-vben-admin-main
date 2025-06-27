@@ -1,7 +1,7 @@
 import type { Recordable, UserInfo } from '@vben/types';
 
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { getAccessCodesApi, getUserInfoApi, loginApi, logoutApi } from '#/api';
+import { $t } from '#/locales';
 
 import { LOGIN_PATH } from '@vben/constants';
 import { preferences } from '@vben/preferences';
@@ -10,8 +10,8 @@ import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 import { ElNotification } from 'element-plus';
 import { defineStore } from 'pinia';
 
-import { getAccessCodesApi, getUserInfoApi, loginApi, logoutApi } from '#/api';
-import { $t } from '#/locales';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();
@@ -53,7 +53,8 @@ export const useAuthStore = defineStore('auth', () => {
 
         if (accessStore.loginExpired) {
           accessStore.setLoginExpired(false);
-        } else {
+        }
+        else {
           onSuccess
             ? await onSuccess?.()
             : await router.push(
@@ -69,7 +70,8 @@ export const useAuthStore = defineStore('auth', () => {
           });
         }
       }
-    } finally {
+    }
+    finally {
       loginLoading.value = false;
     }
 
@@ -81,7 +83,8 @@ export const useAuthStore = defineStore('auth', () => {
   async function logout(redirect: boolean = true) {
     try {
       await logoutApi();
-    } catch {
+    }
+    catch {
       // 不做任何处理
     }
     resetAllStores();

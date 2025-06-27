@@ -54,7 +54,7 @@ function formatCircles(circles: CircularDependencyResult[]): void {
   console.log('⚠️ Circular dependencies found:');
   circles.forEach((circle, index) => {
     console.log(`\nCircular dependency #${index + 1}:`);
-    circle.forEach((file) => console.log(`  → ${file}`));
+    circle.forEach(file => console.log(`  → ${file}`));
   });
 }
 
@@ -103,7 +103,7 @@ async function checkCircular({
       const allowedExtensions = new Set(finalConfig.allowedExtensions);
 
       // 过滤文件列表
-      files = files.filter((file) => allowedExtensions.has(extname(file)));
+      files = files.filter(file => allowedExtensions.has(extname(file)));
 
       const circularFiles: CircularDependencyResult[] = [];
 
@@ -119,7 +119,8 @@ async function checkCircular({
       // 更新缓存
       cache.set(cacheKey, circularFiles);
       verbose && formatCircles(circularFiles);
-    } else {
+    }
+    else {
       // 更新缓存
       cache.set(cacheKey, results);
       verbose && formatCircles(results);
@@ -131,7 +132,8 @@ async function checkCircular({
         '\n⚠️ Warning: Circular dependencies found, please check and fix',
       );
     }
-  } catch (error) {
+  }
+  catch (error) {
     console.error(
       '❌ Error checking circular dependencies:',
       error instanceof Error ? error.message : error,

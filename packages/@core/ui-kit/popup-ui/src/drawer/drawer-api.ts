@@ -8,6 +8,7 @@ export class DrawerApi {
   public sharedData: Record<'payload', any> = {
     payload: {},
   };
+
   public store: Store<DrawerState>;
 
   private api: Pick<
@@ -66,7 +67,8 @@ export class DrawerApi {
           const state = this.store.state;
           if (state?.isOpen === this.state?.isOpen) {
             this.state = state;
-          } else {
+          }
+          else {
             this.state = state;
             this.api.onOpenChange?.(!!state?.isOpen);
           }
@@ -94,7 +96,7 @@ export class DrawerApi {
     // 如果 onBeforeClose 返回 false，则不关闭弹窗
     const allowClose = (await this.api.onBeforeClose?.()) ?? true;
     if (allowClose) {
-      this.store.setState((prev) => ({
+      this.store.setState(prev => ({
         ...prev,
         isOpen: false,
         submitting: false,
@@ -121,7 +123,8 @@ export class DrawerApi {
   onCancel() {
     if (this.api.onCancel) {
       this.api.onCancel?.();
-    } else {
+    }
+    else {
       this.close();
     }
   }
@@ -152,7 +155,7 @@ export class DrawerApi {
   }
 
   open() {
-    this.store.setState((prev) => ({ ...prev, isOpen: true }));
+    this.store.setState(prev => ({ ...prev, isOpen: true }));
   }
 
   setData<T>(payload: T) {
@@ -167,8 +170,9 @@ export class DrawerApi {
   ) {
     if (isFunction(stateOrFn)) {
       this.store.setState(stateOrFn);
-    } else {
-      this.store.setState((prev) => ({ ...prev, ...stateOrFn }));
+    }
+    else {
+      this.store.setState(prev => ({ ...prev, ...stateOrFn }));
     }
     return this;
   }

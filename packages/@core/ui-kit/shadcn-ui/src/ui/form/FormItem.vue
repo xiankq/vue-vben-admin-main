@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { provide, useId } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
+
+import { provide, useId } from 'vue';
 
 import { FORM_ITEM_INJECTION_KEY } from './injectionKeys';
 
@@ -15,6 +15,6 @@ provide(FORM_ITEM_INJECTION_KEY, id);
 
 <template>
   <div :class="cn(props.class)">
-    <slot></slot>
+    <slot />
   </div>
 </template>

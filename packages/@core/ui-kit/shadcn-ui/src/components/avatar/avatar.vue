@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { ClassType } from '@vben-core/typings';
+
 import type {
   AvatarFallbackProps,
   AvatarImageProps,
@@ -6,8 +8,6 @@ import type {
 } from 'radix-vue';
 
 import type { CSSProperties } from 'vue';
-
-import type { ClassType } from '@vben-core/typings';
 
 import { computed } from 'vue';
 
@@ -60,7 +60,7 @@ const rootStyle = computed(() => {
   <div
     :class="props.class"
     :style="rootStyle"
-    class="relative flex flex-shrink-0 items-center"
+    class="flex flex-shrink-0 items-center relative"
   >
     <Avatar :class="props.class" class="size-full">
       <AvatarImage :alt="alt" :src="src" :style="imageStyle" />
@@ -69,8 +69,7 @@ const rootStyle = computed(() => {
     <span
       v-if="dot"
       :class="dotClass"
-      class="border-background absolute bottom-0 right-0 size-3 rounded-full border-2"
-    >
-    </span>
+      class="border-background border-2 rounded-full size-3 bottom-0 right-0 absolute"
+    />
   </div>
 </template>

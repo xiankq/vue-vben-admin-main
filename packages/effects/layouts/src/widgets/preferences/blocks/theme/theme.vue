@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Component } from 'vue';
-
 import type { ThemeModeType } from '@vben/types';
+
+import type { Component } from 'vue';
 
 import { MoonStar, Sun, SunMoon } from '@vben/icons';
 import { $t } from '@vben/locales';
@@ -51,10 +51,10 @@ function nameView(name: string) {
 </script>
 
 <template>
-  <div class="flex w-full flex-wrap justify-between">
+  <div class="flex flex-wrap w-full justify-between">
     <template v-for="theme in THEME_PRESET" :key="theme.name">
       <div
-        class="flex cursor-pointer flex-col"
+        class="flex flex-col cursor-pointer"
         @click="modelValue = theme.name"
       >
         <div
@@ -63,7 +63,7 @@ function nameView(name: string) {
         >
           <component :is="theme.icon" class="mx-9 size-5" />
         </div>
-        <div class="text-muted-foreground mt-2 text-center text-xs">
+        <div class="text-muted-foreground text-xs mt-2 text-center">
           {{ nameView(theme.name) }}
         </div>
       </div>

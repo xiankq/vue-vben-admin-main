@@ -1,10 +1,10 @@
 import type { BacktopProps } from './backtop';
 
-import { onMounted, ref, shallowRef } from 'vue';
-
 import { useEventListener, useThrottleFn } from '@vueuse/core';
 
-export const useBackTop = (props: BacktopProps) => {
+import { onMounted, ref, shallowRef } from 'vue';
+
+export function useBackTop(props: BacktopProps) {
   const el = shallowRef<HTMLElement>();
   const container = shallowRef<Document | HTMLElement>();
   const visible = ref(false);
@@ -42,4 +42,4 @@ export const useBackTop = (props: BacktopProps) => {
     handleClick,
     visible,
   };
-};
+}

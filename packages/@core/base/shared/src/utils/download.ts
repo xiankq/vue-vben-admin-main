@@ -86,8 +86,8 @@ export function downloadFileFromBlobPart({
   source,
 }: DownloadOptions<BlobPart>): void {
   // 如果 data 不是 Blob，则转换为 Blob
-  const blob =
-    source instanceof Blob
+  const blob
+    = source instanceof Blob
       ? source
       : new Blob([source], { type: 'application/octet-stream' });
 

@@ -12,6 +12,7 @@ withDefaults(
   { border: false, gap: 0, size: 'middle' },
 );
 </script>
+
 <template>
   <div
     :class="
@@ -24,7 +25,7 @@ withDefaults(
     "
     :style="{ gap: gap ? `${gap}px` : '0px' }"
   >
-    <slot></slot>
+    <slot />
   </div>
 </template>
 

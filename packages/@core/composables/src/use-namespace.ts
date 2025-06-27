@@ -6,13 +6,7 @@ import { DEFAULT_NAMESPACE } from '@vben-core/shared/constants';
 
 const statePrefix = 'is-';
 
-const _bem = (
-  namespace: string,
-  block: string,
-  blockSuffix: string,
-  element: string,
-  modifier: string,
-) => {
+function _bem(namespace: string, block: string, blockSuffix: string, element: string, modifier: string) {
   let cls = `${namespace}-${block}`;
   if (blockSuffix) {
     cls += `-${blockSuffix}`;
@@ -24,7 +18,7 @@ const _bem = (
     cls += `--${modifier}`;
   }
   return cls;
-};
+}
 
 const is: {
   (name: string): string;
@@ -35,7 +29,7 @@ const is: {
   return name && state ? `${statePrefix}${name}` : '';
 };
 
-const useNamespace = (block: string) => {
+function useNamespace(block: string) {
   const namespace = DEFAULT_NAMESPACE;
   const b = (blockSuffix = '') => _bem(namespace, block, blockSuffix, '', '');
   const e = (element?: string) =>
@@ -98,7 +92,7 @@ const useNamespace = (block: string) => {
     m,
     namespace,
   };
-};
+}
 
 type UseNamespaceReturn = ReturnType<typeof useNamespace>;
 

@@ -4,16 +4,16 @@ import type {
   DropdownMenuRadioItemProps,
 } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { Circle } from 'lucide-vue-next';
+
 import {
   DropdownMenuItemIndicator,
   DropdownMenuRadioItem,
   useForwardPropsEmits,
 } from 'radix-vue';
+import { computed } from 'vue';
 
 const props = defineProps<DropdownMenuRadioItemProps & { class?: any }>();
 
@@ -38,11 +38,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       )
     "
   >
-    <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span class="flex h-3.5 w-3.5 items-center left-2 justify-center absolute">
       <DropdownMenuItemIndicator>
         <Circle class="h-2 w-2 fill-current" />
       </DropdownMenuItemIndicator>
     </span>
-    <slot></slot>
+    <slot />
   </DropdownMenuRadioItem>
 </template>

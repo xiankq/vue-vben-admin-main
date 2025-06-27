@@ -7,8 +7,8 @@ function updateCSSVariables(
   id = '__vben-styles__',
 ): void {
   // 获取或创建内联样式表元素
-  const styleElement =
-    document.querySelector(`#${id}`) || document.createElement('style');
+  const styleElement
+    = document.querySelector(`#${id}`) || document.createElement('style');
 
   styleElement.id = id;
 

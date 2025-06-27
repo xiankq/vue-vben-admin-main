@@ -1,18 +1,10 @@
 <script setup lang="ts">
-import type { Component } from 'vue';
-
 import type { AnyFunction } from '@vben/types';
 
-import { computed, useTemplateRef, watch } from 'vue';
-
-import { useHoverToggle } from '@vben/hooks';
-import { LockKeyhole, LogOut } from '@vben/icons';
-import { $t } from '@vben/locales';
-import { preferences, usePreferences } from '@vben/preferences';
-import { useAccessStore } from '@vben/stores';
-import { isWindowsOs } from '@vben/utils';
+import type { Component } from 'vue';
 
 import { useVbenModal } from '@vben-core/popup-ui';
+
 import {
   Badge,
   DropdownMenu,
@@ -25,8 +17,16 @@ import {
   VbenAvatar,
   VbenIcon,
 } from '@vben-core/shadcn-ui';
+import { useHoverToggle } from '@vben/hooks';
+import { LockKeyhole, LogOut } from '@vben/icons';
+import { $t } from '@vben/locales';
+import { preferences, usePreferences } from '@vben/preferences';
+import { useAccessStore } from '@vben/stores';
 
+import { isWindowsOs } from '@vben/utils';
 import { useMagicKeys, whenever } from '@vueuse/core';
+
+import { computed, useTemplateRef, watch } from 'vue';
 
 import { LockScreenModal } from '../lock-screen';
 
@@ -84,8 +84,8 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{ logout: [] }>();
 
-const { globalLockScreenShortcutKey, globalLogoutShortcutKey } =
-  usePreferences();
+const { globalLockScreenShortcutKey, globalLogoutShortcutKey }
+  = usePreferences();
 const accessStore = useAccessStore();
 const [LockModal, lockModalApi] = useVbenModal({
   connectedComponent: LockScreenModal,
@@ -108,7 +108,8 @@ watch(
   (val) => {
     if (val) {
       hoverWatcher.enable();
-    } else {
+    }
+    else {
       hoverWatcher.disable();
     }
   },
@@ -190,15 +191,15 @@ if (enableShortcutKey.value) {
 
   <DropdownMenu v-model:open="openPopover">
     <DropdownMenuTrigger ref="refTrigger" :disabled="props.trigger === 'hover'">
-      <div class="hover:bg-accent ml-1 mr-2 cursor-pointer rounded-full p-1.5">
+      <div class="hover:bg-accent ml-1 mr-2 p-1.5 rounded-full cursor-pointer">
         <div class="hover:text-accent-foreground flex-center">
           <VbenAvatar :alt="text" :src="avatar" class="size-8" dot />
         </div>
       </div>
     </DropdownMenuTrigger>
-    <DropdownMenuContent class="mr-2 min-w-[240px] p-0 pb-1">
+    <DropdownMenuContent class="mr-2 p-0 pb-1 min-w-[240px]">
       <div ref="refContent">
-        <DropdownMenuLabel class="flex items-center p-3">
+        <DropdownMenuLabel class="p-3 flex items-center">
           <VbenAvatar
             :alt="text"
             :src="avatar"
@@ -209,11 +210,11 @@ if (enableShortcutKey.value) {
           <div class="ml-2 w-full">
             <div
               v-if="tagText || text || $slots.tagText"
-              class="text-foreground mb-1 flex items-center text-sm font-medium"
+              class="text-foreground text-sm font-medium mb-1 flex items-center"
             >
               {{ text }}
               <slot name="tagText">
-                <Badge v-if="tagText" class="ml-2 text-green-400">
+                <Badge v-if="tagText" class="text-green-400 ml-2">
                   {{ tagText }}
                 </Badge>
               </slot>
@@ -227,7 +228,7 @@ if (enableShortcutKey.value) {
         <DropdownMenuItem
           v-for="menu in menus"
           :key="menu.text"
-          class="mx-1 flex cursor-pointer items-center rounded-sm py-1 leading-8"
+          class="leading-8 mx-1 py-1 rounded-sm flex cursor-pointer items-center"
           @click="menu.handler"
         >
           <VbenIcon :icon="menu.icon" class="mr-2 size-4" />
@@ -236,7 +237,7 @@ if (enableShortcutKey.value) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           v-if="preferences.widget.lockScreen"
-          class="mx-1 flex cursor-pointer items-center rounded-sm py-1 leading-8"
+          class="leading-8 mx-1 py-1 rounded-sm flex cursor-pointer items-center"
           @click="handleOpenLock"
         >
           <LockKeyhole class="mr-2 size-4" />
@@ -247,7 +248,7 @@ if (enableShortcutKey.value) {
         </DropdownMenuItem>
         <DropdownMenuSeparator v-if="preferences.widget.lockScreen" />
         <DropdownMenuItem
-          class="mx-1 flex cursor-pointer items-center rounded-sm py-1 leading-8"
+          class="leading-8 mx-1 py-1 rounded-sm flex cursor-pointer items-center"
           @click="handleLogout"
         >
           <LogOut class="mr-2 size-4" />

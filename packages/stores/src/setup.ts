@@ -31,7 +31,7 @@ export async function initStores(app: App, options: InitStoreOptions) {
   pinia.use(
     createPersistedState({
       // key $appName-$store.id
-      key: (storeKey) => `${namespace}-${storeKey}`,
+      key: storeKey => `${namespace}-${storeKey}`,
       storage: import.meta.env.DEV
         ? localStorage
         : {

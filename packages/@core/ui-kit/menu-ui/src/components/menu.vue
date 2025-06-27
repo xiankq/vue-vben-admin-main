@@ -10,6 +10,11 @@ import type {
   MenuProvider,
 } from '../types';
 
+import { useNamespace } from '@vben-core/composables';
+
+import { Ellipsis } from '@vben-core/icons';
+import { useResizeObserver } from '@vueuse/core';
+
 import {
   computed,
   nextTick,
@@ -20,11 +25,6 @@ import {
   watch,
   watchEffect,
 } from 'vue';
-
-import { useNamespace } from '@vben-core/composables';
-import { Ellipsis } from '@vben-core/icons';
-
-import { useResizeObserver } from '@vueuse/core';
 
 import {
   createMenuContext,
@@ -78,13 +78,13 @@ const getSlot = computed(() => {
   const defaultSlots: VNodeArrayChildren = slots.default?.() ?? [];
 
   const originalSlot = flattedChildren(defaultSlots) as VNodeArrayChildren;
-  const slotDefault =
-    sliceIndex.value === -1
+  const slotDefault
+    = sliceIndex.value === -1
       ? originalSlot
       : originalSlot.slice(0, sliceIndex.value);
 
-  const slotMore =
-    sliceIndex.value === -1 ? [] : originalSlot.slice(sliceIndex.value);
+  const slotMore
+    = sliceIndex.value === -1 ? [] : originalSlot.slice(sliceIndex.value);
 
   return { showSlotMore: slotMore.length > 0, slotDefault, slotMore };
 });
@@ -92,7 +92,8 @@ const getSlot = computed(() => {
 watch(
   () => props.collapse,
   (value) => {
-    if (value) openedMenus.value = [];
+    if (value)
+      openedMenus.value = [];
   },
 );
 
@@ -112,7 +113,8 @@ let resizeStopper: UseResizeObserverReturn['stop'];
 watchEffect(() => {
   if (props.mode === 'horizontal') {
     resizeStopper = useResizeObserver(menu, handleResize).stop;
-  } else {
+  }
+  else {
     resizeStopper?.();
   }
 });
@@ -157,10 +159,10 @@ function calcSliceIndex() {
     return -1;
   }
   const items = [...(menu.value?.childNodes ?? [])].filter(
-    (item) =>
+    item =>
       // remove comment type node #12634
-      item.nodeName !== '#comment' &&
-      (item.nodeName !== '#text' || item.nodeValue),
+      item.nodeName !== '#comment'
+      && (item.nodeName !== '#text' || item.nodeValue),
   ) as HTMLElement[];
 
   const moreItemWidth = 46;
@@ -236,10 +238,10 @@ function initMenu() {
 
 function updateActiveName(val: string) {
   const itemsInData = items.value;
-  const item =
-    itemsInData[val] ||
-    (activePath.value && itemsInData[activePath.value]) ||
-    itemsInData[props.defaultActive || ''];
+  const item
+    = itemsInData[val]
+      || (activePath.value && itemsInData[activePath.value])
+      || itemsInData[props.defaultActive || ''];
 
   activePath.value = item ? item.path : val;
 }
@@ -262,7 +264,8 @@ function handleSubMenuClick({ parentPaths, path }: MenuItemRegistered) {
 
   if (isOpened) {
     closeMenu(path, parentPaths);
-  } else {
+  }
+  else {
     openMenu(path, parentPaths);
   }
 }
@@ -335,6 +338,7 @@ function getActivePaths() {
   return activeItem.parentPaths;
 }
 </script>
+
 <template>
   <ul
     ref="menu"
@@ -364,7 +368,7 @@ function getActivePaths() {
       </SubMenu>
     </template>
     <template v-else>
-      <slot></slot>
+      <slot />
     </template>
   </ul>
 </template>
@@ -386,8 +390,7 @@ $namespace: vben;
   align-items: center;
   height: var(--menu-item-height);
   padding: var(--menu-item-padding-y) var(--menu-item-padding-x);
-  margin: 0 var(--menu-item-margin-x) var(--menu-item-margin-y)
-    var(--menu-item-margin-x);
+  margin: 0 var(--menu-item-margin-x) var(--menu-item-margin-y) var(--menu-item-margin-x);
   font-size: var(--menu-font-size);
   color: var(--menu-item-color);
   white-space: nowrap;
@@ -555,19 +558,14 @@ $namespace: vben;
       & .#{$namespace}-menu-item,
       & .#{$namespace}-sub-menu-content,
       & .#{$namespace}-menu-item-group__title {
-        padding-left: calc(
-          var(--menu-item-indent) + var(--menu-level) * var(--menu-item-indent)
-        );
+        padding-left: calc(var(--menu-item-indent) + var(--menu-level) * var(--menu-item-indent));
         white-space: nowrap;
       }
 
       & > .#{$namespace}-sub-menu {
         & > .#{$namespace}-menu {
           & > .#{$namespace}-menu-item {
-            padding-left: calc(
-              0px + var(--menu-item-indent) + var(--menu-level) *
-                var(--menu-item-indent)
-            );
+            padding-left: calc(0px + var(--menu-item-indent) + var(--menu-level) * var(--menu-item-indent));
           }
         }
 
@@ -662,10 +660,8 @@ $namespace: vben;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: var(--menu-item-collapse-padding-y)
-        var(--menu-item-collapse-padding-x);
-      margin: var(--menu-item-collapse-margin-y)
-        var(--menu-item-collapse-margin-x);
+      padding: var(--menu-item-collapse-padding-y) var(--menu-item-collapse-padding-x);
+      margin: var(--menu-item-collapse-margin-y) var(--menu-item-collapse-margin-x);
       transition: all 0.3s;
 
       &.is-active {

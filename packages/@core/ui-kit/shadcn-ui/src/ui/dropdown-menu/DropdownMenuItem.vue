@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { DropdownMenuItemProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { DropdownMenuItem, useForwardProps } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<
   DropdownMenuItemProps & { class?: any; inset?: boolean }
@@ -31,6 +31,6 @@ const forwardedProps = useForwardProps(delegatedProps);
       )
     "
   >
-    <slot></slot>
+    <slot />
   </DropdownMenuItem>
 </template>

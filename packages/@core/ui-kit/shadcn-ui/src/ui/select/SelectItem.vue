@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import type { SelectItemProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { Check } from 'lucide-vue-next';
+
 import {
   SelectItem,
   SelectItemIndicator,
   SelectItemText,
   useForwardProps,
 } from 'radix-vue';
+import { computed } from 'vue';
 
 const props = defineProps<SelectItemProps & { class?: any }>();
 
@@ -34,14 +34,14 @@ const forwardedProps = useForwardProps(delegatedProps);
       )
     "
   >
-    <span class="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span class="flex h-3.5 w-3.5 items-center right-2 justify-center absolute">
       <SelectItemIndicator>
         <Check class="h-4 w-4" />
       </SelectItemIndicator>
     </span>
 
     <SelectItemText>
-      <slot></slot>
+      <slot />
     </SelectItemText>
   </SelectItem>
 </template>

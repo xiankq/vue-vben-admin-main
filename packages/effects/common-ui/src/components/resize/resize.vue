@@ -275,13 +275,13 @@ const rect = computed(() => ({
   height: Math.round(height.value),
 }));
 
-const saveDimensionsBeforeMove = ({
+function saveDimensionsBeforeMove({
   pointerX,
   pointerY,
 }: {
   pointerX: number;
   pointerY: number;
-}) => {
+}) {
   dimensionsBeforeMove.value.pointerX = pointerX;
   dimensionsBeforeMove.value.pointerY = pointerY;
 
@@ -294,36 +294,34 @@ const saveDimensionsBeforeMove = ({
   dimensionsBeforeMove.value.height = height.value as number;
 
   aspectFactor.value = width.value / height.value;
-};
+}
 
-const sideCorrectionByLimit = (
-  limit: { max: number; min: number },
-  current: number,
-) => {
+function sideCorrectionByLimit(limit: { max: number; min: number }, current: number) {
   let value = current;
 
   if (limit.min !== null && current < limit.min) {
     value = limit.min;
-  } else if (limit.max !== null && limit.max < current) {
+  }
+  else if (limit.max !== null && limit.max < current) {
     value = limit.max;
   }
 
   return value;
-};
+}
 
-const rectCorrectionByLimit = (rect: {
+function rectCorrectionByLimit(rect: {
   newBottom: number;
   newLeft: number;
   newRight: number;
   newTop: number;
-}) => {
+}) {
   // const { limits } = this;
   let { newRight, newLeft, newBottom, newTop } = rect;
 
-  type RectRange = {
+  interface RectRange {
     max: number;
     min: number;
-  };
+  }
 
   newLeft = sideCorrectionByLimit(limits.value.left as RectRange, newLeft);
   newRight = sideCorrectionByLimit(limits.value.right as RectRange, newRight);
@@ -339,14 +337,14 @@ const rectCorrectionByLimit = (rect: {
     newTop,
     newBottom,
   };
-};
+}
 
-const rectCorrectionByAspectRatio = (rect: {
+function rectCorrectionByAspectRatio(rect: {
   newBottom: number;
   newLeft: number;
   newRight: number;
   newTop: number;
-}) => {
+}) {
   let { newLeft, newRight, newTop, newBottom } = rect;
   // const { parentWidth, parentHeight, currentStick, aspectFactor, dimensionsBeforeMove } = this;
 
@@ -358,33 +356,38 @@ const rectCorrectionByAspectRatio = (rect: {
 
     newLeft -= (deltaHeight * aspectFactor.value!) / 2;
     newRight -= (deltaHeight * aspectFactor.value!) / 2;
-  } else if (currentStick.value![0] === 'm') {
+  }
+  else if (currentStick.value![0] === 'm') {
     const deltaWidth = newWidth - dimensionsBeforeMove.value.width;
 
     newTop -= deltaWidth / aspectFactor.value! / 2;
     newBottom -= deltaWidth / aspectFactor.value! / 2;
-  } else if (newWidth / newHeight > aspectFactor.value!) {
+  }
+  else if (newWidth / newHeight > aspectFactor.value!) {
     newWidth = aspectFactor.value! * newHeight;
 
     if (currentStick.value![1] === 'l') {
       newLeft = parentWidth.value! - newRight - newWidth;
-    } else {
+    }
+    else {
       newRight = parentWidth.value! - newLeft - newWidth;
     }
-  } else {
+  }
+  else {
     newHeight = newWidth / aspectFactor.value!;
 
     if (currentStick.value![0] === 't') {
       newTop = parentHeight.value! - newBottom - newHeight;
-    } else {
+    }
+    else {
       newBottom = parentHeight.value! - newTop - newHeight;
     }
   }
 
   return { newLeft, newRight, newTop, newBottom };
-};
+}
 
-const stickMove = (delta: { x: number; y: number }) => {
+function stickMove(delta: { x: number; y: number }) {
   let newTop = dimensionsBeforeMove.value.top;
   let newBottom = dimensionsBeforeMove.value.bottom;
   let newLeft = dimensionsBeforeMove.value.left;
@@ -394,12 +397,12 @@ const stickMove = (delta: { x: number; y: number }) => {
       newBottom = dimensionsBeforeMove.value.bottom + delta.y;
 
       if (snapToGrid.value) {
-        newBottom =
-          (parentHeight.value as number) -
-          Math.round(
-            ((parentHeight.value as number) - newBottom) / gridY.value,
-          ) *
-            gridY.value;
+        newBottom
+          = (parentHeight.value as number)
+            - Math.round(
+              ((parentHeight.value as number) - newBottom) / gridY.value,
+            )
+            * gridY.value;
       }
 
       break;
@@ -434,10 +437,10 @@ const stickMove = (delta: { x: number; y: number }) => {
       newRight = dimensionsBeforeMove.value.right + delta.x;
 
       if (snapToGrid.value) {
-        newRight =
-          (parentWidth.value as number) -
-          Math.round(((parentWidth.value as number) - newRight) / gridX.value) *
-            gridX.value;
+        newRight
+          = (parentWidth.value as number)
+            - Math.round(((parentWidth.value as number) - newRight) / gridX.value)
+            * gridX.value;
       }
 
       break;
@@ -469,9 +472,9 @@ const stickMove = (delta: { x: number; y: number }) => {
   bottom.value = newBottom;
 
   emit('resizing', rect.value);
-};
+}
 
-const stickUp = () => {
+function stickUp() {
   stickDrag.value = false;
   // dimensionsBeforeMove.value = {
   //   pointerX: 0,
@@ -500,18 +503,18 @@ const stickUp = () => {
 
   emit('resizing', rect.value);
   emit('resizestop', rect.value);
-};
+}
 
-const calcDragLimitation = () => {
+function calcDragLimitation() {
   return {
     left: { min: 0, max: (parentWidth.value as number) - width.value },
     right: { min: 0, max: (parentWidth.value as number) - width.value },
     top: { min: 0, max: (parentHeight.value as number) - height.value },
     bottom: { min: 0, max: (parentHeight.value as number) - height.value },
   };
-};
+}
 
-const calcResizeLimits = () => {
+function calcResizeLimits() {
   // const { aspectFactor, width, height, bottom, top, left, right } = this;
 
   const parentLim = parentLimitation.value ? 0 : null;
@@ -519,7 +522,8 @@ const calcResizeLimits = () => {
   if (aspectRatio.value) {
     if (minw.value / minh.value > (aspectFactor.value as number)) {
       minh.value = minw.value / (aspectFactor.value as number);
-    } else {
+    }
+    else {
       minw.value = ((aspectFactor.value as number) * minh.value) as number;
     }
   }
@@ -547,35 +551,35 @@ const calcResizeLimits = () => {
     const aspectLimits = {
       left: {
         min:
-          left.value! -
-          Math.min(top.value!, bottom.value!) * aspectFactor.value! * 2,
+          left.value!
+          - Math.min(top.value!, bottom.value!) * aspectFactor.value! * 2,
         max:
-          left.value! +
-          ((height.value - minh.value!) / 2) * aspectFactor.value! * 2,
+          left.value!
+          + ((height.value - minh.value!) / 2) * aspectFactor.value! * 2,
       },
       right: {
         min:
-          right.value! -
-          Math.min(top.value!, bottom.value!) * aspectFactor.value! * 2,
+          right.value!
+          - Math.min(top.value!, bottom.value!) * aspectFactor.value! * 2,
         max:
-          right.value! +
-          ((height.value - minh.value!) / 2) * aspectFactor.value! * 2,
+          right.value!
+          + ((height.value - minh.value!) / 2) * aspectFactor.value! * 2,
       },
       top: {
         min:
-          top.value! -
-          (Math.min(left.value!, right.value!) / aspectFactor.value!) * 2,
+          top.value!
+          - (Math.min(left.value!, right.value!) / aspectFactor.value!) * 2,
         max:
-          top.value! +
-          ((width.value - minw.value) / 2 / aspectFactor.value!) * 2,
+          top.value!
+          + ((width.value - minw.value) / 2 / aspectFactor.value!) * 2,
       },
       bottom: {
         min:
-          bottom.value! -
-          (Math.min(left.value!, right.value!) / aspectFactor.value!) * 2,
+          bottom.value!
+          - (Math.min(left.value!, right.value!) / aspectFactor.value!) * 2,
         max:
-          bottom.value! +
-          ((width.value - minw.value) / 2 / aspectFactor.value!) * 2,
+          bottom.value!
+          + ((width.value - minw.value) / 2 / aspectFactor.value!) * 2,
       },
     };
 
@@ -588,7 +592,8 @@ const calcResizeLimits = () => {
         min: Math.max(limits.right.min!, aspectLimits.right.min),
         max: Math.min(limits.right.max, aspectLimits.right.max),
       };
-    } else if (currentStick.value![1] === 'm') {
+    }
+    else if (currentStick.value![1] === 'm') {
       limits.top = {
         min: Math.max(limits.top.min!, aspectLimits.top.min),
         max: Math.min(limits.top.max, aspectLimits.top.max),
@@ -601,7 +606,7 @@ const calcResizeLimits = () => {
   }
 
   return limits;
-};
+}
 
 const positionStyle = computed(() => ({
   top: `${top.value}px`,
@@ -628,7 +633,7 @@ const stickStyles = computed(() => (stick: string) => {
   return stickStyle;
 });
 
-const bodyMove = (delta: { x: number; y: number }) => {
+function bodyMove(delta: { x: number; y: number }) {
   let newTop = dimensionsBeforeMove.value.top - delta.y;
   let newBottom = dimensionsBeforeMove.value.bottom + delta.y;
   let newLeft = dimensionsBeforeMove.value.left - delta.x;
@@ -639,17 +644,17 @@ const bodyMove = (delta: { x: number; y: number }) => {
     let alignLeft = true;
 
     let diffT = newTop - Math.floor(newTop / gridY.value) * gridY.value;
-    let diffB =
-      (parentHeight.value as number) -
-      newBottom -
-      Math.floor(((parentHeight.value as number) - newBottom) / gridY.value) *
-        gridY.value;
+    let diffB
+      = (parentHeight.value as number)
+        - newBottom
+        - Math.floor(((parentHeight.value as number) - newBottom) / gridY.value)
+        * gridY.value;
     let diffL = newLeft - Math.floor(newLeft / gridX.value) * gridX.value;
-    let diffR =
-      (parentWidth.value as number) -
-      newRight -
-      Math.floor(((parentWidth.value as number) - newRight) / gridX.value) *
-        gridX.value;
+    let diffR
+      = (parentWidth.value as number)
+        - newRight
+        - Math.floor(((parentWidth.value as number) - newRight) / gridX.value)
+        * gridX.value;
 
     if (diffT > gridY.value / 2) {
       diffT -= gridY.value;
@@ -685,9 +690,9 @@ const bodyMove = (delta: { x: number; y: number }) => {
   } = rectCorrectionByLimit({ newLeft, newRight, newTop, newBottom }));
 
   emit('dragging', rect.value);
-};
+}
 
-const bodyUp = () => {
+function bodyUp() {
   bodyDrag.value = false;
   emit('dragging', rect.value);
   emit('dragstop', rect.value);
@@ -708,13 +713,9 @@ const bodyUp = () => {
     top: { min: null, max: null },
     bottom: { min: null, max: null },
   };
-};
+}
 
-const stickDown = (
-  stick: string,
-  ev: { pageX: any; pageY: any; touches?: any },
-  force = false,
-) => {
+function stickDown(stick: string, ev: { pageX: any; pageY: any; touches?: any }, force = false) {
   if ((!isResizable.value || !active.value) && !force) {
     return;
   }
@@ -729,9 +730,9 @@ const stickDown = (
   currentStick.value = stick;
 
   limits.value = calcResizeLimits();
-};
+}
 
-const move = (ev: MouseEvent & TouchEvent) => {
+function move(ev: MouseEvent & TouchEvent) {
   if (!stickDrag.value && !bodyDrag.value) {
     return;
   }
@@ -770,22 +771,23 @@ const move = (ev: MouseEvent & TouchEvent) => {
     }
     bodyMove(delta);
   }
-};
+}
 
-const up = () => {
+function up() {
   if (stickDrag.value) {
     stickUp();
-  } else if (bodyDrag.value) {
+  }
+  else if (bodyDrag.value) {
     bodyUp();
   }
-};
+}
 
-const deselect = () => {
+function deselect() {
   if (preventActiveBehavior.value) {
     return;
   }
   active.value = false;
-};
+}
 
 const domEvents = ref(
   new Map([
@@ -812,12 +814,12 @@ onMounted(() => {
 
   left.value = x.value;
   top.value = y.value;
-  right.value = (parentWidth.value -
-    (w.value === 'auto' ? container.value!.scrollWidth : (w.value as number)) -
-    left.value) as number;
-  bottom.value = (parentHeight.value -
-    (h.value === 'auto' ? container.value!.scrollHeight : (h.value as number)) -
-    top.value) as number;
+  right.value = (parentWidth.value
+    - (w.value === 'auto' ? container.value!.scrollWidth : (w.value as number))
+    - left.value) as number;
+  bottom.value = (parentHeight.value
+    - (h.value === 'auto' ? container.value!.scrollHeight : (h.value as number))
+    - top.value) as number;
 
   addEvents(domEvents.value);
 
@@ -846,7 +848,7 @@ onBeforeUnmount(() => {
   removeEvents(domEvents.value);
 });
 
-const bodyDown = (ev: MouseEvent & TouchEvent) => {
+function bodyDown(ev: MouseEvent & TouchEvent) {
   const { target, button } = ev;
 
   if (!preventActiveBehavior.value) {
@@ -864,17 +866,17 @@ const bodyDown = (ev: MouseEvent & TouchEvent) => {
   }
 
   if (
-    dragHandle.value &&
-    (target! as HTMLElement).dataset.dragHandle !==
-      getCurrentInstance()?.uid.toString()
+    dragHandle.value
+    && (target! as HTMLElement).dataset.dragHandle
+    !== getCurrentInstance()?.uid.toString()
   ) {
     return;
   }
 
   if (
-    dragCancel.value &&
-    (target! as HTMLElement).dataset.dragCancel ===
-      getCurrentInstance()?.uid.toString()
+    dragCancel.value
+    && (target! as HTMLElement).dataset.dragCancel
+    === getCurrentInstance()?.uid.toString()
   ) {
     return;
   }
@@ -899,14 +901,15 @@ const bodyDown = (ev: MouseEvent & TouchEvent) => {
   if (parentLimitation.value) {
     limits.value = calcDragLimitation();
   }
-};
+}
 
 watch(
   () => active.value,
   (isActive) => {
     if (isActive) {
       emit('activated');
-    } else {
+    }
+    else {
       emit('deactivated');
     }
   },
@@ -939,8 +942,8 @@ watch(
 
     const delta = oldVal - newVal;
 
-    bodyDown({ pageX: left.value!, pageY: top.value! } as MouseEvent &
-      TouchEvent);
+    bodyDown({ pageX: left.value!, pageY: top.value! } as MouseEvent
+    & TouchEvent);
     bodyMove({ x: delta, y: 0 });
 
     nextTick(() => {
@@ -958,8 +961,8 @@ watch(
 
     const delta = oldVal - newVal;
 
-    bodyDown({ pageX: left.value, pageY: top.value } as MouseEvent &
-      TouchEvent);
+    bodyDown({ pageX: left.value, pageY: top.value } as MouseEvent
+    & TouchEvent);
     bodyMove({ x: 0, y: delta });
 
     nextTick(() => {
@@ -1041,7 +1044,7 @@ watch(
     @touchstart="bodyDown($event as TouchEvent & MouseEvent)"
   >
     <div ref="container" :style="sizeStyle" class="content-container">
-      <slot></slot>
+      <slot />
     </div>
     <div
       v-for="(stick, index) of sticks"
@@ -1055,7 +1058,7 @@ watch(
       @touchstart.stop.prevent="
         stickDown(stick, $event as TouchEvent & MouseEvent)
       "
-    ></div>
+    />
   </div>
 </template>
 

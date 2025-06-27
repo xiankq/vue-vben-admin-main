@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { LayoutType } from '@vben/types';
 
-import { onMounted } from 'vue';
-
 import { $t } from '@vben/locales';
+
+import { onMounted } from 'vue';
 
 import CheckboxItem from '../checkbox-item.vue';
 import NumberFieldItem from '../number-field-item.vue';
@@ -28,8 +28,8 @@ const sidebarFixedButton = defineModel<boolean>('sidebarFixedButton');
 
 onMounted(() => {
   if (
-    sidebarCollapsedButton.value &&
-    !sidebarButtons.value.includes('collapsed')
+    sidebarCollapsedButton.value
+    && !sidebarButtons.value.includes('collapsed')
   ) {
     sidebarButtons.value.push('collapsed');
   }
@@ -38,10 +38,10 @@ onMounted(() => {
   }
 });
 
-const handleCheckboxChange = () => {
+function handleCheckboxChange() {
   sidebarCollapsedButton.value = !!sidebarButtons.value.includes('collapsed');
   sidebarFixedButton.value = !!sidebarButtons.value.includes('fixed');
-};
+}
 </script>
 
 <template>
@@ -67,23 +67,23 @@ const handleCheckboxChange = () => {
   <SwitchItem
     v-model="sidebarAutoActivateChild"
     :disabled="
-      !sidebarEnable ||
-      !['sidebar-mixed-nav', 'mixed-nav', 'header-mixed-nav'].includes(
-        currentLayout as string,
-      ) ||
-      disabled
+      !sidebarEnable
+        || !['sidebar-mixed-nav', 'mixed-nav', 'header-mixed-nav'].includes(
+          currentLayout as string,
+        )
+        || disabled
     "
     :tip="$t('preferences.sidebar.autoActivateChildTip')"
   >
     {{ $t('preferences.sidebar.autoActivateChild') }}
   </SwitchItem>
   <CheckboxItem
+    v-model="sidebarButtons"
     :items="[
       { label: $t('preferences.sidebar.buttonCollapsed'), value: 'collapsed' },
       { label: $t('preferences.sidebar.buttonFixed'), value: 'fixed' },
     ]"
     multiple
-    v-model="sidebarButtons"
     :on-btn-click="handleCheckboxChange"
   >
     {{ $t('preferences.sidebar.buttons') }}

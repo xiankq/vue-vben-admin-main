@@ -3,10 +3,10 @@ import type { HoverCardContentProps } from '@vben-core/shadcn-ui';
 
 import type { MenuItemRegistered, MenuProvider, SubMenuProps } from '../types';
 
-import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
-
 import { useNamespace } from '@vben-core/composables';
+
 import { VbenHoverCard } from '@vben-core/shadcn-ui';
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import {
   createSubMenuContext,
@@ -105,10 +105,10 @@ function handleClick() {
   const mode = rootMenu?.props.mode;
   if (
     // 当前菜单禁用时，不展开
-    props.disabled ||
-    (rootMenu?.props.collapse && mode === 'vertical') ||
+    props.disabled
+    || (rootMenu?.props.collapse && mode === 'vertical')
     // 水平模式下不展开
-    mode === 'horizontal'
+    || mode === 'horizontal'
   ) {
     return;
   }
@@ -126,8 +126,8 @@ function handleMouseenter(event: FocusEvent | MouseEvent, showTimeout = 300) {
   }
 
   if (
-    (!rootMenu?.props.collapse && rootMenu?.props.mode === 'vertical') ||
-    props.disabled
+    (!rootMenu?.props.collapse && rootMenu?.props.mode === 'vertical')
+    || props.disabled
   ) {
     if (subMenu) {
       subMenu.mouseInChild.value = true;
@@ -147,9 +147,9 @@ function handleMouseenter(event: FocusEvent | MouseEvent, showTimeout = 300) {
 
 function handleMouseleave(deepDispatch = false) {
   if (
-    !rootMenu?.props.collapse &&
-    rootMenu?.props.mode === 'vertical' &&
-    subMenu
+    !rootMenu?.props.collapse
+    && rootMenu?.props.mode === 'vertical'
+    && subMenu
   ) {
     subMenu.mouseInChild.value = false;
     return;
@@ -189,6 +189,7 @@ onBeforeUnmount(() => {
   rootMenu?.removeSubMenu?.(item);
 });
 </script>
+
 <template>
   <li
     :class="[
@@ -226,7 +227,7 @@ onBeforeUnmount(() => {
             @click.stop="handleClick"
           >
             <template #title>
-              <slot name="title"></slot>
+              <slot name="title" />
             </template>
           </SubMenuContent>
         </template>
@@ -240,7 +241,7 @@ onBeforeUnmount(() => {
             :class="[nsMenu.b(), is('rounded', rounded)]"
             :style="subMenuStyle"
           >
-            <slot></slot>
+            <slot />
           </ul>
         </div>
       </VbenHoverCard>
@@ -256,9 +257,9 @@ onBeforeUnmount(() => {
         :path="path"
         @click.stop="handleClick"
       >
-        <slot name="content"></slot>
+        <slot name="content" />
         <template #title>
-          <slot name="title"></slot>
+          <slot name="title" />
         </template>
       </SubMenuContent>
       <CollapseTransition>
@@ -267,7 +268,7 @@ onBeforeUnmount(() => {
           :class="[nsMenu.b(), is('rounded', rounded)]"
           :style="subMenuStyle"
         >
-          <slot></slot>
+          <slot />
         </ul>
       </CollapseTransition>
     </template>

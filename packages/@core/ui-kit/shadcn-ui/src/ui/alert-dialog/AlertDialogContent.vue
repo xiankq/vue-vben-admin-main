@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import type { ClassType } from '@vben-core/typings';
+
 import type {
   AlertDialogContentEmits,
   AlertDialogContentProps,
 } from 'radix-vue';
-
-import type { ClassType } from '@vben-core/typings';
-
-import { computed, ref } from 'vue';
 
 import { cn } from '@vben-core/shared/utils';
 
@@ -15,6 +13,8 @@ import {
   AlertDialogPortal,
   useForwardPropsEmits,
 } from 'radix-vue';
+
+import { computed, ref } from 'vue';
 
 import AlertDialogOverlay from './AlertDialogOverlay.vue';
 
@@ -49,7 +49,8 @@ function onAnimationEnd(event: AnimationEvent) {
   if (event.target === contentRef.value?.$el) {
     if (props.open) {
       emits('opened');
-    } else {
+    }
+    else {
       emits('closed');
     }
   }
@@ -76,7 +77,6 @@ defineExpose({
     <AlertDialogContent
       ref="contentRef"
       :style="{ ...(zIndex ? { zIndex } : {}), position: 'fixed' }"
-      @animationend="onAnimationEnd"
       v-bind="forwarded"
       :class="
         cn(
@@ -94,8 +94,9 @@ defineExpose({
           props.class,
         )
       "
+      @animationend="onAnimationEnd"
     >
-      <slot></slot>
+      <slot />
     </AlertDialogContent>
   </AlertDialogPortal>
 </template>

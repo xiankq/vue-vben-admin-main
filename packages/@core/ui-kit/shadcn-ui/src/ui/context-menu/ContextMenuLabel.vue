@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { ContextMenuLabelProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { ContextMenuLabel } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<
   ContextMenuLabelProps & { class?: any; inset?: boolean }
@@ -29,6 +29,6 @@ const delegatedProps = computed(() => {
       )
     "
   >
-    <slot></slot>
+    <slot />
   </ContextMenuLabel>
 </template>

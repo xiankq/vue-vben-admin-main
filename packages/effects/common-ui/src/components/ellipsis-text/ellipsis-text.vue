@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue';
 
+import { VbenTooltip } from '@vben-core/shadcn-ui';
+
+import { useElementSize } from '@vueuse/core';
+
 import {
   computed,
   onBeforeUnmount,
@@ -9,10 +13,6 @@ import {
   ref,
   watchEffect,
 } from 'vue';
-
-import { VbenTooltip } from '@vben-core/shadcn-ui';
-
-import { useElementSize } from '@vueuse/core';
 
 interface Props {
   /**
@@ -104,8 +104,9 @@ const isEllipsis = ref(false);
 const { width: eleWidth } = useElementSize(ellipsis);
 
 // 检测文本是否被截断
-const checkEllipsis = () => {
-  if (!ellipsis.value || !props.tooltipWhenEllipsis) return;
+function checkEllipsis() {
+  if (!ellipsis.value || !props.tooltipWhenEllipsis)
+    return;
 
   const element = ellipsis.value;
 
@@ -122,11 +123,11 @@ const checkEllipsis = () => {
   const heightDiff = element.scrollHeight - element.clientHeight;
 
   // 使用足够大的差异阈值确保只有真正被截断的文本才会显示 tooltip
-  isEllipsis.value =
-    props.line === 1
+  isEllipsis.value
+    = props.line === 1
       ? widthDiff > props.ellipsisThreshold
       : heightDiff > props.ellipsisThreshold;
-};
+}
 
 // 使用 ResizeObserver 监听尺寸变化
 let resizeObserver: null | ResizeObserver = null;
@@ -163,8 +164,8 @@ onBeforeUnmount(() => {
 watchEffect(
   () => {
     if (props.tooltip && eleWidth.value) {
-      defaultTooltipMaxWidth.value =
-        props.tooltipMaxWidth ?? eleWidth.value + 24;
+      defaultTooltipMaxWidth.value
+        = props.tooltipMaxWidth ?? eleWidth.value + 24;
     }
   },
   { flush: 'post' },
@@ -182,6 +183,7 @@ function handleExpand() {
   props.expand && onExpand();
 }
 </script>
+
 <template>
   <div>
     <VbenTooltip
@@ -198,7 +200,7 @@ function handleExpand() {
       :side="placement"
     >
       <slot name="tooltip">
-        <slot></slot>
+        <slot />
       </slot>
 
       <template #trigger>
@@ -214,10 +216,10 @@ function handleExpand() {
             'max-width': textMaxWidth,
           }"
           class="cursor-text overflow-hidden"
-          @click="handleExpand"
           v-bind="$attrs"
+          @click="handleExpand"
         >
-          <slot></slot>
+          <slot />
         </div>
       </template>
     </VbenTooltip>

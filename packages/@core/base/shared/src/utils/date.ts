@@ -7,7 +7,8 @@ export function formatDate(time: number | string, format = 'YYYY-MM-DD') {
       throw new Error('Invalid date');
     }
     return date.format(format);
-  } catch (error) {
+  }
+  catch (error) {
     console.error(`Error formatting date: ${error}`);
     return time;
   }

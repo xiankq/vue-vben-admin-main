@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { Recordable } from '@vben/types';
 
-import { computed, reactive } from 'vue';
-
-import { $t } from '@vben/locales';
-
 import { useVbenForm, z } from '@vben-core/form-ui';
+
 import { useVbenModal } from '@vben-core/popup-ui';
+
 import { VbenAvatar, VbenButton } from '@vben-core/shadcn-ui';
+import { $t } from '@vben/locales';
+import { computed, reactive } from 'vue';
 
 interface Props {
   avatar?: string;
@@ -78,17 +78,17 @@ async function handleSubmit() {
     :title="$t('ui.widgets.lockScreen.title')"
   >
     <div
-      class="mb-10 flex w-full flex-col items-center px-10"
+      class="mb-10 px-10 flex flex-col w-full items-center"
       @keydown.enter.prevent="handleSubmit"
     >
       <div class="w-full">
-        <div class="ml-2 flex w-full flex-col items-center">
+        <div class="ml-2 flex flex-col w-full items-center">
           <VbenAvatar
             :src="avatar"
             class="size-20"
             dot-class="bottom-0 right-1 border-2 size-4 bg-green-500"
           />
-          <div class="text-foreground my-6 flex items-center font-medium">
+          <div class="text-foreground font-medium my-6 flex items-center">
             {{ text }}
           </div>
         </div>

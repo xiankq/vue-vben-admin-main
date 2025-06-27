@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import type { ColPageProps } from './types';
 
-import { computed, ref, useSlots } from 'vue';
-
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from '@vben-core/shadcn-ui';
+
+import { computed, ref, useSlots } from 'vue';
 
 import Page from '../page/page.vue';
 
@@ -55,6 +55,7 @@ defineExpose({
   collapseLeft,
 });
 </script>
+
 <template>
   <Page v-bind="delegatedProps">
     <!-- 继承默认的slot -->
@@ -63,7 +64,7 @@ defineExpose({
       :key="slotName"
       #[slotName]="slotProps"
     >
-      <slot :name="slotName" v-bind="slotProps"></slot>
+      <slot :name="slotName" v-bind="slotProps" />
     </template>
 
     <ResizablePanelGroup class="w-full" direction="horizontal">
@@ -83,7 +84,7 @@ defineExpose({
               expand: expandLeft,
               collapse: collapseLeft,
             }"
-          ></slot>
+          />
         </template>
       </ResizablePanel>
       <ResizableHandle
@@ -99,7 +100,7 @@ defineExpose({
         :min-size="rightMinWidth"
       >
         <template #default>
-          <slot></slot>
+          <slot />
         </template>
       </ResizablePanel>
     </ResizablePanelGroup>

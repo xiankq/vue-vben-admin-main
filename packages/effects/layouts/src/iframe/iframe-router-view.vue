@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import type { RouteLocationNormalized } from 'vue-router';
 
-import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
-
-import { preferences } from '@vben/preferences';
-import { useTabbarStore } from '@vben/stores';
-
 import { VbenSpinner } from '@vben-core/shadcn-ui';
+import { preferences } from '@vben/preferences';
+
+import { useTabbarStore } from '@vben/stores';
+import { computed, ref } from 'vue';
+
+import { useRoute } from 'vue-router';
 
 defineOptions({ name: 'IFrameRouterView' });
 
@@ -21,11 +21,11 @@ const iframeRoutes = computed(() => {
   if (!enableTabbar.value) {
     return route.meta.iframeSrc ? [route] : [];
   }
-  return tabbarStore.getTabs.filter((tab) => !!tab.meta?.iframeSrc);
+  return tabbarStore.getTabs.filter(tab => !!tab.meta?.iframeSrc);
 });
 
 const tabNames = computed(
-  () => new Set(iframeRoutes.value.map((item) => item.name as string)),
+  () => new Set(iframeRoutes.value.map(item => item.name as string)),
 );
 
 const showIframe = computed(() => iframeRoutes.value.length > 0);
@@ -47,13 +47,13 @@ function canRender(tabItem: RouteLocationNormalized) {
 
   // 跟随 keepAlive 状态,与其他tab页保持一致
   if (
-    !meta?.keepAlive &&
-    tabNames.value.has(name as string) &&
-    name !== route.name
+    !meta?.keepAlive
+    && tabNames.value.has(name as string)
+    && name !== route.name
   ) {
     return false;
   }
-  return tabbarStore.getTabs.some((tab) => tab.name === name);
+  return tabbarStore.getTabs.some(tab => tab.name === name);
 }
 
 function hideLoading(index: number) {
@@ -66,20 +66,21 @@ function showSpinning(index: number) {
   return curSpinning === undefined ? true : curSpinning;
 }
 </script>
+
 <template>
   <template v-if="showIframe">
     <template v-for="(item, index) in iframeRoutes" :key="item.fullPath">
       <div
         v-if="canRender(item)"
         v-show="routeShow(item)"
-        class="relative size-full"
+        class="size-full relative"
       >
         <VbenSpinner :spinning="showSpinning(index)" />
         <iframe
           :src="item.meta.iframeSrc as string"
           class="size-full"
           @load="hideLoading(index)"
-        ></iframe>
+        />
       </div>
     </template>
   </template>

@@ -8,6 +8,6 @@ const props = defineProps<{
 
 <template>
   <p :class="cn('text-muted-foreground text-sm', props.class)">
-    <slot></slot>
+    <slot />
   </p>
 </template>

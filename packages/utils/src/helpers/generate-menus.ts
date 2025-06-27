@@ -1,10 +1,10 @@
-import type { Router, RouteRecordRaw } from 'vue-router';
-
 import type {
   ExRouteRecordRaw,
   MenuRecordRaw,
   RouteMeta,
 } from '@vben-core/typings';
+
+import type { Router, RouteRecordRaw } from 'vue-router';
 
 import { filterTree, mapTree } from '@vben-core/shared/utils';
 
@@ -84,7 +84,7 @@ function generateMenus(
   menus = menus.sort((a, b) => (a?.order ?? 999) - (b?.order ?? 999));
 
   // 过滤掉隐藏的菜单项
-  return filterTree(menus, (menu) => !!menu.show);
+  return filterTree(menus, menu => !!menu.show);
 }
 
 export { generateMenus };

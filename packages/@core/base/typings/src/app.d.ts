@@ -1,11 +1,11 @@
-type LayoutType =
-  | 'full-content'
-  | 'header-mixed-nav'
-  | 'header-nav'
-  | 'header-sidebar-nav'
-  | 'mixed-nav'
-  | 'sidebar-mixed-nav'
-  | 'sidebar-nav';
+type LayoutType
+  = | 'full-content'
+    | 'header-mixed-nav'
+    | 'header-nav'
+    | 'header-sidebar-nav'
+    | 'mixed-nav'
+    | 'sidebar-mixed-nav'
+    | 'sidebar-nav';
 
 type ThemeModeType = 'auto' | 'dark' | 'light';
 
@@ -17,25 +17,25 @@ type ThemeModeType = 'auto' | 'dark' | 'light';
  */
 type PreferencesButtonPositionType = 'auto' | 'fixed' | 'header';
 
-type BuiltinThemeType =
-  | 'custom'
-  | 'deep-blue'
-  | 'deep-green'
-  | 'default'
-  | 'gray'
-  | 'green'
-  | 'neutral'
-  | 'orange'
-  | 'pink'
-  | 'red'
-  | 'rose'
-  | 'sky-blue'
-  | 'slate'
-  | 'stone'
-  | 'violet'
-  | 'yellow'
-  | 'zinc'
-  | (Record<never, never> & string);
+type BuiltinThemeType
+  = | 'custom'
+    | 'deep-blue'
+    | 'deep-green'
+    | 'default'
+    | 'gray'
+    | 'green'
+    | 'neutral'
+    | 'orange'
+    | 'pink'
+    | 'red'
+    | 'rose'
+    | 'sky-blue'
+    | 'slate'
+    | 'stone'
+    | 'violet'
+    | 'yellow'
+    | 'zinc'
+    | (Record<never, never> & string);
 
 type ContentCompactType = 'compact' | 'wide';
 

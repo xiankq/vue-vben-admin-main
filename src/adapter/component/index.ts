@@ -3,10 +3,15 @@
  * 可用于 vben-form、vben-modal、vben-drawer 等组件使用,
  */
 
+import type { BaseFormComponentType } from '@vben/common-ui';
+
+import type { Recordable } from '@vben/types';
 import type { Component } from 'vue';
 
-import type { BaseFormComponentType } from '@vben/common-ui';
-import type { Recordable } from '@vben/types';
+import { ApiComponent, globalShareState, IconPicker } from '@vben/common-ui';
+
+import { $t } from '@vben/locales';
+import { ElNotification } from 'element-plus';
 
 import {
   defineAsyncComponent,
@@ -15,11 +20,6 @@ import {
   h,
   ref,
 } from 'vue';
-
-import { ApiComponent, globalShareState, IconPicker } from '@vben/common-ui';
-import { $t } from '@vben/locales';
-
-import { ElNotification } from 'element-plus';
 
 const ElButton = defineAsyncComponent(() =>
   Promise.all([
@@ -124,19 +124,15 @@ const ElUpload = defineAsyncComponent(() =>
   ]).then(([res]) => res.ElUpload),
 );
 
-const withDefaultPlaceholder = <T extends Component>(
-  component: T,
-  type: 'input' | 'select',
-  componentProps: Recordable<any> = {},
-) => {
+function withDefaultPlaceholder<T extends Component>(component: T, type: 'input' | 'select', componentProps: Recordable<any> = {}) {
   return defineComponent({
     name: component.name,
     inheritAttrs: false,
     setup: (props: any, { attrs, expose, slots }) => {
-      const placeholder =
-        props?.placeholder ||
-        attrs?.placeholder ||
-        $t(`ui.placeholder.${type}`);
+      const placeholder
+        = props?.placeholder
+          || attrs?.placeholder
+          || $t(`ui.placeholder.${type}`);
       // 透传组件暴露的方法
       const innerRef = ref();
       const publicApi: Recordable<any> = {};
@@ -157,27 +153,27 @@ const withDefaultPlaceholder = <T extends Component>(
         );
     },
   });
-};
+}
 
 // 这里需要自行根据业务组件库进行适配，需要用到的组件都需要在这里类型说明
-export type ComponentType =
-  | 'ApiSelect'
-  | 'ApiTreeSelect'
-  | 'Checkbox'
-  | 'CheckboxGroup'
-  | 'DatePicker'
-  | 'Divider'
-  | 'IconPicker'
-  | 'Input'
-  | 'InputNumber'
-  | 'RadioGroup'
-  | 'Select'
-  | 'Space'
-  | 'Switch'
-  | 'TimePicker'
-  | 'TreeSelect'
-  | 'Upload'
-  | BaseFormComponentType;
+export type ComponentType
+  = | 'ApiSelect'
+    | 'ApiTreeSelect'
+    | 'Checkbox'
+    | 'CheckboxGroup'
+    | 'DatePicker'
+    | 'Divider'
+    | 'IconPicker'
+    | 'Input'
+    | 'InputNumber'
+    | 'RadioGroup'
+    | 'Select'
+    | 'Space'
+    | 'Switch'
+    | 'TimePicker'
+    | 'TreeSelect'
+    | 'Upload'
+    | BaseFormComponentType;
 
 async function initComponentAdapter() {
   const components: Partial<Record<ComponentType, Component>> = {
@@ -216,11 +212,12 @@ async function initComponentAdapter() {
       let defaultSlot;
       if (Reflect.has(slots, 'default')) {
         defaultSlot = slots.default;
-      } else {
+      }
+      else {
         const { options, isButton } = attrs;
         if (Array.isArray(options)) {
           defaultSlot = () =>
-            options.map((option) =>
+            options.map(option =>
               h(isButton ? ElCheckboxButton : ElCheckbox, option),
             );
         }
@@ -251,11 +248,12 @@ async function initComponentAdapter() {
       let defaultSlot;
       if (Reflect.has(slots, 'default')) {
         defaultSlot = slots.default;
-      } else {
+      }
+      else {
         const { options } = attrs;
         if (Array.isArray(options)) {
           defaultSlot = () =>
-            options.map((option) =>
+            options.map(option =>
               h(attrs.isButton ? ElRadioButton : ElRadio, option),
             );
         }

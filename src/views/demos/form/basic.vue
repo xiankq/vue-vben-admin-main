@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { h } from 'vue';
+import { useVbenForm } from '#/adapter/form';
+
+import { getAllMenusApi } from '#/api';
 
 import { Page, useVbenDrawer } from '@vben/common-ui';
 
 import { ElButton, ElCard, ElCheckbox, ElMessage } from 'element-plus';
-
-import { useVbenForm } from '#/adapter/form';
-import { getAllMenusApi } from '#/api';
+import { h } from 'vue';
 
 const [Form, formApi] = useVbenForm({
   commonConfig: {
@@ -93,7 +93,7 @@ const [Form, formApi] = useVbenForm({
       label: 'RadioButton',
       componentProps: {
         isButton: true,
-        options: ['A', 'B', 'C', 'D', 'E', 'F'].map((v) => ({
+        options: ['A', 'B', 'C', 'D', 'E', 'F'].map(v => ({
           value: v,
           label: `选项${v}`,
         })),
@@ -104,7 +104,7 @@ const [Form, formApi] = useVbenForm({
       fieldName: 'checkbox',
       label: 'Checkbox',
       componentProps: {
-        options: ['A', 'B', 'C'].map((v) => ({ value: v, label: `选项${v}` })),
+        options: ['A', 'B', 'C'].map(v => ({ value: v, label: `选项${v}` })),
       },
     },
     {
@@ -114,7 +114,7 @@ const [Form, formApi] = useVbenForm({
       renderComponentContent: () => {
         return {
           default: () => {
-            return ['A', 'B', 'C', 'D'].map((v) =>
+            return ['A', 'B', 'C', 'D'].map(v =>
               h(ElCheckbox, { label: v, value: v }),
             );
           },
@@ -170,6 +170,7 @@ function setFormValues() {
   });
 }
 </script>
+
 <template>
   <Page
     description="我们重新包装了CheckboxGroup、RadioGroup、Select，可以通过options属性传入选项属性数组以自动生成选项"
@@ -182,10 +183,14 @@ function setFormValues() {
       <template #header>
         <div class="flex items-center">
           <span class="flex-auto">基础表单演示</span>
-          <ElButton type="primary" @click="setFormValues">设置表单值</ElButton>
+          <ElButton type="primary" @click="setFormValues">
+            设置表单值
+          </ElButton>
         </div>
       </template>
-      <ElButton type="primary" @click="drawerApi.open"> 打开抽屉 </ElButton>
+      <ElButton type="primary" @click="drawerApi.open">
+        打开抽屉
+      </ElButton>
     </ElCard>
   </Page>
 </template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { MenuRecordBadgeRaw } from '@vben-core/typings';
 
-import { computed } from 'vue';
-
 import { isValidColor } from '@vben-core/shared/color';
+
+import { computed } from 'vue';
 
 import BadgeDot from './menu-badge-dot.vue';
 
@@ -42,6 +42,7 @@ const badgeStyle = computed(() => {
   return {};
 });
 </script>
+
 <template>
   <span v-if="isDot || badge" :class="$attrs.class" class="absolute">
     <BadgeDot v-if="isDot" :dot-class="badgeClass" :dot-style="badgeStyle" />
@@ -49,7 +50,7 @@ const badgeStyle = computed(() => {
       v-else
       :class="badgeClass"
       :style="badgeStyle"
-      class="text-primary-foreground flex-center rounded-xl px-1.5 py-0.5 text-[10px]"
+      class="flex-center text-primary-foreground text-[10px] px-1.5 py-0.5 rounded-xl"
     >
       {{ badge }}
     </div>

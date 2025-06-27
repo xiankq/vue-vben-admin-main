@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MenuRecordRaw } from '@vben/types';
 
-import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
+import { useVbenModal } from '@vben-core/popup-ui';
 
 import {
   ArrowDown,
@@ -13,9 +13,9 @@ import {
 import { $t } from '@vben/locales';
 import { isWindowsOs } from '@vben/utils';
 
-import { useVbenModal } from '@vben-core/popup-ui';
-
 import { useMagicKeys, whenever } from '@vueuse/core';
+
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 
 import SearchPanel from './search-panel.vue';
 
@@ -44,7 +44,7 @@ const [Modal, modalApi] = useVbenModal({
     }
   },
 });
-const open = modalApi.useStore((state) => state.isOpen);
+const open = modalApi.useStore(state => state.isOpen);
 
 function handleClose() {
   modalApi.close();
@@ -65,23 +65,24 @@ whenever(open, () => {
   });
 });
 
-const preventDefaultBrowserSearchHotKey = (event: KeyboardEvent) => {
+function preventDefaultBrowserSearchHotKey(event: KeyboardEvent) {
   if (event.key?.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey)) {
     event.preventDefault();
   }
-};
+}
 
-const toggleKeydownListener = () => {
+function toggleKeydownListener() {
   if (props.enableShortcutKey) {
     window.addEventListener('keydown', preventDefaultBrowserSearchHotKey);
-  } else {
+  }
+  else {
     window.removeEventListener('keydown', preventDefaultBrowserSearchHotKey);
   }
-};
+}
 
-const toggleOpen = () => {
+function toggleOpen() {
   open.value ? modalApi.close() : modalApi.open();
-};
+}
 
 watch(() => props.enableShortcutKey, toggleKeydownListener);
 
@@ -108,14 +109,14 @@ onMounted(() => {
             ref="searchInputRef"
             v-model="keyword"
             :placeholder="$t('ui.widgets.search.searchNavigate')"
-            class="ring-none placeholder:text-muted-foreground w-[80%] rounded-md border border-none bg-transparent p-2 pl-0 text-sm font-normal outline-none ring-0 ring-offset-transparent focus-visible:ring-transparent"
-          />
+            class="ring-none placeholder:text-muted-foreground text-sm font-normal p-2 pl-0 outline-none border rounded-md border-none bg-transparent w-[80%] ring-0 ring-offset-transparent focus-visible:ring-transparent"
+          >
         </div>
       </template>
 
       <SearchPanel :keyword="keyword" :menus="menus" @close="handleClose" />
       <template #footer>
-        <div class="flex w-full justify-start text-xs">
+        <div class="text-xs flex w-full justify-start">
           <div class="mr-2 flex items-center">
             <CornerDownLeft class="mr-1 size-3" />
             {{ $t('ui.widgets.search.select') }}
@@ -133,25 +134,25 @@ onMounted(() => {
       </template>
     </Modal>
     <div
-      class="md:bg-accent group flex h-8 cursor-pointer items-center gap-3 rounded-2xl border-none bg-none px-2 py-0.5 outline-none"
+      class="group md:bg-accent px-2 py-0.5 outline-none rounded-2xl border-none flex gap-3 h-8 cursor-pointer items-center bg-none"
       @click="toggleOpen()"
     >
       <Search
         class="text-muted-foreground group-hover:text-foreground size-4 group-hover:opacity-100"
       />
       <span
-        class="text-muted-foreground group-hover:text-foreground hidden text-xs duration-300 md:block"
+        class="text-muted-foreground group-hover:text-foreground text-xs hidden duration-300 md:block"
       >
         {{ $t('ui.widgets.search.title') }}
       </span>
       <span
         v-if="enableShortcutKey"
-        class="bg-background border-foreground/60 text-muted-foreground group-hover:text-foreground relative hidden rounded-sm rounded-r-xl px-1.5 py-1 text-xs leading-none group-hover:opacity-100 md:block"
+        class="bg-background text-muted-foreground group-hover:text-foreground border-foreground/60 text-xs leading-none px-1.5 py-1 rounded-sm rounded-r-xl hidden relative group-hover:opacity-100 md:block"
       >
         {{ isWindowsOs() ? 'Ctrl' : '⌘' }}
         <kbd>K</kbd>
       </span>
-      <span v-else></span>
+      <span v-else />
     </div>
   </div>
 </template>

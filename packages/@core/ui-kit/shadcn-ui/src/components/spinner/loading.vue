@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
+
+import { ref, watch } from 'vue';
 
 interface Props {
   class?: string;
@@ -78,18 +78,20 @@ function onTransitionEnd() {
     "
     @transitionend="onTransitionEnd"
   >
-    <slot name="icon" v-if="renderSpinner">
-      <span class="dot relative inline-block size-9 text-3xl">
+    <slot v-if="renderSpinner" name="icon">
+      <span class="dot text-3xl size-9 inline-block relative">
         <i
           v-for="index in 4"
           :key="index"
-          class="bg-primary absolute block size-4 origin-[50%_50%] scale-75 rounded-full opacity-30"
-        ></i>
+          class="bg-primary rounded-full opacity-30 size-4 block origin-[50%_50%] scale-75 absolute"
+        />
       </span>
     </slot>
 
-    <div v-if="text" class="text-primary mt-4 text-xs">{{ text }}</div>
-    <slot></slot>
+    <div v-if="text" class="text-primary text-xs mt-4">
+      {{ text }}
+    </div>
+    <slot />
   </div>
 </template>
 

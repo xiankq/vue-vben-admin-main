@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-
 import { Page } from '@vben/common-ui';
 
 import {
@@ -12,6 +10,8 @@ import {
   ElSpace,
   ElTable,
 } from 'element-plus';
+
+import { ref } from 'vue';
 
 type NotificationType = 'error' | 'info' | 'success' | 'warning';
 
@@ -63,37 +63,73 @@ const segmentedOptions = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   >
     <div class="flex flex-wrap gap-5">
       <ElCard class="mb-5 w-auto">
-        <template #header> 按钮 </template>
+        <template #header>
+          按钮
+        </template>
         <ElSpace>
-          <ElButton text>Text</ElButton>
+          <ElButton text>
+            Text
+          </ElButton>
           <ElButton>Default</ElButton>
-          <ElButton type="primary"> Primary </ElButton>
-          <ElButton type="info"> Info </ElButton>
-          <ElButton type="success"> Success </ElButton>
-          <ElButton type="warning"> Warning </ElButton>
-          <ElButton type="danger"> Error </ElButton>
+          <ElButton type="primary">
+            Primary
+          </ElButton>
+          <ElButton type="info">
+            Info
+          </ElButton>
+          <ElButton type="success">
+            Success
+          </ElButton>
+          <ElButton type="warning">
+            Warning
+          </ElButton>
+          <ElButton type="danger">
+            Error
+          </ElButton>
         </ElSpace>
       </ElCard>
       <ElCard class="mb-5 w-80">
-        <template #header> Message </template>
+        <template #header>
+          Message
+        </template>
         <ElSpace>
-          <ElButton type="info" @click="info"> 信息 </ElButton>
-          <ElButton type="danger" @click="error"> 错误 </ElButton>
-          <ElButton type="warning" @click="warning"> 警告 </ElButton>
-          <ElButton type="success" @click="success"> 成功 </ElButton>
+          <ElButton type="info" @click="info">
+            信息
+          </ElButton>
+          <ElButton type="danger" @click="error">
+            错误
+          </ElButton>
+          <ElButton type="warning" @click="warning">
+            警告
+          </ElButton>
+          <ElButton type="success" @click="success">
+            成功
+          </ElButton>
         </ElSpace>
       </ElCard>
       <ElCard class="mb-5 w-80">
-        <template #header> Notification </template>
+        <template #header>
+          Notification
+        </template>
         <ElSpace>
-          <ElButton type="info" @click="notify('info')"> 信息 </ElButton>
-          <ElButton type="danger" @click="notify('error')"> 错误 </ElButton>
-          <ElButton type="warning" @click="notify('warning')"> 警告 </ElButton>
-          <ElButton type="success" @click="notify('success')"> 成功 </ElButton>
+          <ElButton type="info" @click="notify('info')">
+            信息
+          </ElButton>
+          <ElButton type="danger" @click="notify('error')">
+            错误
+          </ElButton>
+          <ElButton type="warning" @click="notify('warning')">
+            警告
+          </ElButton>
+          <ElButton type="success" @click="notify('success')">
+            成功
+          </ElButton>
         </ElSpace>
       </ElCard>
       <ElCard class="mb-5 w-auto">
-        <template #header> Segmented </template>
+        <template #header>
+          Segmented
+        </template>
         <ElSegmented
           v-model="segmentedValue"
           :options="segmentedOptions"
@@ -101,8 +137,10 @@ const segmentedOptions = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         />
       </ElCard>
       <ElCard class="mb-5 w-80">
-        <template #header> V-Loading </template>
-        <div class="flex size-72 items-center justify-center" v-loading="true">
+        <template #header>
+          V-Loading
+        </template>
+        <div v-loading="true" class="flex size-72 items-center justify-center">
           一些演示的内容
         </div>
       </ElCard>

@@ -28,8 +28,9 @@ const modelValue = useVModel(props, 'modelValue', emits, {
         props.class,
       )
     "
-  />
+  >
 </template>
+
 <style lang="scss" scoped>
 input {
   --ring: var(--primary);

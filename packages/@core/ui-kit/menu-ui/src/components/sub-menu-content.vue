@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { MenuItemProps } from '../types';
 
-import { computed } from 'vue';
-
 import { useNamespace } from '@vben-core/composables';
+
 import { ChevronDown, ChevronRight } from '@vben-core/icons';
 import { VbenIcon } from '@vben-core/shadcn-ui';
+import { computed } from 'vue';
 
 import { useMenuContext } from '../hooks';
 
@@ -54,16 +54,16 @@ const showArrowIcon = computed(() => {
 
 const hiddenTitle = computed(() => {
   return (
-    mode.value === 'vertical' &&
-    isFirstLevel.value &&
-    collapse.value &&
-    !getCollapseShowTitle.value
+    mode.value === 'vertical'
+    && isFirstLevel.value
+    && collapse.value
+    && !getCollapseShowTitle.value
   );
 });
 
 const iconComp = computed(() => {
-  return (mode.value === 'horizontal' && !isFirstLevel.value) ||
-    (mode.value === 'vertical' && collapse.value)
+  return (mode.value === 'horizontal' && !isFirstLevel.value)
+    || (mode.value === 'vertical' && collapse.value)
     ? ChevronRight
     : ChevronDown;
 });
@@ -72,6 +72,7 @@ const iconArrowStyle = computed(() => {
   return opened.value ? { transform: `rotate(180deg)` } : {};
 });
 </script>
+
 <template>
   <div
     :class="[
@@ -80,7 +81,7 @@ const iconArrowStyle = computed(() => {
       is('more', isMenuMore),
     ]"
   >
-    <slot></slot>
+    <slot />
 
     <VbenIcon
       v-if="!isMenuMore"
@@ -90,7 +91,7 @@ const iconArrowStyle = computed(() => {
     />
 
     <div v-if="!hiddenTitle" :class="[e('title')]">
-      <slot name="title"></slot>
+      <slot name="title" />
     </div>
 
     <component

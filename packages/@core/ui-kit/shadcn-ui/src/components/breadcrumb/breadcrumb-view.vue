@@ -16,6 +16,7 @@ const emit = defineEmits<{ select: [string] }>();
 
 const forward = useForwardPropsEmits(props, emit);
 </script>
+
 <template>
   <Breadcrumb
     v-if="styleType === 'normal'"
@@ -28,6 +29,7 @@ const forward = useForwardPropsEmits(props, emit);
     class="vben-breadcrumb"
   />
 </template>
+
 <style lang="scss" scoped>
 /** 修复全局引入Antd时，ol和ul的默认样式会被修改的问题 */
 .vben-breadcrumb {

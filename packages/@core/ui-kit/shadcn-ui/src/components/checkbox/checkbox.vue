@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { CheckboxRootEmits, CheckboxRootProps } from 'radix-vue';
 
-import { useId } from 'vue';
-
 import { useForwardPropsEmits } from 'radix-vue';
+
+import { useId } from 'vue';
 
 import { Checkbox } from '../../ui/checkbox';
 
@@ -21,6 +21,6 @@ const id = useId();
 <template>
   <div class="flex items-center">
     <Checkbox v-bind="forwarded" :id="id" v-model:checked="checked" />
-    <label :for="id" class="ml-2 cursor-pointer text-sm"> <slot></slot> </label>
+    <label :for="id" class="text-sm ml-2 cursor-pointer"> <slot /> </label>
   </div>
 </template>

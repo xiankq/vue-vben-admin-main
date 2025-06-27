@@ -5,12 +5,12 @@ defineOptions({
   name: 'CollapseTransition',
 });
 
-const reset = (el: RendererElement) => {
+function reset(el: RendererElement) {
   el.style.maxHeight = '';
   el.style.overflow = el.dataset.oldOverflow;
   el.style.paddingTop = el.dataset.oldPaddingTop;
   el.style.paddingBottom = el.dataset.oldPaddingBottom;
-};
+}
 
 const on = {
   afterEnter(el: RendererElement) {
@@ -23,14 +23,16 @@ const on = {
   },
 
   beforeEnter(el: RendererElement) {
-    if (!el.dataset) el.dataset = {};
+    if (!el.dataset)
+      el.dataset = {};
 
     el.dataset.oldPaddingTop = el.style.paddingTop;
     el.dataset.oldMarginTop = el.style.marginTop;
 
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
     el.dataset.oldMarginBottom = el.style.marginBottom;
-    if (el.style.height) el.dataset.elExistsHeight = el.style.height;
+    if (el.style.height)
+      el.dataset.elExistsHeight = el.style.height;
 
     el.style.maxHeight = 0;
     el.style.paddingTop = 0;
@@ -40,7 +42,8 @@ const on = {
   },
 
   beforeLeave(el: RendererElement) {
-    if (!el.dataset) el.dataset = {};
+    if (!el.dataset)
+      el.dataset = {};
     el.dataset.oldPaddingTop = el.style.paddingTop;
     el.dataset.oldMarginTop = el.style.marginTop;
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
@@ -55,9 +58,11 @@ const on = {
       el.dataset.oldOverflow = el.style.overflow;
       if (el.dataset.elExistsHeight) {
         el.style.maxHeight = el.dataset.elExistsHeight;
-      } else if (el.scrollHeight === 0) {
+      }
+      else if (el.scrollHeight === 0) {
         el.style.maxHeight = 0;
-      } else {
+      }
+      else {
         el.style.maxHeight = `${el.scrollHeight}px`;
       }
 
@@ -91,6 +96,6 @@ const on = {
 
 <template>
   <transition name="collapse-transition" v-on="on">
-    <slot></slot>
+    <slot />
   </transition>
 </template>

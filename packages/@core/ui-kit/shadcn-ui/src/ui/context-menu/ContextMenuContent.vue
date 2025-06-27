@@ -4,8 +4,6 @@ import type {
   ContextMenuContentProps,
 } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import {
@@ -13,6 +11,8 @@ import {
   ContextMenuPortal,
   useForwardPropsEmits,
 } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<ContextMenuContentProps & { class?: any }>();
 const emits = defineEmits<ContextMenuContentEmits>();
@@ -37,7 +37,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         )
       "
     >
-      <slot></slot>
+      <slot />
     </ContextMenuContent>
   </ContextMenuPortal>
 </template>

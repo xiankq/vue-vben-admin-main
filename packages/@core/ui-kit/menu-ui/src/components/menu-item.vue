@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { MenuItemProps, MenuItemRegistered } from '../types';
 
-import { computed, onBeforeUnmount, onMounted, reactive, useSlots } from 'vue';
-
 import { useNamespace } from '@vben-core/composables';
+
 import { VbenIcon, VbenTooltip } from '@vben-core/shadcn-ui';
+import { computed, onBeforeUnmount, onMounted, reactive, useSlots } from 'vue';
 
 import { MenuBadge } from '../components';
 import { useMenu, useMenuContext, useSubMenuContext } from '../hooks';
@@ -37,17 +37,17 @@ const isTopLevelMenuItem = computed(
 
 const collapseShowTitle = computed(
   () =>
-    rootMenu.props?.collapseShowTitle &&
-    isTopLevelMenuItem.value &&
-    rootMenu.props.collapse,
+    rootMenu.props?.collapseShowTitle
+    && isTopLevelMenuItem.value
+    && rootMenu.props.collapse,
 );
 
 const showTooltip = computed(
   () =>
-    rootMenu.props.mode === 'vertical' &&
-    isTopLevelMenuItem.value &&
-    rootMenu.props?.collapse &&
-    slots.title,
+    rootMenu.props.mode === 'vertical'
+    && isTopLevelMenuItem.value
+    && rootMenu.props?.collapse
+    && slots.title,
 );
 
 const item: MenuItemRegistered = reactive({
@@ -80,6 +80,7 @@ onBeforeUnmount(() => {
   rootMenu?.removeMenuItem?.(item);
 });
 </script>
+
 <template>
   <li
     :class="[
@@ -100,13 +101,13 @@ onBeforeUnmount(() => {
       <template #trigger>
         <div :class="[nsMenu.be('tooltip', 'trigger')]">
           <VbenIcon :class="nsMenu.e('icon')" :icon="menuIcon" fallback />
-          <slot></slot>
+          <slot />
           <span v-if="collapseShowTitle" :class="nsMenu.e('name')">
-            <slot name="title"></slot>
+            <slot name="title" />
           </span>
         </div>
       </template>
-      <slot name="title"></slot>
+      <slot name="title" />
     </VbenTooltip>
     <div v-show="!showTooltip" :class="[e('content')]">
       <MenuBadge
@@ -115,8 +116,8 @@ onBeforeUnmount(() => {
         v-bind="props"
       />
       <VbenIcon :class="nsMenu.e('icon')" :icon="menuIcon" />
-      <slot></slot>
-      <slot name="title"></slot>
+      <slot />
+      <slot name="title" />
     </div>
   </li>
 </template>

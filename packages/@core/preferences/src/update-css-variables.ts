@@ -36,7 +36,7 @@ function updateCSSVariables(preferences: Preferences) {
 
   // 获取当前的内置主题
   const currentBuiltType = [...BUILT_IN_THEME_PRESETS].find(
-    (item) => item.type === builtinType,
+    item => item.type === builtinType,
   );
 
   let builtinTypeColorPrimary: string | undefined = '';
@@ -52,11 +52,11 @@ function updateCSSVariables(preferences: Preferences) {
 
   // 如果内置主题颜色和自定义颜色都不存在，则不更新主题颜色
   if (
-    builtinTypeColorPrimary ||
-    Reflect.has(theme, 'colorPrimary') ||
-    Reflect.has(theme, 'colorDestructive') ||
-    Reflect.has(theme, 'colorSuccess') ||
-    Reflect.has(theme, 'colorWarning')
+    builtinTypeColorPrimary
+    || Reflect.has(theme, 'colorPrimary')
+    || Reflect.has(theme, 'colorDestructive')
+    || Reflect.has(theme, 'colorSuccess')
+    || Reflect.has(theme, 'colorWarning')
   ) {
     // preferences.theme.colorPrimary = builtinTypeColorPrimary || colorPrimary;
     updateMainColorVariables(preferences);
@@ -76,8 +76,8 @@ function updateMainColorVariables(preference: Preferences) {
   if (!preference.theme) {
     return;
   }
-  const { colorDestructive, colorPrimary, colorSuccess, colorWarning } =
-    preference.theme;
+  const { colorDestructive, colorPrimary, colorSuccess, colorWarning }
+    = preference.theme;
 
   const colorVariables = generatorColorVariables([
     { color: colorPrimary, name: 'primary' },

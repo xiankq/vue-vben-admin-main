@@ -16,6 +16,7 @@ class FileDownloader {
   constructor(client: RequestClient) {
     this.client = client;
   }
+
   /**
    * 下载文件
    * @param url 文件的完整链接

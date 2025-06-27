@@ -53,7 +53,8 @@ describe('requestClient', () => {
     try {
       await requestClient.get('/test/error');
       expect(true).toBe(false);
-    } catch (error: any) {
+    }
+    catch (error: any) {
       expect(error.isAxiosError).toBe(true);
       expect(error.message).toBe('Network Error');
     }
@@ -64,7 +65,8 @@ describe('requestClient', () => {
     try {
       await requestClient.get('/test/timeout');
       expect(true).toBe(false);
-    } catch (error: any) {
+    }
+    catch (error: any) {
       expect(error.isAxiosError).toBe(true);
       expect(error.code).toBe('ECONNABORTED');
     }

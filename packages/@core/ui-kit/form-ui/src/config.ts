@@ -6,8 +6,6 @@ import type {
   VbenFormAdapterOptions,
 } from './types';
 
-import { h } from 'vue';
-
 import {
   VbenButton,
   VbenCheckbox,
@@ -16,9 +14,11 @@ import {
   VbenPinInput,
   VbenSelect,
 } from '@vben-core/shadcn-ui';
-import { globalShareState } from '@vben-core/shared/global-state';
 
+import { globalShareState } from '@vben-core/shared/global-state';
 import { defineRule } from 'vee-validate';
+
+import { h } from 'vue';
 
 const DEFAULT_MODEL_PROP_NAME = 'modelValue';
 
@@ -63,8 +63,8 @@ export function setupVbenForm<
     }
   }
 
-  const baseModelPropName =
-    config?.baseModelPropName ?? DEFAULT_MODEL_PROP_NAME;
+  const baseModelPropName
+    = config?.baseModelPropName ?? DEFAULT_MODEL_PROP_NAME;
   const modelPropNameMap = config?.modelPropNameMap as
     | Record<BaseFormComponentType, string>
     | undefined;

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { Recordable } from '@vben/types';
-
 import type { VbenFormSchema } from '@vben-core/form-ui';
+
+import type { Recordable } from '@vben/types';
 
 import type { AuthenticationProps } from './types';
 
-import { computed, onMounted, reactive, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useVbenForm } from '@vben-core/form-ui';
+import { VbenButton, VbenCheckbox } from '@vben-core/shadcn-ui';
 
 import { $t } from '@vben/locales';
 
-import { useVbenForm } from '@vben-core/form-ui';
-import { VbenButton, VbenCheckbox } from '@vben-core/shadcn-ui';
+import { computed, onMounted, reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import Title from './auth-title.vue';
 import ThirdPartyLogin from './third-party-login.vue';
@@ -172,7 +172,7 @@ defineExpose({
     </slot>
 
     <slot name="to-register">
-      <div v-if="showRegister" class="mt-3 text-center text-sm">
+      <div v-if="showRegister" class="text-sm mt-3 text-center">
         {{ $t('authentication.accountTip') }}
         <span
           class="vben-link text-sm font-normal"

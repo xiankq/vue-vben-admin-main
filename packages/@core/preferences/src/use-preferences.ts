@@ -1,6 +1,6 @@
-import { computed } from 'vue';
-
 import { diff } from '@vben-core/shared/utils';
+
+import { computed } from 'vue';
 
 import { preferencesManager } from './preferences';
 import { isDarkTheme } from './update-css-variables';
@@ -108,11 +108,11 @@ function usePreferences() {
    */
   const isSideMode = computed(() => {
     return (
-      isMixedNav.value ||
-      isSideMixedNav.value ||
-      isSideNav.value ||
-      isHeaderMixedNav.value ||
-      isHeaderSidebarNav.value
+      isMixedNav.value
+      || isSideMixedNav.value
+      || isSideNav.value
+      || isHeaderMixedNav.value
+      || isHeaderSidebarNav.value
     );
   });
 
@@ -211,11 +211,11 @@ function usePreferences() {
     }
 
     // 如果是全屏模式或者没有固定在顶部，
-    const fixed =
-      contentIsMaximize ||
-      isFullContent.value ||
-      isMobile.value ||
-      !isShowHeaderNav.value;
+    const fixed
+      = contentIsMaximize
+        || isFullContent.value
+        || isMobile.value
+        || !isShowHeaderNav.value;
 
     return {
       fixed,

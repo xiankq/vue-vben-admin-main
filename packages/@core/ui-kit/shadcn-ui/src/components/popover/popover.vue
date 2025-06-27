@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import type { ClassType } from '@vben-core/typings';
+
 import type {
   PopoverContentProps,
   PopoverRootEmits,
   PopoverRootProps,
 } from 'radix-vue';
 
-import type { ClassType } from '@vben-core/typings';
+import { useForwardPropsEmits } from 'radix-vue';
 
 import { computed } from 'vue';
-
-import { useForwardPropsEmits } from 'radix-vue';
 
 import {
   PopoverContent,
@@ -46,14 +46,14 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 <template>
   <PopoverRoot v-bind="forwarded">
     <PopoverTrigger :class="triggerClass">
-      <slot name="trigger"></slot>
+      <slot name="trigger" />
 
       <PopoverContent
         :class="contentClass"
         class="side-content z-popup"
         v-bind="contentProps"
       >
-        <slot></slot>
+        <slot />
       </PopoverContent>
     </PopoverTrigger>
   </PopoverRoot>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue';
 
-import { computed, ref, useTemplateRef } from 'vue';
+import { Slot } from '@vben-core/shadcn-ui';
 
 import { Check, ChevronsRight } from '@vben/icons';
 
-import { Slot } from '@vben-core/shadcn-ui';
+import { computed, ref, useTemplateRef } from 'vue';
 
 const props = defineProps<{
   actionStyle: CSSProperties;
@@ -52,7 +52,7 @@ defineExpose({
       'rounded-md': isDragging,
     }"
     :style="style"
-    class="bg-background dark:bg-accent absolute left-0 top-0 flex h-full cursor-move items-center justify-center px-3.5 shadow-md"
+    class="bg-background dark:bg-accent px-3.5 flex h-full cursor-move shadow-md items-center left-0 top-0 justify-center absolute"
     name="captcha-action"
   >
     <Slot :is-passing="isPassing" class="text-foreground/60 size-4">

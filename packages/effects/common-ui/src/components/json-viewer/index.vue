@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { SetupContext } from 'vue';
-
 import type { Recordable } from '@vben/types';
+
+import type { SetupContext } from 'vue';
 
 import type {
   JsonViewerAction,
@@ -10,13 +10,13 @@ import type {
   JsonViewerValue,
 } from './types';
 
-import { computed, useAttrs } from 'vue';
-// @ts-ignore
-import VueJsonViewer from 'vue-json-viewer';
-
+import { isBoolean } from '@vben-core/shared/utils';
 import { $t } from '@vben/locales';
 
-import { isBoolean } from '@vben-core/shared/utils';
+import { computed, useAttrs } from 'vue';
+
+// @ts-ignore
+import VueJsonViewer from 'vue-json-viewer';
 
 defineOptions({ name: 'JsonViewer' });
 
@@ -44,8 +44,8 @@ const attrs: SetupContext['attrs'] = useAttrs();
 
 function handleClick(event: MouseEvent) {
   if (
-    event.target instanceof HTMLElement &&
-    event.target.classList.contains('jv-item')
+    event.target instanceof HTMLElement
+    && event.target.classList.contains('jv-item')
   ) {
     const pathNode = event.target.closest('.jv-push');
     if (!pathNode || !pathNode.hasAttribute('path')) {
@@ -86,13 +86,15 @@ const bindProps = computed<Recordable<any>>(() => {
   };
 });
 </script>
+
 <template>
   <VueJsonViewer v-bind="bindProps">
     <template #copy="slotProps">
-      <slot name="copy" v-bind="slotProps"></slot>
+      <slot name="copy" v-bind="slotProps" />
     </template>
   </VueJsonViewer>
 </template>
+
 <style lang="scss">
 @use './style.scss';
 </style>

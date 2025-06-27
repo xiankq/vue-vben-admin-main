@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref, unref, watch, watchEffect } from 'vue';
-
 import { isNumber } from '@vben-core/shared/utils';
 
 import { TransitionPresets, useTransition } from '@vueuse/core';
+
+import { computed, onMounted, ref, unref, watch, watchEffect } from 'vue';
 
 interface Props {
   autoplay?: boolean;
@@ -121,6 +121,7 @@ function formatNumber(num: number | string) {
 
 defineExpose({ reset });
 </script>
+
 <template>
   <span :style="{ color }">
     {{ value }}

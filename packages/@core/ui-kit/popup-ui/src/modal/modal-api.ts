@@ -8,6 +8,7 @@ export class ModalApi {
   public sharedData: Record<'payload', any> = {
     payload: {},
   };
+
   public store: Store<ModalState>;
 
   private api: Pick<
@@ -73,7 +74,8 @@ export class ModalApi {
           // 每次更新状态时，都会调用 onOpenChange 回调函数
           if (state?.isOpen === this.state?.isOpen) {
             this.state = state;
-          } else {
+          }
+          else {
             this.state = state;
             this.api.onOpenChange?.(!!state?.isOpen);
           }
@@ -103,7 +105,7 @@ export class ModalApi {
     // 如果 onBeforeClose 返回 false，则不关闭弹窗
     const allowClose = (await this.api.onBeforeClose?.()) ?? true;
     if (allowClose) {
-      this.store.setState((prev) => ({
+      this.store.setState(prev => ({
         ...prev,
         isOpen: false,
         submitting: false,
@@ -130,7 +132,8 @@ export class ModalApi {
   onCancel() {
     if (this.api.onCancel) {
       this.api.onCancel?.();
-    } else {
+    }
+    else {
       this.close();
     }
   }
@@ -161,7 +164,7 @@ export class ModalApi {
   }
 
   open() {
-    this.store.setState((prev) => ({ ...prev, isOpen: true }));
+    this.store.setState(prev => ({ ...prev, isOpen: true }));
   }
 
   setData<T>(payload: T) {
@@ -176,8 +179,9 @@ export class ModalApi {
   ) {
     if (isFunction(stateOrFn)) {
       this.store.setState(stateOrFn);
-    } else {
-      this.store.setState((prev) => ({ ...prev, ...stateOrFn }));
+    }
+    else {
+      this.store.setState(prev => ({ ...prev, ...stateOrFn }));
     }
     return this;
   }

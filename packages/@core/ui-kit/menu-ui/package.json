@@ -1,33 +1,33 @@
 {
   "name": "@vben-core/menu-ui",
+  "type": "module",
   "version": "5.5.7",
+  "license": "MIT",
   "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
     "directory": "packages/@vben-core/uikit/menu-ui"
   },
-  "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "build": "pnpm unbuild",
-    "prepublishOnly": "npm run build"
-  },
-  "files": [
-    "dist"
-  ],
+  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "sideEffects": [
     "**/*.css"
   ],
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
   "exports": {
     ".": {
       "types": "./src/index.ts",
       "development": "./src/index.ts",
       "default": "./dist/index.mjs"
     }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm unbuild",
+    "prepublishOnly": "npm run build"
   },
   "publishConfig": {
     "exports": {

@@ -2,9 +2,9 @@
 import type { ButtonVariants } from '../../ui';
 import type { VbenButtonProps } from './button';
 
-import { computed, useSlots } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
+
+import { computed, useSlots } from 'vue';
 
 import { VbenTooltip } from '../tooltip';
 import VbenButton from './button.vue';
@@ -41,7 +41,7 @@ const showTooltip = computed(() => !!slots.tooltip || !!props.tooltip);
     size="icon"
     @click="onClick"
   >
-    <slot></slot>
+    <slot />
   </VbenButton>
 
   <VbenTooltip
@@ -57,10 +57,10 @@ const showTooltip = computed(() => !!slots.tooltip || !!props.tooltip);
         size="icon"
         @click="onClick"
       >
-        <slot></slot>
+        <slot />
       </VbenButton>
     </template>
-    <slot v-if="slots.tooltip" name="tooltip"> </slot>
+    <slot v-if="slots.tooltip" name="tooltip" />
     <template v-else>
       {{ tooltip }}
     </template>

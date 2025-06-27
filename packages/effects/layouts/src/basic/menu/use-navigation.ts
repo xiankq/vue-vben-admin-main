@@ -1,8 +1,8 @@
 import type { RouteRecordNormalized } from 'vue-router';
 
-import { useRouter } from 'vue-router';
-
 import { isHttpUrl, openRouteInNewWindow, openWindow } from '@vben/utils';
+
+import { useRouter } from 'vue-router';
 
 function useNavigation() {
   const router = useRouter();
@@ -39,15 +39,18 @@ function useNavigation() {
 
       if (isHttpUrl(path)) {
         openWindow(path, { target: '_blank' });
-      } else if (openInNewWindow) {
+      }
+      else if (openInNewWindow) {
         openRouteInNewWindow(path);
-      } else {
+      }
+      else {
         await router.push({
           path,
           query,
         });
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Navigation failed:', error);
       throw error;
     }

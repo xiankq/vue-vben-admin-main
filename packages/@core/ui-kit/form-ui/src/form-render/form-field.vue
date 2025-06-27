@@ -3,9 +3,8 @@ import type { ZodType } from 'zod';
 
 import type { FormSchema, MaybeComponentProps } from '../types';
 
-import { computed, nextTick, onUnmounted, useTemplateRef, watch } from 'vue';
-
 import { CircleAlert } from '@vben-core/icons';
+
 import {
   FormControl,
   FormDescription,
@@ -16,9 +15,10 @@ import {
   VbenTooltip,
 } from '@vben-core/shadcn-ui';
 import { cn, isFunction, isObject, isString } from '@vben-core/shared/utils';
-
 import { toTypedSchema } from '@vee-validate/zod';
+
 import { useFieldError, useFormValues } from 'vee-validate';
+import { computed, nextTick, onUnmounted, useTemplateRef, watch } from 'vue';
 
 import { injectComponentRefMap } from '../use-form-context';
 import { injectRenderFormProps, useFormContext } from './context';
@@ -206,9 +206,9 @@ function fieldBindEvent(slotProps: Record<string, any>) {
   const modelValue = slotProps.componentField.modelValue;
   const handler = slotProps.componentField['onUpdate:modelValue'];
 
-  const bindEventField =
-    modelPropName ||
-    (isString(component) ? componentBindEventMap.value?.[component] : null);
+  const bindEventField
+    = modelPropName
+      || (isString(component) ? componentBindEventMap.value?.[component] : null);
 
   let value = modelValue;
   // antd design 的一些组件会传递一个 event 对象
@@ -262,10 +262,10 @@ function createComponentProps(slotProps: Record<string, any>) {
 
 function autofocus() {
   if (
-    fieldComponentRef.value &&
-    isFunction(fieldComponentRef.value.focus) &&
+    fieldComponentRef.value
+    && isFunction(fieldComponentRef.value.focus)
     // 检查当前是否有元素被聚焦
-    document.activeElement !== fieldComponentRef.value
+    && document.activeElement !== fieldComponentRef.value
   ) {
     fieldComponentRef.value?.focus?.();
   }
@@ -284,8 +284,8 @@ onUnmounted(() => {
 <template>
   <FormField
     v-if="isIf"
-    v-bind="fieldProps"
     v-slot="slotProps"
+    v-bind="fieldProps"
     :name="fieldName"
   >
     <FormItem
@@ -298,7 +298,7 @@ onUnmounted(() => {
         'pb-6': !compact,
         'pb-2': compact,
       }"
-      class="relative flex"
+      class="flex relative"
       v-bind="$attrs"
     >
       <FormLabel
@@ -323,7 +323,7 @@ onUnmounted(() => {
           <VbenRenderContent :content="label" />
         </template>
       </FormLabel>
-      <div class="flex-auto overflow-hidden p-[1px]">
+      <div class="p-[1px] flex-auto overflow-hidden">
         <div :class="cn('relative flex w-full items-center', wrapperClass)">
           <FormControl :class="cn(controlClass)">
             <slot
@@ -385,8 +385,8 @@ onUnmounted(() => {
           </FormDescription>
         </div>
 
-        <Transition name="slide-up" v-if="!compact">
-          <FormMessage class="absolute bottom-1" />
+        <Transition v-if="!compact" name="slide-up">
+          <FormMessage class="bottom-1 absolute" />
         </Transition>
       </div>
     </FormItem>

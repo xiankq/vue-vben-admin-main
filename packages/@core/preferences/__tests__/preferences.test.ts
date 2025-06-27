@@ -10,7 +10,7 @@ describe('preferences', () => {
   // 模拟 window.matchMedia 方法
   vi.stubGlobal(
     'matchMedia',
-    vi.fn().mockImplementation((query) => ({
+    vi.fn().mockImplementation(query => ({
       addEventListener: vi.fn(),
       addListener: vi.fn(), // Deprecated
       dispatchEvent: vi.fn(),
@@ -92,7 +92,7 @@ describe('preferences', () => {
     // 模拟移动端状态
     vi.stubGlobal(
       'matchMedia',
-      vi.fn().mockImplementation((query) => ({
+      vi.fn().mockImplementation(query => ({
         addEventListener: vi.fn(),
         addListener: vi.fn(),
         dispatchEvent: vi.fn(),
@@ -234,7 +234,7 @@ describe('isDarkTheme', () => {
   });
 
   it('should return system preference for auto theme', () => {
-    vi.spyOn(window, 'matchMedia').mockImplementation((query) => ({
+    vi.spyOn(window, 'matchMedia').mockImplementation(query => ({
       addEventListener: vi.fn(),
       addListener: vi.fn(), // Deprecated
       dispatchEvent: vi.fn(),

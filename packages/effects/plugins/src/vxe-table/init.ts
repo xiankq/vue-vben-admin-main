@@ -1,10 +1,10 @@
-import type { SetupVxeTable } from './types';
+import type { useVbenForm } from '@vben-core/form-ui';
 
-import { defineComponent, watch } from 'vue';
+import type { SetupVxeTable } from './types';
 
 import { usePreferences } from '@vben/preferences';
 
-import { useVbenForm } from '@vben-core/form-ui';
+import { defineComponent, watch } from 'vue';
 
 import {
   VxeButton,
@@ -54,11 +54,11 @@ let isInit = false;
 export let useTableForm: typeof useVbenForm;
 
 // 部分组件，如果没注册，vxe-table 会报错，这里实际没用组件，只是为了不报错，同时可以减少打包体积
-const createVirtualComponent = (name = '') => {
+function createVirtualComponent(name = '') {
   return defineComponent({
     name,
   });
-};
+}
 
 export function initVxeTable() {
   if (isInit) {

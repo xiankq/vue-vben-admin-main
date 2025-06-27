@@ -20,10 +20,11 @@ function handleItemClick(value: string) {
   modelValue.value = value;
 }
 </script>
+
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger as-child class="flex items-center gap-1">
-      <slot></slot>
+    <DropdownMenuTrigger as-child class="flex gap-1 items-center">
+      <slot />
     </DropdownMenuTrigger>
     <DropdownMenuContent align="start">
       <DropdownMenuGroup>
@@ -41,8 +42,8 @@ function handleItemClick(value: string) {
             <span
               v-if="!menu.icon"
               :class="menu.value === modelValue ? 'bg-foreground' : ''"
-              class="mr-2 size-1.5 rounded-full"
-            ></span>
+              class="mr-2 rounded-full size-1.5"
+            />
             {{ menu.label }}
           </DropdownMenuItem>
         </template>

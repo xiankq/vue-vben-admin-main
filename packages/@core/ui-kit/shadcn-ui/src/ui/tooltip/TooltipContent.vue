@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { TooltipContentEmits, TooltipContentProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { TooltipContent, TooltipPortal, useForwardPropsEmits } from 'radix-vue';
+
+import { computed } from 'vue';
 
 defineOptions({
   inheritAttrs: false,
@@ -42,7 +42,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         )
       "
     >
-      <slot></slot>
+      <slot />
     </TooltipContent>
   </TooltipPortal>
 </template>

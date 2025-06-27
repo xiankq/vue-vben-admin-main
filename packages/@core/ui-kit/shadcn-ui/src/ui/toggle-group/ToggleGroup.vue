@@ -4,11 +4,11 @@ import type { ToggleGroupRootEmits, ToggleGroupRootProps } from 'radix-vue';
 
 import type { toggleVariants } from '../toggle';
 
-import { computed, provide } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { ToggleGroupRoot, useForwardPropsEmits } from 'radix-vue';
+
+import { computed, provide } from 'vue';
 
 type ToggleGroupVariants = VariantProps<typeof toggleVariants>;
 
@@ -39,6 +39,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     v-bind="forwarded"
     :class="cn('flex items-center justify-center gap-1', props.class)"
   >
-    <slot></slot>
+    <slot />
   </ToggleGroupRoot>
 </template>

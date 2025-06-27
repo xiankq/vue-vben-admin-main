@@ -56,28 +56,28 @@ export default eventHandler(async (event) => {
   } = getQuery(event);
   let listData = structuredClone(mockData);
   if (name) {
-    listData = listData.filter((item) =>
+    listData = listData.filter(item =>
       item.name.toLowerCase().includes(String(name).toLowerCase()),
     );
   }
   if (id) {
-    listData = listData.filter((item) =>
+    listData = listData.filter(item =>
       item.id.toLowerCase().includes(String(id).toLowerCase()),
     );
   }
   if (remark) {
-    listData = listData.filter((item) =>
+    listData = listData.filter(item =>
       item.remark?.toLowerCase()?.includes(String(remark).toLowerCase()),
     );
   }
   if (startTime) {
-    listData = listData.filter((item) => item.createTime >= startTime);
+    listData = listData.filter(item => item.createTime >= startTime);
   }
   if (endTime) {
-    listData = listData.filter((item) => item.createTime <= endTime);
+    listData = listData.filter(item => item.createTime <= endTime);
   }
   if (['0', '1'].includes(status as string)) {
-    listData = listData.filter((item) => item.status === Number(status));
+    listData = listData.filter(item => item.status === Number(status));
   }
   return usePageResponseSuccess(page as string, pageSize as string, listData);
 });

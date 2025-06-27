@@ -10,7 +10,7 @@ function toggleScreen() {
 
 <template>
   <div
-    class="flex-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-2 text-lg font-semibold"
+    class="flex-center hover:bg-muted hover:text-foreground text-muted-foreground border-border text-lg font-semibold px-2 border-l h-full cursor-pointer"
     @click="toggleScreen"
   >
     <Minimize2 v-if="screen" class="size-4" />

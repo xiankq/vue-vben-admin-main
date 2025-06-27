@@ -40,7 +40,7 @@ async function getLintFiles(files: string[] = []) {
   const lintFiles: string[] = [];
 
   if (files?.length > 0) {
-    return files.filter((file) => basename(file) === 'package.json');
+    return files.filter(file => basename(file) === 'package.json');
   }
 
   const { packages } = await getPackages();
@@ -60,7 +60,8 @@ async function readCache(cacheFile: string) {
   try {
     await ensureFile(cacheFile);
     return await readJSON(cacheFile);
-  } catch {
+  }
+  catch {
     return {};
   }
 }
@@ -87,8 +88,8 @@ async function runPublint(files: string[], { check }: PubLintCommandOptions) {
         const content = JSON.stringify(pkgJson);
         const hash = generatorContentHash(content);
 
-        const publintResult: Result =
-          cache?.[file]?.hash === hash
+        const publintResult: Result
+          = cache?.[file]?.hash === hash
             ? (cache?.[file]?.result ?? [])
             : await publint({
                 level: 'suggestion',
@@ -102,7 +103,8 @@ async function runPublint(files: string[], { check }: PubLintCommandOptions) {
         };
 
         return { pkgJson, pkgPath: file, publintResult };
-      } catch {
+      }
+      catch {
         return null;
       }
     }),
@@ -169,7 +171,8 @@ function printResult(
       ),
     );
     !check && process.exit(1);
-  } else {
+  }
+  else {
     consola.log(colors.green(`${UNICODE.SUCCESS} No problem`));
   }
 }

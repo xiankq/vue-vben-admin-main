@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { PrimitiveProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { Primitive, useForwardProps } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<PrimitiveProps & { class?: any }>();
 const delegatedProps = computed(() => {
@@ -20,6 +20,6 @@ const forwardedProps = useForwardProps(delegatedProps);
     v-bind="forwardedProps"
     :class="cn('flex items-center', props.class)"
   >
-    <slot></slot>
+    <slot />
   </Primitive>
 </template>

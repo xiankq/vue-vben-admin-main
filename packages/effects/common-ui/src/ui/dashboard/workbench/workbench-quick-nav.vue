@@ -28,9 +28,11 @@ defineEmits(['click']);
 <template>
   <Card>
     <CardHeader class="py-4">
-      <CardTitle class="text-lg">{{ title }}</CardTitle>
+      <CardTitle class="text-lg">
+        {{ title }}
+      </CardTitle>
     </CardHeader>
-    <CardContent class="flex flex-wrap p-0">
+    <CardContent class="p-0 flex flex-wrap">
       <template v-for="(item, index) in items" :key="item.title">
         <div
           :class="{
@@ -40,7 +42,7 @@ defineEmits(['click']);
             'rounded-bl-xl': index === items.length - 3,
             'rounded-br-xl': index === items.length - 1,
           }"
-          class="flex-col-center border-border group w-1/3 cursor-pointer border-r border-t py-8 hover:shadow-xl"
+          class="flex-col-center border-border group py-8 border-r border-t w-1/3 cursor-pointer hover:shadow-xl"
           @click="$emit('click', item)"
         >
           <VbenIcon

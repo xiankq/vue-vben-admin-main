@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import type { BreadcrumbStyleType } from '@vben/types';
-
 import type { IBreadcrumb } from '@vben-core/shadcn-ui';
 
-import { computed } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-
-import { $t } from '@vben/locales';
+import type { BreadcrumbStyleType } from '@vben/types';
 
 import { VbenBreadcrumbView } from '@vben-core/shadcn-ui';
+import { $t } from '@vben/locales';
+
+import { computed } from 'vue';
+
+import { useRoute, useRouter } from 'vue-router';
 
 interface Props {
   hideWhenOnlyOne?: boolean;
@@ -33,8 +33,8 @@ const breadcrumbs = computed((): IBreadcrumb[] => {
 
   for (const match of matched) {
     const { meta, path } = match;
-    const { hideChildrenInMenu, hideInBreadcrumb, icon, name, title } =
-      meta || {};
+    const { hideChildrenInMenu, hideInBreadcrumb, icon, name, title }
+      = meta || {};
     if (hideInBreadcrumb || hideChildrenInMenu || !path) {
       continue;
     }
@@ -63,6 +63,7 @@ function handleSelect(path: string) {
   router.push(path);
 }
 </script>
+
 <template>
   <VbenBreadcrumbView
     :breadcrumbs="breadcrumbs"

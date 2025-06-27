@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { ClassType } from '@vben-core/typings';
 
-import { computed, ref } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
+
+import { computed, ref } from 'vue';
 
 import { ScrollArea, ScrollBar } from '../../ui';
 
@@ -55,10 +55,10 @@ const showShadowRight = computed(() => props.shadow && props.shadowRight);
 const computedShadowClasses = computed(() => {
   return {
     'both-shadow':
-      !isAtLeft.value &&
-      !isAtRight.value &&
-      showShadowLeft.value &&
-      showShadowRight.value,
+      !isAtLeft.value
+      && !isAtRight.value
+      && showShadowLeft.value
+      && showShadowRight.value,
     'left-shadow': !isAtLeft.value && showShadowLeft.value,
     'right-shadow': !isAtRight.value && showShadowRight.value,
   };
@@ -74,12 +74,12 @@ function handleScroll(event: Event) {
   const scrollWidth = target?.scrollWidth ?? 0;
   isAtTop.value = scrollTop <= 0;
   isAtLeft.value = scrollLeft <= 0;
-  isAtBottom.value =
-    Math.abs(scrollTop) + clientHeight >=
-    scrollHeight - ARRIVED_STATE_THRESHOLD_PIXELS;
-  isAtRight.value =
-    Math.abs(scrollLeft) + clientWidth >=
-    scrollWidth - ARRIVED_STATE_THRESHOLD_PIXELS;
+  isAtBottom.value
+    = Math.abs(scrollTop) + clientHeight
+      >= scrollHeight - ARRIVED_STATE_THRESHOLD_PIXELS;
+  isAtRight.value
+    = Math.abs(scrollLeft) + clientWidth
+      >= scrollWidth - ARRIVED_STATE_THRESHOLD_PIXELS;
 
   emit('scrollAt', {
     bottom: isAtBottom.value,
@@ -102,17 +102,17 @@ function handleScroll(event: Event) {
         'opacity-100': !isAtTop,
         'border-border border-t': shadowBorder && !isAtTop,
       }"
-      class="scrollbar-top-shadow pointer-events-none absolute top-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
-    ></div>
-    <slot></slot>
+      class="scrollbar-top-shadow will-change-[opacity] opacity-0 h-12 w-full pointer-events-none transition-opacity duration-300 ease-in-out top-0 absolute z-10"
+    />
+    <slot />
     <div
       v-if="showShadowBottom"
       :class="{
         'opacity-100': !isAtTop && !isAtBottom,
         'border-border border-b': shadowBorder && !isAtTop && !isAtBottom,
       }"
-      class="scrollbar-bottom-shadow pointer-events-none absolute bottom-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
-    ></div>
+      class="scrollbar-bottom-shadow will-change-[opacity] opacity-0 h-12 w-full pointer-events-none transition-opacity duration-300 ease-in-out bottom-0 absolute z-10"
+    />
     <ScrollBar
       v-if="horizontal"
       :class="scrollBarClass"
@@ -128,38 +128,19 @@ function handleScroll(event: Event) {
   }
 
   &:not(.both-shadow).right-shadow {
-    mask-image: linear-gradient(
-      90deg,
-      #000 0%,
-      #000 calc(100% - 16px),
-      transparent
-    );
+    mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 16px), transparent);
   }
 
   &.both-shadow {
-    mask-image: linear-gradient(
-      90deg,
-      transparent,
-      #000 16px,
-      #000 calc(100% - 16px),
-      transparent 100%
-    );
+    mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent 100%);
   }
 }
 
 .scrollbar-top-shadow {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--scroll-shadow, var(--background))),
-    transparent
-  );
+  background: linear-gradient(to bottom, hsl(var(--scroll-shadow, var(--background))), transparent);
 }
 
 .scrollbar-bottom-shadow {
-  background: linear-gradient(
-    to top,
-    hsl(var(--scroll-shadow, var(--background))),
-    transparent
-  );
+  background: linear-gradient(to top, hsl(var(--scroll-shadow, var(--background))), transparent);
 }
 </style>

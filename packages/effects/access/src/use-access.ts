@@ -1,7 +1,7 @@
-import { computed } from 'vue';
-
 import { preferences, updatePreferences } from '@vben/preferences';
+
 import { useAccessStore, useUserStore } from '@vben/stores';
+import { computed } from 'vue';
 
 function useAccess() {
   const accessStore = useAccessStore();
@@ -17,7 +17,7 @@ function useAccess() {
    */
   function hasAccessByRoles(roles: string[]) {
     const userRoleSet = new Set(userStore.userRoles);
-    const intersection = roles.filter((item) => userRoleSet.has(item));
+    const intersection = roles.filter(item => userRoleSet.has(item));
     return intersection.length > 0;
   }
 
@@ -29,7 +29,7 @@ function useAccess() {
   function hasAccessByCodes(codes: string[]) {
     const userCodesSet = new Set(accessStore.accessCodes);
 
-    const intersection = codes.filter((item) => userCodesSet.has(item));
+    const intersection = codes.filter(item => userCodesSet.has(item));
     return intersection.length > 0;
   }
 

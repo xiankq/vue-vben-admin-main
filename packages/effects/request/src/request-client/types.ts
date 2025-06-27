@@ -5,7 +5,7 @@ import type {
   InternalAxiosRequestConfig,
 } from 'axios';
 
-type ExtendOptions<T = any> = {
+interface ExtendOptions<T = any> {
   /**
    * 参数序列化方式。预置的有
    * - brackets: ids[]=1&ids[]=2&ids[]=3
@@ -26,18 +26,18 @@ type ExtendOptions<T = any> = {
    * - data: 解构响应的BODY数据，只返回其中的data节点数据（会检查status和code是否为成功状态）。
    */
   responseReturn?: 'body' | 'data' | 'raw';
-};
+}
 type RequestClientConfig<T = any> = AxiosRequestConfig<T> & ExtendOptions<T>;
 
 type RequestResponse<T = any> = AxiosResponse<T> & {
   config: RequestClientConfig<T>;
 };
 
-type RequestContentType =
-  | 'application/json;charset=utf-8'
-  | 'application/octet-stream;charset=utf-8'
-  | 'application/x-www-form-urlencoded;charset=utf-8'
-  | 'multipart/form-data;charset=utf-8';
+type RequestContentType
+  = | 'application/json;charset=utf-8'
+    | 'application/octet-stream;charset=utf-8'
+    | 'application/x-www-form-urlencoded;charset=utf-8'
+    | 'multipart/form-data;charset=utf-8';
 
 type RequestClientOptions = CreateAxiosDefaults & ExtendOptions;
 

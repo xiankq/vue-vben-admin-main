@@ -1,3 +1,9 @@
+import type { BaseFormComponentType, useVbenForm, VbenFormProps } from '@vben-core/form-ui';
+
+import type { ClassType, DeepPartial } from '@vben/types';
+
+import type { Ref } from 'vue';
+
 import type {
   VxeGridListeners,
   VxeGridPropTypes,
@@ -5,15 +11,7 @@ import type {
   VxeUIExport,
 } from 'vxe-table';
 
-import type { Ref } from 'vue';
-
-import type { ClassType, DeepPartial } from '@vben/types';
-
-import type { BaseFormComponentType, VbenFormProps } from '@vben-core/form-ui';
-
 import type { VxeGridApi } from './api';
-
-import { useVbenForm } from '@vben-core/form-ui';
 
 export interface VxePaginationInfo {
   currentPage: number;

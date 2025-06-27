@@ -11,15 +11,16 @@ const { isFullscreen, toggle } = useFullscreen();
 
 // 重新检查全屏状态
 isFullscreen.value = !!(
-  document.fullscreenElement ||
+  document.fullscreenElement
   // @ts-ignore
-  document.webkitFullscreenElement ||
+  || document.webkitFullscreenElement
   // @ts-ignore
-  document.mozFullScreenElement ||
+  || document.mozFullScreenElement
   // @ts-ignore
-  document.msFullscreenElement
+  || document.msFullscreenElement
 );
 </script>
+
 <template>
   <VbenIconButton @click="toggle">
     <Minimize v-if="isFullscreen" class="text-foreground size-4" />

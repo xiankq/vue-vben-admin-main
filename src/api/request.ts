@@ -3,6 +3,7 @@
  */
 import type { RequestClientOptions } from '@vben/request';
 
+import { useAuthStore } from '#/store';
 import { useAppConfig } from '@vben/hooks';
 import { preferences } from '@vben/preferences';
 import {
@@ -11,11 +12,10 @@ import {
   errorMessageResponseInterceptor,
   RequestClient,
 } from '@vben/request';
+
 import { useAccessStore } from '@vben/stores';
 
 import { ElMessage } from 'element-plus';
-
-import { useAuthStore } from '#/store';
 
 import { refreshTokenApi } from './core';
 
@@ -36,11 +36,12 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
     const authStore = useAuthStore();
     accessStore.setAccessToken(null);
     if (
-      preferences.app.loginExpiredMode === 'modal' &&
-      accessStore.isAccessChecked
+      preferences.app.loginExpiredMode === 'modal'
+      && accessStore.isAccessChecked
     ) {
       accessStore.setLoginExpired(true);
-    } else {
+    }
+    else {
       await authStore.logout();
     }
   }

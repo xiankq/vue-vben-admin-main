@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { HoverCardContentProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { HoverCardContent, HoverCardPortal, useForwardProps } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = withDefaults(
   defineProps<HoverCardContentProps & { class?: any }>(),
@@ -34,7 +34,7 @@ const forwardedProps = useForwardProps(delegatedProps);
         )
       "
     >
-      <slot></slot>
+      <slot />
     </HoverCardContent>
   </HoverCardPortal>
 </template>

@@ -1,15 +1,15 @@
 {
   "name": "@vben/hooks",
+  "type": "module",
   "version": "5.5.7",
+  "license": "MIT",
   "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
     "directory": "packages/effects/hooks"
   },
-  "license": "MIT",
-  "type": "module",
+  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "sideEffects": [
     "**/*.css"
   ],

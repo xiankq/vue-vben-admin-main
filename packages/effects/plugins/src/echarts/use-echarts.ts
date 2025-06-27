@@ -1,12 +1,10 @@
+import type { Nullable } from '@vben/types';
+
 import type { EChartsOption } from 'echarts';
 
 import type { Ref } from 'vue';
 
-import type { Nullable } from '@vben/types';
-
 import type EchartsUI from './echarts-ui.vue';
-
-import { computed, nextTick, watch } from 'vue';
 
 import { usePreferences } from '@vben/preferences';
 
@@ -17,6 +15,8 @@ import {
   useTimeoutFn,
   useWindowSize,
 } from '@vueuse/core';
+
+import { computed, nextTick, watch } from 'vue';
 
 import echarts from './echarts';
 
@@ -72,7 +72,8 @@ function useEcharts(chartRef: Ref<EchartsUIType>) {
         useTimeoutFn(() => {
           if (!chartInstance) {
             const instance = initCharts();
-            if (!instance) return;
+            if (!instance)
+              return;
           }
           clear && chartInstance?.clear();
           chartInstance?.setOption(currentOptions);

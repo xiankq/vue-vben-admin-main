@@ -12,6 +12,6 @@ const props = defineProps<{
       cn('hover:text-foreground inline-flex items-center gap-1.5', props.class)
     "
   >
-    <slot></slot>
+    <slot />
   </li>
 </template>

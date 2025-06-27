@@ -28,18 +28,18 @@ function findComponentUpward(
   return parent;
 }
 
-const flattedChildren = (
-  children: FlattenVNodes | VNode | VNodeNormalizedChildren,
-): FlattenVNodes => {
+function flattedChildren(children: FlattenVNodes | VNode | VNodeNormalizedChildren): FlattenVNodes {
   const vNodes = Array.isArray(children) ? children : [children];
   const result: FlattenVNodes = [];
 
   vNodes.forEach((child) => {
     if (Array.isArray(child)) {
       result.push(...flattedChildren(child));
-    } else if (isVNode(child) && Array.isArray(child.children)) {
+    }
+    else if (isVNode(child) && Array.isArray(child.children)) {
       result.push(...flattedChildren(child.children));
-    } else {
+    }
+    else {
       result.push(child);
       if (isVNode(child) && child.component?.subTree) {
         result.push(...flattedChildren(child.component.subTree));
@@ -47,6 +47,6 @@ const flattedChildren = (
     }
   });
   return result;
-};
+}
 
 export { findComponentUpward, flattedChildren };

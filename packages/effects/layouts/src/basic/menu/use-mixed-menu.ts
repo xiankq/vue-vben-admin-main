@@ -1,11 +1,11 @@
 import type { MenuRecordRaw } from '@vben/types';
 
-import { computed, onBeforeMount, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-
 import { preferences, usePreferences } from '@vben/preferences';
 import { useAccessStore } from '@vben/stores';
+
 import { findRootMenuByPath } from '@vben/utils';
+import { computed, onBeforeMount, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 import { useNavigation } from './use-navigation';
 
@@ -23,8 +23,8 @@ function useMixedMenu() {
 
   const needSplit = computed(
     () =>
-      (preferences.navigation.split && isMixedNav.value) ||
-      isHeaderMixedNav.value,
+      (preferences.navigation.split && isMixedNav.value)
+      || isHeaderMixedNav.value,
   );
 
   const sidebarVisible = computed(() => {
@@ -89,7 +89,7 @@ function useMixedMenu() {
       navigation(key);
       return;
     }
-    const rootMenu = menus.value.find((item) => item.path === key);
+    const rootMenu = menus.value.find(item => item.path === key);
     const _splitSideMenus = rootMenu?.children ?? [];
 
     if (!willOpenedByWindow(key)) {
@@ -99,7 +99,8 @@ function useMixedMenu() {
 
     if (_splitSideMenus.length === 0) {
       navigation(key);
-    } else if (rootMenu && preferences.sidebar.autoActivateChild) {
+    }
+    else if (rootMenu && preferences.sidebar.autoActivateChild) {
       navigation(
         defaultSubMap.has(rootMenu.path)
           ? (defaultSubMap.get(rootMenu.path) as string)
@@ -128,7 +129,7 @@ function useMixedMenu() {
   function calcSideMenus(path: string = route.path) {
     let { rootMenu } = findRootMenuByPath(menus.value, path);
     if (!rootMenu) {
-      rootMenu = menus.value.find((item) => item.path === path);
+      rootMenu = menus.value.find(item => item.path === path);
     }
     const result = findRootMenuByPath(rootMenu?.children || [], path, 1);
     mixedRootMenuPath.value = result.rootMenuPath ?? '';

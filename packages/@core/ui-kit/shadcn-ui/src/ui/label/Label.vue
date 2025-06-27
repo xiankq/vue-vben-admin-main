@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { LabelProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { Label } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<LabelProps & { class?: any }>();
 
@@ -26,6 +26,6 @@ const delegatedProps = computed(() => {
       )
     "
   >
-    <slot></slot>
+    <slot />
   </Label>
 </template>

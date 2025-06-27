@@ -1,7 +1,7 @@
-import { computed, ref } from 'vue';
-import { useRouter } from 'vue-router';
-
 import { preferences } from '@vben/preferences';
+import { computed, ref } from 'vue';
+
+import { useRouter } from 'vue-router';
 
 function useContentSpinner() {
   const spinning = ref(false);
@@ -20,7 +20,8 @@ function useContentSpinner() {
       setTimeout(() => {
         spinning.value = false;
       }, minShowTime - processTime);
-    } else {
+    }
+    else {
       spinning.value = false;
     }
   };

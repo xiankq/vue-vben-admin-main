@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import type { ClassType } from '@vben-core/typings';
+
 import type {
   HoverCardContentProps,
   HoverCardRootEmits,
   HoverCardRootProps,
 } from 'radix-vue';
 
-import type { ClassType } from '@vben-core/typings';
+import { useForwardPropsEmits } from 'radix-vue';
 
 import { computed } from 'vue';
-
-import { useForwardPropsEmits } from 'radix-vue';
 
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../../ui';
 
@@ -41,7 +41,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   <HoverCard v-bind="forwarded">
     <HoverCardTrigger as-child class="h-full">
       <div class="h-full cursor-pointer">
-        <slot name="trigger"></slot>
+        <slot name="trigger" />
       </div>
     </HoverCardTrigger>
     <HoverCardContent
@@ -49,7 +49,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       v-bind="contentProps"
       class="side-content z-popup"
     >
-      <slot></slot>
+      <slot />
     </HoverCardContent>
   </HoverCard>
 </template>

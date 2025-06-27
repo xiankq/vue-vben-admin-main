@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { CaptchaPoint, PointSelectionCaptchaProps } from '../types';
 
-import { RotateCw } from '@vben/icons';
-import { $t } from '@vben/locales';
-
 import { VbenButton, VbenIconButton } from '@vben-core/shadcn-ui';
+import { RotateCw } from '@vben/icons';
+
+import { $t } from '@vben/locales';
 
 import { useCaptchaPoints } from '../hooks/useCaptchaPoints';
 import CaptchaCard from './point-selection-captcha-card.vue';
@@ -43,7 +43,8 @@ function getElementPosition(element: HTMLElement) {
 function handleClick(e: MouseEvent) {
   try {
     const dom = e.currentTarget as HTMLElement;
-    if (!dom) throw new Error('Element not found');
+    if (!dom)
+      throw new Error('Element not found');
 
     const { x: domX, y: domY } = getElementPosition(dom);
 
@@ -80,7 +81,8 @@ function handleClick(e: MouseEvent) {
     emit('click', point);
     e.stopPropagation();
     e.preventDefault();
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error in handleClick:', error);
   }
 }
@@ -88,7 +90,8 @@ function handleClick(e: MouseEvent) {
 function clear() {
   try {
     clearPoints();
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error in clear:', error);
   }
 }
@@ -97,20 +100,24 @@ function handleRefresh() {
   try {
     clear();
     emit('refresh');
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error in handleRefresh:', error);
   }
 }
 
 function handleConfirm() {
-  if (!props.showConfirm) return;
+  if (!props.showConfirm)
+    return;
   try {
     emit('confirm', points, clear);
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error in handleConfirm:', error);
   }
 }
 </script>
+
 <template>
   <CaptchaCard
     :captcha-image="captchaImage"
@@ -122,7 +129,9 @@ function handleConfirm() {
     @click="handleClick"
   >
     <template #title>
-      <slot name="title">{{ $t('ui.captcha.title') }}</slot>
+      <slot name="title">
+        {{ $t('ui.captcha.title') }}
+      </slot>
     </template>
 
     <template #extra>
@@ -152,7 +161,7 @@ function handleConfirm() {
         top: `${point.y - POINT_OFFSET}px`,
         left: `${point.x - POINT_OFFSET}px`,
       }"
-      class="bg-primary text-primary-50 border-primary-50 absolute z-20 flex h-5 w-5 cursor-default items-center justify-center rounded-full border-2"
+      class="bg-primary text-primary-50 border-primary-50 border-2 rounded-full flex h-5 w-5 cursor-default items-center justify-center absolute z-20"
       role="button"
       tabindex="0"
     >
@@ -163,11 +172,11 @@ function handleConfirm() {
         v-if="hintImage"
         :alt="$t('ui.captcha.alt')"
         :src="hintImage"
-        class="border-border h-10 w-full rounded border"
-      />
+        class="border-border border rounded h-10 w-full"
+      >
       <div
         v-else-if="hintText"
-        class="border-border flex-center h-10 w-full rounded border"
+        class="border-border flex-center border rounded h-10 w-full"
       >
         {{ `${$t('ui.captcha.clickInOrder')}` + `【${hintText}】` }}
       </div>

@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { Component, PropType } from 'vue';
 
-import { defineComponent, h } from 'vue';
-
 import { isFunction, isObject, isString } from '@vben-core/shared/utils';
+
+import { defineComponent, h } from 'vue';
 
 export default defineComponent({
   name: 'RenderContent',
@@ -24,9 +24,9 @@ export default defineComponent({
       if (!props.content) {
         return null;
       }
-      const isComponent =
-        (isObject(props.content) || isFunction(props.content)) &&
-        props.content !== null;
+      const isComponent
+        = (isObject(props.content) || isFunction(props.content))
+          && props.content !== null;
       if (!isComponent) {
         if (props.renderBr && isString(props.content)) {
           const lines = props.content.split('\n');
@@ -38,7 +38,8 @@ export default defineComponent({
             // }
           }
           return result;
-        } else {
+        }
+        else {
           return props.content;
         }
       }

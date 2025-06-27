@@ -2,10 +2,10 @@ import type { DefaultProps, Props } from 'tippy.js';
 
 import type { App, SetupContext } from 'vue';
 
-import { h, watchEffect } from 'vue';
-import { setDefaultProps, Tippy as TippyComponent } from 'vue-tippy';
-
 import { usePreferences } from '@vben-core/preferences';
+import { h, watchEffect } from 'vue';
+
+import { setDefaultProps, Tippy as TippyComponent } from 'vue-tippy';
 
 import useTippyDirective from './directive';
 
@@ -47,7 +47,7 @@ export function initTippy(app: App<Element>, options?: DefaultProps) {
   app.directive('tippy', useTippyDirective(isDark));
 }
 
-export const Tippy = (props: any, { attrs, slots }: SetupContext) => {
+export function Tippy(props: any, { attrs, slots }: SetupContext) {
   let theme: string = (attrs.theme as string) ?? 'auto';
   if (theme === 'auto') {
     theme = isDark.value ? '' : 'light';
@@ -64,4 +64,4 @@ export const Tippy = (props: any, { attrs, slots }: SetupContext) => {
     },
     slots,
   );
-};
+}

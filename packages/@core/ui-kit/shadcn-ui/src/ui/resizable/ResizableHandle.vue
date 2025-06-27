@@ -6,12 +6,12 @@ import type {
 
 import type { HTMLAttributes } from 'vue';
 
-import { computed } from 'vue';
-
 import { GripVertical } from '@vben-core/icons';
-import { cn } from '@vben-core/shared/utils';
 
+import { cn } from '@vben-core/shared/utils';
 import { SplitterResizeHandle, useForwardPropsEmits } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<
   SplitterResizeHandleProps & {
@@ -41,7 +41,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   >
     <template v-if="props.withHandle">
       <div
-        class="bg-border z-10 flex h-4 w-3 items-center justify-center rounded-sm border"
+        class="bg-border border rounded-sm flex h-4 w-3 items-center justify-center z-10"
       >
         <GripVertical class="h-2.5 w-2.5" />
       </div>

@@ -2,10 +2,10 @@
 import type { VbenFormSchema } from '@vben/common-ui';
 import type { Recordable } from '@vben/types';
 
-import { computed, h, ref } from 'vue';
-
 import { AuthenticationRegister, z } from '@vben/common-ui';
+
 import { $t } from '@vben/locales';
+import { computed, h, ref } from 'vue';
 
 defineOptions({ name: 'Register' });
 
@@ -48,7 +48,7 @@ const formSchema = computed((): VbenFormSchema[] => {
           return z
             .string({ required_error: $t('authentication.passwordTip') })
             .min(1, { message: $t('authentication.passwordTip') })
-            .refine((value) => value === password, {
+            .refine(value => value === password, {
               message: $t('authentication.confirmPasswordTip'),
             });
         },
@@ -74,7 +74,7 @@ const formSchema = computed((): VbenFormSchema[] => {
             ),
           ]),
       }),
-      rules: z.boolean().refine((value) => !!value, {
+      rules: z.boolean().refine(value => !!value, {
         message: $t('authentication.agreeTip'),
       }),
     },

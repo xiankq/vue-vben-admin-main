@@ -1,25 +1,25 @@
 {
   "name": "@vben/vsh",
+  "type": "module",
   "version": "5.5.6",
   "private": true,
   "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "stub": "pnpm unbuild --stub"
-  },
-  "files": [
-    "dist"
-  ],
-  "bin": {
-    "vsh": "./bin/vsh.mjs"
-  },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
   "exports": {
     ".": {
       "default": "./dist/index.mjs"
     },
     "./package.json": "./package.json"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "bin": {
+    "vsh": "./bin/vsh.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "stub": "pnpm unbuild --stub"
   },
   "dependencies": {
     "@vben/node-utils": "workspace:*",

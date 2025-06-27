@@ -3,11 +3,11 @@ import type { DialogContentEmits, DialogContentProps } from 'radix-vue';
 
 import type { SheetVariants } from './sheet';
 
-import { computed, ref } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { DialogContent, DialogPortal, useForwardPropsEmits } from 'radix-vue';
+
+import { computed, ref } from 'vue';
 
 import { sheetVariants } from './sheet';
 import SheetOverlay from './SheetOverlay.vue';
@@ -48,9 +48,9 @@ const delegatedProps = computed(() => {
 
 function isAppendToBody() {
   return (
-    props.appendTo === 'body' ||
-    props.appendTo === document.body ||
-    !props.appendTo
+    props.appendTo === 'body'
+    || props.appendTo === document.body
+    || !props.appendTo
   );
 }
 
@@ -65,7 +65,8 @@ function onAnimationEnd(event: AnimationEvent) {
   if (event.target === contentRef.value?.$el) {
     if (props.open) {
       emits('opened');
-    } else {
+    }
+    else {
       emits('closed');
     }
   }
@@ -92,10 +93,10 @@ function onAnimationEnd(event: AnimationEvent) {
         ...(zIndex ? { zIndex } : {}),
         position,
       }"
-      @animationend="onAnimationEnd"
       v-bind="{ ...forwarded, ...$attrs }"
+      @animationend="onAnimationEnd"
     >
-      <slot></slot>
+      <slot />
 
       <!-- <DialogClose
         class="data-[state=open]:bg-secondary absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none"

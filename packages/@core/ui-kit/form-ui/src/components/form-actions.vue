@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, toRaw, unref, watch } from 'vue';
-
 import { useSimpleLocale } from '@vben-core/composables';
+
 import { VbenExpandableArrow } from '@vben-core/shadcn-ui';
 import { cn, isFunction, triggerWindowResize } from '@vben-core/shared/utils';
+import { computed, toRaw, unref, watch } from 'vue';
 
 import { COMPONENT_MAP } from '../config';
 import { injectFormProps } from '../use-form-context';
@@ -38,7 +38,7 @@ const queryFormStyle = computed(() => {
   if (!unref(rootProps).actionWrapperClass) {
     return {
       'grid-column': `-2 / -1`,
-      marginLeft: 'auto',
+      'marginLeft': 'auto',
     };
   }
 
@@ -66,7 +66,8 @@ async function handleReset(e: Event) {
 
   if (isFunction(props.handleReset)) {
     await props.handleReset?.(values);
-  } else {
+  }
+  else {
     form.resetForm();
   }
 }
@@ -86,6 +87,7 @@ defineExpose({
   handleSubmit,
 });
 </script>
+
 <template>
   <div
     :class="
@@ -99,52 +101,52 @@ defineExpose({
   >
     <template v-if="rootProps.actionButtonsReverse">
       <!-- 提交按钮前 -->
-      <slot name="submit-before"></slot>
+      <slot name="submit-before" />
 
       <component
         :is="COMPONENT_MAP.PrimaryButton"
         v-if="submitButtonOptions.show"
         class="ml-3"
         type="button"
-        @click="handleSubmit"
         v-bind="submitButtonOptions"
+        @click="handleSubmit"
       >
         {{ submitButtonOptions.content }}
       </component>
     </template>
 
     <!-- 重置按钮前 -->
-    <slot name="reset-before"></slot>
+    <slot name="reset-before" />
 
     <component
       :is="COMPONENT_MAP.DefaultButton"
       v-if="resetButtonOptions.show"
       class="ml-3"
       type="button"
-      @click="handleReset"
       v-bind="resetButtonOptions"
+      @click="handleReset"
     >
       {{ resetButtonOptions.content }}
     </component>
 
     <template v-if="!rootProps.actionButtonsReverse">
       <!-- 提交按钮前 -->
-      <slot name="submit-before"></slot>
+      <slot name="submit-before" />
 
       <component
         :is="COMPONENT_MAP.PrimaryButton"
         v-if="submitButtonOptions.show"
         class="ml-3"
         type="button"
-        @click="handleSubmit"
         v-bind="submitButtonOptions"
+        @click="handleSubmit"
       >
         {{ submitButtonOptions.content }}
       </component>
     </template>
 
     <!-- 展开按钮前 -->
-    <slot name="expand-before"></slot>
+    <slot name="expand-before" />
 
     <VbenExpandableArrow
       v-if="rootProps.showCollapseButton"
@@ -155,6 +157,6 @@ defineExpose({
     </VbenExpandableArrow>
 
     <!-- 展开按钮后 -->
-    <slot name="expand-after"></slot>
+    <slot name="expand-after" />
   </div>
 </template>

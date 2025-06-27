@@ -6,11 +6,11 @@ import type {
   SliderRotateVerifyPassingData,
 } from '../types';
 
-import { computed, reactive, unref, useTemplateRef, watch } from 'vue';
-
 import { $t } from '@vben/locales';
 
 import { useTimeoutFn } from '@vueuse/core';
+
+import { computed, reactive, unref, useTemplateRef, watch } from 'vue';
 
 import SliderCaptcha from '../slider-captcha/index.vue';
 
@@ -116,7 +116,8 @@ function handleDragEnd() {
       state.showTip = true;
       //  时间与动画时间保持一致
     }, 300);
-  } else {
+  }
+  else {
     checkPass();
   }
   state.showTip = true;
@@ -164,22 +165,22 @@ defineExpose({
 </script>
 
 <template>
-  <div class="relative flex flex-col items-center">
+  <div class="flex flex-col items-center relative">
     <div
       :style="getImgWrapStyleRef"
-      class="border-border relative cursor-pointer overflow-hidden rounded-full border shadow-md"
+      class="border-border border rounded-full cursor-pointer shadow-md relative overflow-hidden"
     >
       <img
         :class="imgCls"
         :src="src"
         :style="state.imgStyle"
         alt="verify"
-        class="w-full rounded-full"
+        class="rounded-full w-full"
         @click="resume"
         @load="handleImgOnLoad"
-      />
+      >
       <div
-        class="absolute bottom-3 left-0 z-10 block h-7 w-full text-center text-xs leading-[30px] text-white"
+        class="text-xs text-white leading-[30px] text-center h-7 w-full block bottom-3 left-0 absolute z-10"
       >
         <div
           v-if="state.showTip"
@@ -206,7 +207,7 @@ defineExpose({
       @start="handleStart"
     >
       <template v-for="(_, key) in $slots" :key="key" #[key]="slotProps">
-        <slot :name="key" v-bind="slotProps"></slot>
+        <slot :name="key" v-bind="slotProps" />
       </template>
     </SliderCaptcha>
   </div>

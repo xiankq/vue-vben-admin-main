@@ -20,11 +20,13 @@ async function cleanTargetsRecursively(currentDir, targets) {
         // 匹配到目标目录或文件时直接删除
         await fs.rm(itemPath, { force: true, recursive: true });
         console.log(`Deleted: ${itemPath}`);
-      } else if (stat.isDirectory()) {
+      }
+      else if (stat.isDirectory()) {
         // 只对目录进行递归处理
         await cleanTargetsRecursively(itemPath, targets);
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error(
         `Error handling item ${item} in ${currentDir}: ${error.message}`,
       );
@@ -49,7 +51,8 @@ async function cleanTargetsRecursively(currentDir, targets) {
   try {
     await cleanTargetsRecursively(rootDir, cleanupTargets);
     console.log('Cleanup process completed successfully.');
-  } catch (error) {
+  }
+  catch (error) {
     console.error(`Unexpected error during cleanup: ${error.message}`);
     process.exit(1);
   }

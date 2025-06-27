@@ -1,6 +1,6 @@
-import { execaCommand, getPackages } from '@vben/node-utils';
-
 import { cancel, isCancel, select } from '@clack/prompts';
+
+import { execaCommand, getPackages } from '@vben/node-utils';
 
 interface RunOptions {
   command?: string;
@@ -27,7 +27,7 @@ export async function run(options: RunOptions) {
   if (selectPkgs.length > 1) {
     selectPkg = await select<string>({
       message: `Select the app you need to run [${command}]:`,
-      options: selectPkgs.map((item) => ({
+      options: selectPkgs.map(item => ({
         label: item?.packageJson.name,
         value: item?.packageJson.name,
       })),
@@ -37,7 +37,8 @@ export async function run(options: RunOptions) {
       cancel('👋 Has cancelled');
       process.exit(0);
     }
-  } else {
+  }
+  else {
     selectPkg = selectPkgs[0]?.packageJson?.name ?? '';
   }
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { AuthenticationProps } from './types';
 
-import { computed, watch } from 'vue';
-
 import { useVbenModal } from '@vben-core/popup-ui';
+
 import { Slot, VbenAvatar } from '@vben-core/shadcn-ui';
+import { computed, watch } from 'vue';
 
 interface Props extends AuthenticationProps {
   avatar?: string;
@@ -40,7 +40,7 @@ const getZIndex = computed(() => {
  */
 const zIndexExcludeClass = ['ant-message', 'loading'];
 function isZIndexExcludeClass(element: Element) {
-  return zIndexExcludeClass.some((className) =>
+  return zIndexExcludeClass.some(className =>
     element.classList.contains(className),
   );
 }
@@ -55,9 +55,9 @@ function calcZIndex() {
     const style = window.getComputedStyle(element);
     const zIndex = style.getPropertyValue('z-index');
     if (
-      zIndex &&
-      !Number.isNaN(Number.parseInt(zIndex)) &&
-      !isZIndexExcludeClass(element)
+      zIndex
+      && !Number.isNaN(Number.parseInt(zIndex))
+      && !isZIndexExcludeClass(element)
     ) {
       maxZ = Math.max(maxZ, Number.parseInt(zIndex));
     }
@@ -76,7 +76,7 @@ function calcZIndex() {
       :fullscreen-button="false"
       :header="false"
       :z-index="getZIndex"
-      class="border-none px-10 py-6 text-center shadow-xl sm:w-[600px] sm:rounded-2xl md:h-[unset]"
+      class="px-10 py-6 text-center border-none shadow-xl sm:rounded-2xl md:h-[unset] sm:w-[600px]"
     >
       <VbenAvatar :src="avatar" class="mx-auto mb-6 size-20" />
       <Slot
@@ -86,7 +86,7 @@ function calcZIndex() {
         :sub-title="$t('authentication.loginAgainSubTitle')"
         :title="$t('authentication.loginAgainTitle')"
       >
-        <slot> </slot>
+        <slot />
       </Slot>
     </Modal>
   </div>

@@ -64,14 +64,14 @@ const logoStyle = computed((): CSSProperties => {
   <header
     :class="theme"
     :style="style"
-    class="border-border bg-header top-0 flex w-full flex-[0_0_auto] items-center border-b pl-2 transition-[margin-top] duration-200"
+    class="border-border transition-[margin-top] bg-header pl-2 border-b flex flex-[0_0_auto] w-full duration-200 items-center top-0"
   >
     <div v-if="slots.logo" :style="logoStyle">
-      <slot name="logo"></slot>
+      <slot name="logo" />
     </div>
 
-    <slot name="toggle-button"> </slot>
+    <slot name="toggle-button" />
 
-    <slot></slot>
+    <slot />
   </header>
 </template>

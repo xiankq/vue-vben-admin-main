@@ -33,6 +33,7 @@ function handleClick(path?: string) {
   emit('select', path);
 }
 </script>
+
 <template>
   <Breadcrumb>
     <BreadcrumbList>
@@ -44,7 +45,7 @@ function handleClick(path?: string) {
           <BreadcrumbItem>
             <div v-if="item.items?.length ?? 0 > 0">
               <DropdownMenu>
-                <DropdownMenuTrigger class="flex items-center gap-1">
+                <DropdownMenuTrigger class="flex gap-1 items-center">
                   <VbenIcon v-if="showIcon" :icon="item.icon" class="size-5" />
                   {{ item.title }}
                   <ChevronDown class="size-4" />

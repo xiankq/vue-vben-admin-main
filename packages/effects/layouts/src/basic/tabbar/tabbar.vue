@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-
+import { TabsToolMore, TabsToolScreen, TabsView } from '@vben-core/tabs-ui';
 import { useContentMaximize, useTabs } from '@vben/hooks';
+
 import { preferences } from '@vben/preferences';
 import { useTabbarStore } from '@vben/stores';
+import { computed } from 'vue';
 
-import { TabsToolMore, TabsToolScreen, TabsView } from '@vben-core/tabs-ui';
+import { useRoute } from 'vue-router';
 
 import { useTabbar } from './use-tabbar';
 

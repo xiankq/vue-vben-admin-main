@@ -13,7 +13,8 @@ function capitalizeFirstLetter(string: string): string {
  * @returns 首字母小写的字符串
  */
 function toLowerCaseFirstLetter(str: string): string {
-  if (!str) return str; // 如果字符串为空，直接返回
+  if (!str)
+    return str; // 如果字符串为空，直接返回
   return str.charAt(0).toLowerCase() + str.slice(1);
 }
 

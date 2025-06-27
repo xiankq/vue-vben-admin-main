@@ -2,20 +2,11 @@
 import type { DrawerProps, ExtendedDrawerApi } from './drawer';
 
 import {
-  computed,
-  onDeactivated,
-  provide,
-  ref,
-  unref,
-  useId,
-  watch,
-} from 'vue';
-
-import {
   useIsMobile,
   usePriorityValues,
   useSimpleLocale,
 } from '@vben-core/composables';
+
 import { X } from '@vben-core/icons';
 import {
   Separator,
@@ -35,6 +26,15 @@ import {
 import { ELEMENT_ID_MAIN_CONTENT } from '@vben-core/shared/constants';
 import { globalShareState } from '@vben-core/shared/global-state';
 import { cn } from '@vben-core/shared/utils';
+import {
+  computed,
+  onDeactivated,
+  provide,
+  ref,
+  unref,
+  useId,
+  watch,
+} from 'vue';
 
 interface Props extends DrawerProps {
   drawerApi?: ExtendedDrawerApi;
@@ -127,9 +127,9 @@ function pointerDownOutside(e: Event) {
   const target = e.target as HTMLElement;
   const dismissableDrawer = target?.dataset.dismissableDrawer;
   if (
-    submitting.value ||
-    !closeOnClickModal.value ||
-    dismissableDrawer !== id
+    submitting.value
+    || !closeOnClickModal.value
+    || dismissableDrawer !== id
   ) {
     e.preventDefault();
   }
@@ -175,6 +175,7 @@ const getForceMount = computed(() => {
   return !unref(destroyOnClose) && unref(hasOpened);
 });
 </script>
+
 <template>
   <Sheet
     :modal="false"
@@ -187,7 +188,7 @@ const getForceMount = computed(() => {
         cn('flex w-[520px] flex-col', drawerClass, {
           '!w-full': isMobile || placement === 'bottom' || placement === 'top',
           'max-h-[100vh]': placement === 'bottom' || placement === 'top',
-          hidden: isClosed,
+          'hidden': isClosed,
         })
       "
       :modal="modal"
@@ -223,7 +224,7 @@ const getForceMount = computed(() => {
             v-if="closable && closeIconPlacement === 'left'"
             as-child
             :disabled="submitting"
-            class="data-[state=open]:bg-secondary ml-[2px] cursor-pointer rounded-full opacity-80 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none"
+            class="data-[state=open]:bg-secondary ml-[2px] rounded-full opacity-80 cursor-pointer transition-opacity focus:outline-none hover:opacity-100 disabled:pointer-events-none"
           >
             <slot name="close-icon">
               <VbenIconButton>
@@ -246,7 +247,7 @@ const getForceMount = computed(() => {
               </VbenHelpTooltip>
             </slot>
           </SheetTitle>
-          <SheetDescription v-if="description" class="mt-1 text-xs">
+          <SheetDescription v-if="description" class="text-xs mt-1">
             <slot name="description">
               {{ description }}
             </slot>
@@ -259,12 +260,12 @@ const getForceMount = computed(() => {
         </VisuallyHidden>
 
         <div class="flex-center">
-          <slot name="extra"></slot>
+          <slot name="extra" />
           <SheetClose
             v-if="closable && closeIconPlacement === 'right'"
             as-child
             :disabled="submitting"
-            class="data-[state=open]:bg-secondary ml-[2px] cursor-pointer rounded-full opacity-80 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none"
+            class="data-[state=open]:bg-secondary ml-[2px] rounded-full opacity-80 cursor-pointer transition-opacity focus:outline-none hover:opacity-100 disabled:pointer-events-none"
           >
             <slot name="close-icon">
               <VbenIconButton>
@@ -288,7 +289,7 @@ const getForceMount = computed(() => {
           })
         "
       >
-        <slot></slot>
+        <slot />
       </div>
       <VbenLoading v-if="showLoading || submitting" spinning />
       <SheetFooter
@@ -300,7 +301,7 @@ const getForceMount = computed(() => {
           )
         "
       >
-        <slot name="prepend-footer"></slot>
+        <slot name="prepend-footer" />
         <slot name="footer">
           <component
             :is="components.DefaultButton || VbenButton"
@@ -313,7 +314,7 @@ const getForceMount = computed(() => {
               {{ cancelText || $t('cancel') }}
             </slot>
           </component>
-          <slot name="center-footer"></slot>
+          <slot name="center-footer" />
           <component
             :is="components.PrimaryButton || VbenButton"
             v-if="showConfirmButton"
@@ -325,7 +326,7 @@ const getForceMount = computed(() => {
             </slot>
           </component>
         </slot>
-        <slot name="append-footer"></slot>
+        <slot name="append-footer" />
       </SheetFooter>
     </SheetContent>
   </Sheet>

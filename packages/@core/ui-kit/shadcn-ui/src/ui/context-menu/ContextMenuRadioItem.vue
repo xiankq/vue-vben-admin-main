@@ -4,16 +4,16 @@ import type {
   ContextMenuRadioItemProps,
 } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { Circle } from 'lucide-vue-next';
+
 import {
   ContextMenuItemIndicator,
   ContextMenuRadioItem,
   useForwardPropsEmits,
 } from 'radix-vue';
+import { computed } from 'vue';
 
 const props = defineProps<ContextMenuRadioItemProps & { class?: any }>();
 const emits = defineEmits<ContextMenuRadioItemEmits>();
@@ -37,11 +37,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       )
     "
   >
-    <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span class="flex h-3.5 w-3.5 items-center left-2 justify-center absolute">
       <ContextMenuItemIndicator>
         <Circle class="h-2 w-2 fill-current" />
       </ContextMenuItemIndicator>
     </span>
-    <slot></slot>
+    <slot />
   </ContextMenuRadioItem>
 </template>

@@ -3,17 +3,17 @@ import type { StyleValue } from 'vue';
 
 import type { PageProps } from './types';
 
-import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
-
 import { CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT } from '@vben-core/shared/constants';
+
 import { cn } from '@vben-core/shared/utils';
+import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
 
 defineOptions({
   name: 'Page',
 });
 
-const { autoContentHeight = false, heightOffset = 0 } =
-  defineProps<PageProps>();
+const { autoContentHeight = false, heightOffset = 0 }
+  = defineProps<PageProps>();
 
 const headerHeight = ref(0);
 const footerHeight = ref(0);
@@ -53,11 +53,11 @@ onMounted(() => {
   <div class="relative">
     <div
       v-if="
-        description ||
-        $slots.description ||
-        title ||
-        $slots.title ||
-        $slots.extra
+        description
+          || $slots.description
+          || title
+          || $slots.title
+          || $slots.extra
       "
       ref="headerRef"
       :class="
@@ -69,7 +69,7 @@ onMounted(() => {
     >
       <div class="flex-auto">
         <slot name="title">
-          <div v-if="title" class="mb-2 flex text-lg font-semibold">
+          <div v-if="title" class="text-lg font-semibold mb-2 flex">
             {{ title }}
           </div>
         </slot>
@@ -82,12 +82,12 @@ onMounted(() => {
       </div>
 
       <div v-if="$slots.extra">
-        <slot name="extra"></slot>
+        <slot name="extra" />
       </div>
     </div>
 
     <div :class="cn('h-full p-4', contentClass)" :style="contentStyle">
-      <slot></slot>
+      <slot />
     </div>
 
     <div
@@ -100,7 +100,7 @@ onMounted(() => {
         )
       "
     >
-      <slot name="footer"></slot>
+      <slot name="footer" />
     </div>
   </div>
 </template>

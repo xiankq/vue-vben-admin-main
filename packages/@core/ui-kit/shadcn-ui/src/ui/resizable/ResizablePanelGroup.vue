@@ -3,11 +3,11 @@ import type { SplitterGroupEmits, SplitterGroupProps } from 'radix-vue';
 
 import type { HTMLAttributes } from 'vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { SplitterGroup, useForwardPropsEmits } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<
   SplitterGroupProps & { class?: HTMLAttributes['class'] }
@@ -32,6 +32,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       )
     "
   >
-    <slot></slot>
+    <slot />
   </SplitterGroup>
 </template>

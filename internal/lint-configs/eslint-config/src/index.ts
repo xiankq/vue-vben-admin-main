@@ -19,11 +19,6 @@ export default antfu({
   vue: {
     overrides: {
       'vue/valid-template-root': 'off',
-      'vue/component-name-in-template-casing': [
-        'warn',
-        'kebab-case',
-        { registeredComponentsOnly: false, ignores: ['/^i-/'] },
-      ],
       'vue/max-attributes-per-line': ['warn', { singleline: { max: 5 } }],
     },
   },

@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import type { SegmentedItem } from '@vben-core/shadcn-ui';
 import type { SupportedLanguagesType } from '@vben/locales';
+
 import type {
   BreadcrumbStyleType,
   BuiltinThemeType,
@@ -12,11 +14,16 @@ import type {
   ThemeModeType,
 } from '@vben/types';
 
-import type { SegmentedItem } from '@vben-core/shadcn-ui';
+import { useVbenDrawer } from '@vben-core/popup-ui';
 
-import { computed, ref } from 'vue';
-
+import {
+  VbenButton,
+  VbenIconButton,
+  VbenSegmented,
+} from '@vben-core/shadcn-ui';
+import { globalShareState } from '@vben-core/shared/global-state';
 import { Copy, RotateCw } from '@vben/icons';
+
 import { $t, loadLocaleMessages } from '@vben/locales';
 import {
   clearPreferencesCache,
@@ -24,16 +31,9 @@ import {
   resetPreferences,
   usePreferences,
 } from '@vben/preferences';
-
-import { useVbenDrawer } from '@vben-core/popup-ui';
-import {
-  VbenButton,
-  VbenIconButton,
-  VbenSegmented,
-} from '@vben-core/shadcn-ui';
-import { globalShareState } from '@vben-core/shared/global-state';
-
 import { useClipboard } from '@vueuse/core';
+
+import { computed, ref } from 'vue';
 
 import {
   Animation,
@@ -98,8 +98,8 @@ const sidebarCollapsedButton = defineModel<boolean>('sidebarCollapsedButton');
 const sidebarFixedButton = defineModel<boolean>('sidebarFixedButton');
 const headerEnable = defineModel<boolean>('headerEnable');
 const headerMode = defineModel<LayoutHeaderModeType>('headerMode');
-const headerMenuAlign =
-  defineModel<LayoutHeaderMenuAlignType>('headerMenuAlign');
+const headerMenuAlign
+  = defineModel<LayoutHeaderMenuAlignType>('headerMenuAlign');
 
 const breadcrumbEnable = defineModel<boolean>('breadcrumbEnable');
 const breadcrumbShowIcon = defineModel<boolean>('breadcrumbShowIcon');
@@ -204,10 +204,10 @@ const tabs = computed((): SegmentedItem[] => {
 
 const showBreadcrumbConfig = computed(() => {
   return (
-    !isFullContent.value &&
-    !isMixedNav.value &&
-    !isHeaderNav.value &&
-    preferences.header.enable
+    !isFullContent.value
+    && !isMixedNav.value
+    && !isHeaderNav.value
+    && preferences.header.enable
   );
 });
 
@@ -251,8 +251,8 @@ async function handleReset() {
           >
             <span
               v-if="diffPreference"
-              class="bg-primary absolute right-0.5 top-0.5 h-2 w-2 rounded"
-            ></span>
+              class="bg-primary rounded h-2 w-2 right-0.5 top-0.5 absolute"
+            />
             <RotateCw class="size-4" @click="handleReset" />
           </VbenIconButton>
         </div>
@@ -354,8 +354,8 @@ async function handleReset() {
                 v-model:breadcrumb-show-icon="breadcrumbShowIcon"
                 v-model:breadcrumb-style-type="breadcrumbStyleType"
                 :disabled="
-                  !showBreadcrumbConfig ||
-                  !(isSideNav || isSideMixedNav || isHeaderSidebarNav)
+                  !showBreadcrumbConfig
+                    || !(isSideNav || isSideMixedNav || isHeaderSidebarNav)
                 "
               />
             </Block>

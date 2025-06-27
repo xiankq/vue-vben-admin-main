@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import type { SetupContext } from 'vue';
-
 import type { MenuRecordRaw } from '@vben/types';
 
-import { computed, useSlots, watch } from 'vue';
+import type { SetupContext } from 'vue';
 
+import { VbenAdminLayout } from '@vben-core/layout-ui';
+
+import { VbenBackTop, VbenLogo } from '@vben-core/shadcn-ui';
 import { useRefresh } from '@vben/hooks';
 import { $t, i18n } from '@vben/locales';
 import {
@@ -13,10 +14,9 @@ import {
   usePreferences,
 } from '@vben/preferences';
 import { useAccessStore } from '@vben/stores';
-import { cloneDeep, mapTree } from '@vben/utils';
 
-import { VbenAdminLayout } from '@vben-core/layout-ui';
-import { VbenBackTop, VbenLogo } from '@vben-core/shadcn-ui';
+import { cloneDeep, mapTree } from '@vben/utils';
+import { computed, useSlots, watch } from 'vue';
 
 import { Breadcrumb, CheckUpdates, Preferences } from '../widgets';
 import { LayoutContent, LayoutContentSpinner } from './content';
@@ -95,8 +95,8 @@ const logoCollapsed = computed(() => {
 
 const showHeaderNav = computed(() => {
   return (
-    !isMobile.value &&
-    (isHeaderNav.value || isMixedNav.value || isHeaderMixedNav.value)
+    !isMobile.value
+    && (isHeaderNav.value || isMixedNav.value || isHeaderMixedNav.value)
   );
 });
 
@@ -172,7 +172,7 @@ watch(i18n.global.locale, refresh, { flush: 'post' });
 
 const slots: SetupContext['slots'] = useSlots();
 const headerSlots = computed(() => {
-  return Object.keys(slots).filter((key) => key.startsWith('header-'));
+  return Object.keys(slots).filter(key => key.startsWith('header-'));
 });
 </script>
 
@@ -243,7 +243,7 @@ const headerSlots = computed(() => {
         @click="clickLogo"
       >
         <template v-if="$slots['logo-text']" #text>
-          <slot name="logo-text"></slot>
+          <slot name="logo-text" />
         </template>
       </VbenLogo>
     </template>
@@ -276,13 +276,13 @@ const headerSlots = computed(() => {
           />
         </template>
         <template #user-dropdown>
-          <slot name="user-dropdown"></slot>
+          <slot name="user-dropdown" />
         </template>
         <template #notification>
-          <slot name="notification"></slot>
+          <slot name="notification" />
         </template>
         <template v-for="item in headerSlots" #[item]>
-          <slot :name="item"></slot>
+          <slot :name="item" />
         </template>
       </LayoutHeader>
     </template>
@@ -330,7 +330,7 @@ const headerSlots = computed(() => {
         :theme="theme"
       >
         <template v-if="$slots['logo-text']" #text>
-          <slot name="logo-text"></slot>
+          <slot name="logo-text" />
         </template>
       </VbenLogo>
     </template>
@@ -363,19 +363,19 @@ const headerSlots = computed(() => {
     </template>
 
     <template #extra>
-      <slot name="extra"></slot>
+      <slot name="extra" />
       <CheckUpdates
         v-if="preferences.app.enableCheckUpdates"
         :check-updates-interval="preferences.app.checkUpdatesInterval"
       />
 
       <Transition v-if="preferences.widget.lockScreen" name="slide-up">
-        <slot v-if="accessStore.isLockScreen" name="lock-screen"></slot>
+        <slot v-if="accessStore.isLockScreen" name="lock-screen" />
       </Transition>
 
       <template v-if="preferencesButtonPosition.fixed">
         <Preferences
-          class="z-100 fixed bottom-20 right-0"
+          class="bottom-20 right-0 fixed z-100"
           @clear-preferences-and-logout="clearPreferencesAndLogout"
         />
       </template>

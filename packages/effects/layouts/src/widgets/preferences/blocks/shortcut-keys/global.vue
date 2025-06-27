@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import { $t } from '@vben/locales';
+
 import { isWindowsOs } from '@vben/utils';
+import { computed } from 'vue';
 
 import SwitchItem from '../switch-item.vue';
 
@@ -37,7 +37,9 @@ const altView = computed(() => (isWindowsOs() ? 'Alt' : '⌥'));
   </SwitchItem>
   <SwitchItem v-model="shortcutKeysLogout" :disabled="!shortcutKeysEnable">
     {{ $t('preferences.shortcutKeys.logout') }}
-    <template #shortcut> {{ altView }} Q </template>
+    <template #shortcut>
+      {{ altView }} Q
+    </template>
   </SwitchItem>
   <!-- <SwitchItem v-model="shortcutKeysPreferences" :disabled="!shortcutKeysEnable">
     {{ $t('preferences.shortcutKeys.preferences') }}
@@ -45,6 +47,8 @@ const altView = computed(() => (isWindowsOs() ? 'Alt' : '⌥'));
   </SwitchItem> -->
   <SwitchItem v-model="shortcutKeysLockScreen" :disabled="!shortcutKeysEnable">
     {{ $t('ui.widgets.lockScreen.title') }}
-    <template #shortcut> {{ altView }} L </template>
+    <template #shortcut>
+      {{ altView }} L
+    </template>
   </SwitchItem>
 </template>

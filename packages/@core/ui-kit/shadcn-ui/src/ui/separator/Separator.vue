@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { SeparatorProps } from 'radix-vue';
 
-import { computed } from 'vue';
-
 import { cn } from '@vben-core/shared/utils';
 
 import { Separator } from 'radix-vue';
+
+import { computed } from 'vue';
 
 const props = defineProps<SeparatorProps & { class?: any; label?: string }>();
 

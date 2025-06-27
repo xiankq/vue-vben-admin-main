@@ -36,7 +36,7 @@ describe('traverseTreeValues', () => {
   it('traverses tree and returns all node values', () => {
     const values = traverseTreeValues<Node, NodeValue>(
       sampleTree,
-      (node) => node.name,
+      node => node.name,
       {
         childProps: 'children',
       },
@@ -45,7 +45,7 @@ describe('traverseTreeValues', () => {
   });
 
   it('handles empty tree', () => {
-    const values = traverseTreeValues<Node, NodeValue>([], (node) => node.name);
+    const values = traverseTreeValues<Node, NodeValue>([], node => node.name);
     expect(values).toEqual([]);
   });
 
@@ -53,7 +53,7 @@ describe('traverseTreeValues', () => {
     const rootNode = { name: 'A' };
     const values = traverseTreeValues<Node, NodeValue>(
       [rootNode],
-      (node) => node.name,
+      node => node.name,
     );
     expect(values).toEqual(['A']);
   });
@@ -62,7 +62,7 @@ describe('traverseTreeValues', () => {
     const leafNodes = [{ name: 'A' }, { name: 'B' }, { name: 'C' }];
     const values = traverseTreeValues<Node, NodeValue>(
       leafNodes,
-      (node) => node.name,
+      node => node.name,
     );
     expect(values).toEqual(['A', 'B', 'C']);
   });
@@ -93,12 +93,12 @@ describe('filterTree', () => {
   });
 
   it('should return nodes with even id values', () => {
-    const result = filterTree(tree, (node) => node.id % 2 === 0);
+    const result = filterTree(tree, node => node.id % 2 === 0);
     expect(result).toEqual([{ id: 8, children: [{ id: 10 }] }]);
   });
 
   it('should return nodes with odd id values and their ancestors', () => {
-    const result = filterTree(tree, (node) => node.id % 2 === 1);
+    const result = filterTree(tree, node => node.id % 2 === 1);
     expect(result).toEqual([
       {
         id: 1,
@@ -124,7 +124,7 @@ describe('filterTree', () => {
     ];
     const result = filterTree(
       tree,
-      (node) => node.name.includes('leaf') || node.name === 'root',
+      node => node.name.includes('leaf') || node.name === 'root',
     );
     expect(result).toEqual([
       {
@@ -162,7 +162,7 @@ describe('mapTree', () => {
         ],
       },
     ];
-    const newTree = mapTree(tree, (node) => ({
+    const newTree = mapTree(tree, node => ({
       ...node,
       name: `${node.name}-new`,
     }));

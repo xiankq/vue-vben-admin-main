@@ -6,7 +6,7 @@ import { isFunction } from '@vben/utils';
 
 import axios from 'axios';
 
-export const defaultResponseInterceptor = ({
+export function defaultResponseInterceptor({
   codeField = 'code',
   dataField = 'data',
   successCode = 0,
@@ -17,7 +17,7 @@ export const defaultResponseInterceptor = ({
   dataField: ((response: any) => any) | string;
   /** 当codeField所指定的字段值与successCode相同时，代表接口访问成功。如果提供一个函数，则返回true代表接口访问成功 */
   successCode: ((code: any) => boolean) | number | string;
-}): ResponseInterceptorConfig => {
+}): ResponseInterceptorConfig {
   return {
     fulfilled: (response) => {
       const { config, data: responseData, status } = response;
@@ -29,7 +29,8 @@ export const defaultResponseInterceptor = ({
       if (status >= 200 && status < 400) {
         if (config.responseReturn === 'body') {
           return responseData;
-        } else if (
+        }
+        else if (
           isFunction(successCode)
             ? successCode(responseData[codeField])
             : responseData[codeField] === successCode
@@ -42,9 +43,9 @@ export const defaultResponseInterceptor = ({
       throw Object.assign({}, response, { response });
     },
   };
-};
+}
 
-export const authenticateResponseInterceptor = ({
+export function authenticateResponseInterceptor({
   client,
   doReAuthenticate,
   doRefreshToken,
@@ -56,7 +57,7 @@ export const authenticateResponseInterceptor = ({
   doRefreshToken: () => Promise<string>;
   enableRefreshToken: boolean;
   formatToken: (token: string) => null | string;
-}): ResponseInterceptorConfig => {
+}): ResponseInterceptorConfig {
   return {
     rejected: async (error) => {
       const { config, response } = error;
@@ -89,29 +90,29 @@ export const authenticateResponseInterceptor = ({
         const newToken = await doRefreshToken();
 
         // 处理队列中的请求
-        client.refreshTokenQueue.forEach((callback) => callback(newToken));
+        client.refreshTokenQueue.forEach(callback => callback(newToken));
         // 清空队列
         client.refreshTokenQueue = [];
 
         return client.request(error.config.url, { ...error.config });
-      } catch (refreshError) {
+      }
+      catch (refreshError) {
         // 如果刷新 token 失败，处理错误（如强制登出或跳转登录页面）
-        client.refreshTokenQueue.forEach((callback) => callback(''));
+        client.refreshTokenQueue.forEach(callback => callback(''));
         client.refreshTokenQueue = [];
         console.error('Refresh token failed, please login again.');
         await doReAuthenticate();
 
         throw refreshError;
-      } finally {
+      }
+      finally {
         client.isRefreshing = false;
       }
     },
   };
-};
+}
 
-export const errorMessageResponseInterceptor = (
-  makeErrorMessage?: MakeErrorMessageFn,
-): ResponseInterceptorConfig => {
+export function errorMessageResponseInterceptor(makeErrorMessage?: MakeErrorMessageFn): ResponseInterceptorConfig {
   return {
     rejected: (error: any) => {
       if (axios.isCancel(error)) {
@@ -122,7 +123,8 @@ export const errorMessageResponseInterceptor = (
       let errMsg = '';
       if (err?.includes('Network Error')) {
         errMsg = $t('ui.fallback.http.networkError');
-      } else if (error?.message?.includes?.('timeout')) {
+      }
+      else if (error?.message?.includes?.('timeout')) {
         errMsg = $t('ui.fallback.http.requestTimeout');
       }
       if (errMsg) {
@@ -162,4 +164,4 @@ export const errorMessageResponseInterceptor = (
       return Promise.reject(error);
     },
   };
-};
+}

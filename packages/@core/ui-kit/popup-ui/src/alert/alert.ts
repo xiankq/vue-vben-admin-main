@@ -1,16 +1,16 @@
-import type { Component, VNode, VNodeArrayChildren } from 'vue';
-
 import type { Recordable } from '@vben-core/typings';
+
+import type { Component, VNode, VNodeArrayChildren } from 'vue';
 
 import { createContext } from '@vben-core/shadcn-ui';
 
 export type IconType = 'error' | 'info' | 'question' | 'success' | 'warning';
 
-export type BeforeCloseScope = {
+export interface BeforeCloseScope {
   isConfirm: boolean;
-};
+}
 
-export type AlertProps = {
+export interface AlertProps {
   /** 关闭前的回调，如果返回false，则终止关闭 */
   beforeClose?: (
     scope: BeforeCloseScope,
@@ -34,7 +34,7 @@ export type AlertProps = {
   content: Component | string;
   /** 弹窗内容的额外样式 */
   contentClass?: string;
-  /** 执行beforeClose回调期间，在内容区域显示一个loading遮罩*/
+  /** 执行beforeClose回调期间，在内容区域显示一个loading遮罩 */
   contentMasking?: boolean;
   /** 弹窗底部内容（与按钮在同一个容器中） */
   footer?: Component | string;
@@ -48,7 +48,7 @@ export type AlertProps = {
   showCancel?: boolean;
   /** 弹窗标题 */
   title?: string;
-};
+}
 
 /** Prompt属性 */
 export type PromptProps<T = any> = {
@@ -76,15 +76,15 @@ export type PromptProps<T = any> = {
 /**
  * Alert上下文
  */
-export type AlertContext = {
+export interface AlertContext {
   /** 执行取消操作 */
   doCancel: () => void;
   /** 执行确认操作 */
   doConfirm: () => void;
-};
+}
 
-export const [injectAlertContext, provideAlertContext] =
-  createContext<AlertContext>('VbenAlertContext');
+export const [injectAlertContext, provideAlertContext]
+  = createContext<AlertContext>('VbenAlertContext');
 
 /**
  * 获取Alert上下文

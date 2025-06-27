@@ -23,7 +23,8 @@ try {
   turboRun.usage('turbo-run');
   turboRun.help();
   turboRun.parse();
-} catch (error) {
+}
+catch (error) {
   consola.error(error);
   process.exit(1);
 }

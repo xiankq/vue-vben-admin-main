@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { useVbenModal } from '@vben-core/popup-ui';
 
 import { $t } from '@vben/locales';
 
-import { useVbenModal } from '@vben-core/popup-ui';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 interface Props {
   // 轮询时间，分钟
@@ -38,8 +38,8 @@ const [UpdateNoticeModal, modalApi] = useVbenModal({
 async function getVersionTag() {
   try {
     if (
-      location.hostname === 'localhost' ||
-      location.hostname === '127.0.0.1'
+      location.hostname === 'localhost'
+      || location.hostname === '127.0.0.1'
     ) {
       return null;
     }
@@ -52,7 +52,8 @@ async function getVersionTag() {
     return (
       response.headers.get('etag') || response.headers.get('last-modified')
     );
-  } catch {
+  }
+  catch {
     console.error('Failed to fetch version tag');
     return null;
   }
@@ -95,7 +96,8 @@ function start() {
 function handleVisibilitychange() {
   if (document.hidden) {
     stop();
-  } else {
+  }
+  else {
     if (!isCheckingUpdates) {
       isCheckingUpdates = true;
       checkForUpdates().finally(() => {
@@ -120,6 +122,7 @@ onUnmounted(() => {
   document.removeEventListener('visibilitychange', handleVisibilitychange);
 });
 </script>
+
 <template>
   <UpdateNoticeModal
     :cancel-text="$t('common.cancel')"

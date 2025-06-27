@@ -1,24 +1,15 @@
 {
   "name": "@vben-core/typings",
+  "type": "module",
   "version": "5.5.7",
+  "license": "MIT",
   "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
     "directory": "packages/@vben-core/base/typings"
   },
-  "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "build": "pnpm unbuild"
-  },
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "exports": {
     ".": {
       "types": "./src/index.ts",
@@ -28,6 +19,15 @@
     "./vue-router": {
       "types": "./vue-router.d.ts"
     }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm unbuild"
   },
   "publishConfig": {
     "exports": {

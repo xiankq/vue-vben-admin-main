@@ -14,8 +14,8 @@ function parseSvg(svgData: string): IconifyIconStructure {
   const svgElement = xmlDoc.documentElement;
 
   const svgContent = [...svgElement.childNodes]
-    .filter((node) => node.nodeType === Node.ELEMENT_NODE)
-    .map((node) => new XMLSerializer().serializeToString(node))
+    .filter(node => node.nodeType === Node.ELEMENT_NODE)
+    .map(node => new XMLSerializer().serializeToString(node))
     .join('');
 
   const viewBoxValue = svgElement.getAttribute('viewBox') || '';

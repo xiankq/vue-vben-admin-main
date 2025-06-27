@@ -1,8 +1,8 @@
 import type { Ref } from 'vue';
 
-import { watch } from 'vue';
-
 import { useDebounceFn } from '@vueuse/core';
+
+import { watch } from 'vue';
 
 interface UseMenuScrollOptions {
   delay?: number;
@@ -17,7 +17,8 @@ export function useMenuScroll(
 
   function scrollToActiveItem() {
     const isEnabled = typeof enable === 'boolean' ? enable : enable.value;
-    if (!isEnabled) return;
+    if (!isEnabled)
+      return;
 
     const activeElement = document.querySelector(
       `aside li[role=menuitem].is-active`,
@@ -35,7 +36,8 @@ export function useMenuScroll(
 
   watch(activePath, () => {
     const isEnabled = typeof enable === 'boolean' ? enable : enable.value;
-    if (!isEnabled) return;
+    if (!isEnabled)
+      return;
 
     debouncedScroll();
   });

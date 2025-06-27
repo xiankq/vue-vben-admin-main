@@ -1,9 +1,9 @@
 import type { App, Directive, DirectiveBinding } from 'vue';
 
-import { h, render } from 'vue';
-
 import { VbenLoading, VbenSpinner } from '@vben-core/shadcn-ui';
+
 import { isString } from '@vben-core/shared/utils';
+import { h, render } from 'vue';
 
 const LOADING_INSTANCE_KEY = Symbol('loading');
 const SPINNER_INSTANCE_KEY = Symbol('spinner');
@@ -36,7 +36,8 @@ const loadingDirective: Directive = {
           instance.component.props[key] = options[key];
         });
         instance.component.update();
-      } catch (error) {
+      }
+      catch (error) {
         console.error(
           'Failed to update loading component in directive:',
           error,
@@ -49,9 +50,11 @@ const loadingDirective: Directive = {
 function getOptions(binding: DirectiveBinding) {
   if (binding.value === undefined) {
     return { spinning: true };
-  } else if (typeof binding.value === 'boolean') {
+  }
+  else if (typeof binding.value === 'boolean') {
     return { spinning: binding.value };
-  } else {
+  }
+  else {
     return { ...binding.value };
   }
 }
@@ -82,7 +85,8 @@ const spinningDirective: Directive = {
           instance.component.props[key] = options[key];
         });
         instance.component.update();
-      } catch (error) {
+      }
+      catch (error) {
         console.error(
           'Failed to update spinner component in directive:',
           error,
@@ -92,12 +96,12 @@ const spinningDirective: Directive = {
   },
 };
 
-type loadingDirectiveParams = {
+interface loadingDirectiveParams {
   /** 是否注册loading指令。如果提供一个string，则将指令注册为指定的名称 */
   loading?: boolean | string;
   /** 是否注册spinning指令。如果提供一个string，则将指令注册为指定的名称 */
   spinning?: boolean | string;
-};
+}
 
 /**
  * 注册loading指令

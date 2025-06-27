@@ -3,13 +3,13 @@ import type { Recordable } from '@vben-core/typings';
 
 import type { ExtendedFormApi, VbenFormProps } from './types';
 
+import { useForwardPriorityValues } from '@vben-core/composables';
+
+import { cloneDeep, get, isEqual, set } from '@vben-core/shared/utils';
+import { useDebounceFn } from '@vueuse/core';
+
 // import { toRaw, watch } from 'vue';
 import { nextTick, onMounted, watch } from 'vue';
-
-import { useForwardPriorityValues } from '@vben-core/composables';
-import { cloneDeep, get, isEqual, set } from '@vben-core/shared/utils';
-
-import { useDebounceFn } from '@vueuse/core';
 
 import FormActions from './components/form-actions.vue';
 import {
@@ -43,9 +43,9 @@ provideComponentRefMap(componentRefMap);
 
 props.formApi?.mount?.(form, componentRefMap);
 
-const handleUpdateCollapsed = (value: boolean) => {
+function handleUpdateCollapsed(value: boolean) {
   props.formApi?.setState({ collapsed: !!value });
-};
+}
 
 function handleKeyDownEnter(event: KeyboardEvent) {
   if (!state.value.submitOnEnter || !forward.value.formApi?.isMounted) {
@@ -107,20 +107,20 @@ onMounted(async () => {
 
 <template>
   <Form
-    @keydown.enter="handleKeyDownEnter"
     v-bind="forward"
     :collapsed="state.collapsed"
     :component-bind-event-map="COMPONENT_BIND_EVENT_MAP"
     :component-map="COMPONENT_MAP"
     :form="form"
     :global-common-config="DEFAULT_FORM_COMMON_CONFIG"
+    @keydown.enter="handleKeyDownEnter"
   >
     <template
       v-for="slotName in delegatedSlots"
       :key="slotName"
       #[slotName]="slotProps"
     >
-      <slot :name="slotName" v-bind="slotProps"></slot>
+      <slot :name="slotName" v-bind="slotProps" />
     </template>
     <template #default="slotProps">
       <slot v-bind="slotProps">
@@ -130,16 +130,16 @@ onMounted(async () => {
           @update:model-value="handleUpdateCollapsed"
         >
           <template #reset-before="resetSlotProps">
-            <slot name="reset-before" v-bind="resetSlotProps"></slot>
+            <slot name="reset-before" v-bind="resetSlotProps" />
           </template>
           <template #submit-before="submitSlotProps">
-            <slot name="submit-before" v-bind="submitSlotProps"></slot>
+            <slot name="submit-before" v-bind="submitSlotProps" />
           </template>
           <template #expand-before="expandBeforeSlotProps">
-            <slot name="expand-before" v-bind="expandBeforeSlotProps"></slot>
+            <slot name="expand-before" v-bind="expandBeforeSlotProps" />
           </template>
           <template #expand-after="expandAfterSlotProps">
-            <slot name="expand-after" v-bind="expandAfterSlotProps"></slot>
+            <slot name="expand-after" v-bind="expandAfterSlotProps" />
           </template>
         </FormActions>
       </slot>

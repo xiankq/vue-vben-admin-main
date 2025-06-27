@@ -12,6 +12,7 @@ vi.mock('@vben-core/shared/store', () => {
       get state() {
         return this._state;
       }
+
       private _state: DrawerState;
 
       private options: any;
@@ -88,7 +89,7 @@ describe('drawerApi', () => {
   });
 
   it('should set state correctly using a function', () => {
-    drawerApi.setState((prev) => ({ ...prev, confirmText: 'Yes' }));
+    drawerApi.setState(prev => ({ ...prev, confirmText: 'Yes' }));
     expect(drawerApi.store.state.confirmText).toBe('Yes');
   });
 
