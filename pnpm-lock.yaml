@@ -180,9 +180,6 @@ catalogs:
     jsonwebtoken:
       specifier: ^9.0.2
       version: 9.0.2
-    lefthook:
-      specifier: ^1.11.12
-      version: 1.11.12
     lodash.clonedeep:
       specifier: ^4.5.0
       version: 4.5.0
@@ -470,9 +467,6 @@ importers:
       is-ci:
         specifier: 'catalog:'
         version: 4.1.0
-      lefthook:
-        specifier: 'catalog:'
-        version: 1.11.12
       playwright:
         specifier: 'catalog:'
         version: 1.52.0
@@ -644,6 +638,9 @@ importers:
       '@vben/types':
         specifier: workspace:*
         version: link:../../packages/types
+      unplugin-vue-router:
+        specifier: ^0.12.0
+        version: 0.12.0(vue-router@4.5.1(vue@3.5.13(typescript@5.8.3)))(vue@3.5.13(typescript@5.8.3))
       vite:
         specifier: 'catalog:'
         version: 6.3.4(@types/node@22.15.3)(jiti@2.4.2)(less@4.3.0)(sass@1.87.0)(terser@5.39.0)(yaml@2.7.1)
@@ -6130,60 +6127,6 @@ packages:
   lazystream@1.0.1:
     resolution: {integrity: sha512-b94GiNHQNy6JNTrt5w6zNyffMrNkXZb3KTkCZJb2V1xaEGCk093vkZ2jk3tpaeP33/OiXC+WvK9AxUebnf5nbw==}
     engines: {node: '>= 0.6.3'}
-
-  lefthook-darwin-arm64@1.11.12:
-    resolution: {integrity: sha512-nB3rZVGoign6lhlbdfT1/knk4fV4Kx7kgbho8oSFcpw/o2qRQpLqmclCWUTtf+Pyj4vCzE7hiee/m+uQtvu19w==}
-    cpu: [arm64]
-    os: [darwin]
-
-  lefthook-darwin-x64@1.11.12:
-    resolution: {integrity: sha512-ExNz8ctFRRaVz2wpvjmOtV4GeZcRdsAZwnZbmvlu1fMcJ6WtjAuR6fB0ybtcsc03/zBNrfShiq+VtZLkGv8Oeg==}
-    cpu: [x64]
-    os: [darwin]
-
-  lefthook-freebsd-arm64@1.11.12:
-    resolution: {integrity: sha512-3Si6YJ8YLEMJ6TGsaBI2ni64XSrJX69N4gX7OKQp85IXeizPUEy7oorYAJCUaw5nMffRbIkzxNTjaMkcn4iwag==}
-    cpu: [arm64]
-    os: [freebsd]
-
-  lefthook-freebsd-x64@1.11.12:
-    resolution: {integrity: sha512-J18MNYZKkVdHJ5K54MT8kxJ/W4TBUxD8aCi4e+Oliw8UXAiwaJSTGPkdY5P8aUlVYDknN2w+6I99Dxre6CJRFw==}
-    cpu: [x64]
-    os: [freebsd]
-
-  lefthook-linux-arm64@1.11.12:
-    resolution: {integrity: sha512-oIWcj7mcHnFB4tcfz4dsZTnDTXIyF7cjCEqhDQTvqJQLbE1XRfjU0RzQdgSKrzdmXIcUFB+lmcgeRwJnKBEJ8Q==}
-    cpu: [arm64]
-    os: [linux]
-
-  lefthook-linux-x64@1.11.12:
-    resolution: {integrity: sha512-sr9X5dW5dl9Fa3Kdk3x66DPGgCz/rykm+JHIyQGfnuvZnaeqkEaXgNubBaVGBbOimagXgtA5DwXc6D6fzUYALA==}
-    cpu: [x64]
-    os: [linux]
-
-  lefthook-openbsd-arm64@1.11.12:
-    resolution: {integrity: sha512-4TuX8c/lwky1DSNIY6knIFlMIHQZrVBxh6O5vSTjOAjKv5YmIkNgeUlwcBD+SMru9tQBj7MvOpJSkVkaLK5hhQ==}
-    cpu: [arm64]
-    os: [openbsd]
-
-  lefthook-openbsd-x64@1.11.12:
-    resolution: {integrity: sha512-Y/rPvyXtsIH+pxACfLHwxqc2Ahk+aExj8Izce3zXp75Wki5DH+6TXm5tWj5CgIuefL7CMqNFsOZCjEe1+SyM+w==}
-    cpu: [x64]
-    os: [openbsd]
-
-  lefthook-windows-arm64@1.11.12:
-    resolution: {integrity: sha512-OJaElGktzsMrkmIpXBqwlc+eZx5kwxx+tJFByTXiW/rb8ttBwj0ueVyfo3lw/PqqlbMy73qc9Uj3CHYkaKsDKw==}
-    cpu: [arm64]
-    os: [win32]
-
-  lefthook-windows-x64@1.11.12:
-    resolution: {integrity: sha512-ZhKsisibIcaG+rv9i7UJUgnuejI6mfaS5T3FreqsWt5vAsEIvLLNmZUA15MHPr99n+L4La1YQ2jTqie1kH57dA==}
-    cpu: [x64]
-    os: [win32]
-
-  lefthook@1.11.12:
-    resolution: {integrity: sha512-refh8mlcNtwJfmHDH+2mN1KTIVjp1EHlrjzOjfH/hJ4vFQByH2+1KfFDlJLX9V16VESwUNyOGkEZ9cJEF6zNgg==}
-    hasBin: true
 
   less@4.3.0:
     resolution: {integrity: sha512-X9RyH9fvemArzfdP8Pi3irr7lor2Ok4rOttDXBhlwDg+wKQsXOXgHWduAJE1EsF7JJx0w0bcO6BC6tCKKYnXKA==}
@@ -14751,49 +14694,6 @@ snapshots:
   lazystream@1.0.1:
     dependencies:
       readable-stream: 2.3.8
-
-  lefthook-darwin-arm64@1.11.12:
-    optional: true
-
-  lefthook-darwin-x64@1.11.12:
-    optional: true
-
-  lefthook-freebsd-arm64@1.11.12:
-    optional: true
-
-  lefthook-freebsd-x64@1.11.12:
-    optional: true
-
-  lefthook-linux-arm64@1.11.12:
-    optional: true
-
-  lefthook-linux-x64@1.11.12:
-    optional: true
-
-  lefthook-openbsd-arm64@1.11.12:
-    optional: true
-
-  lefthook-openbsd-x64@1.11.12:
-    optional: true
-
-  lefthook-windows-arm64@1.11.12:
-    optional: true
-
-  lefthook-windows-x64@1.11.12:
-    optional: true
-
-  lefthook@1.11.12:
-    optionalDependencies:
-      lefthook-darwin-arm64: 1.11.12
-      lefthook-darwin-x64: 1.11.12
-      lefthook-freebsd-arm64: 1.11.12
-      lefthook-freebsd-x64: 1.11.12
-      lefthook-linux-arm64: 1.11.12
-      lefthook-linux-x64: 1.11.12
-      lefthook-openbsd-arm64: 1.11.12
-      lefthook-openbsd-x64: 1.11.12
-      lefthook-windows-arm64: 1.11.12
-      lefthook-windows-x64: 1.11.12
 
   less@4.3.0:
     dependencies:
