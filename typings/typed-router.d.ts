@@ -21,5 +21,8 @@ declare module 'vue-router/auto-routes' {
     '//coredemo': RouteRecordInfo<'//coredemo', '/coredemo', Record<never, never>, Record<never, never>>,
     '//coredemo/element/': RouteRecordInfo<'//coredemo/element/', '/coredemo/element', Record<never, never>, Record<never, never>>,
     '//coredemo/element2/': RouteRecordInfo<'//coredemo/element2/', '/coredemo/element2', Record<never, never>, Record<never, never>>,
+    '//coredemo2': RouteRecordInfo<'//coredemo2', '/coredemo2', Record<never, never>, Record<never, never>>,
+    '//coredemo2/element/': RouteRecordInfo<'//coredemo2/element/', '/coredemo2/element', Record<never, never>, Record<never, never>>,
+    '//coredemo2/element2/': RouteRecordInfo<'//coredemo2/element2/', '/coredemo2/element2', Record<never, never>, Record<never, never>>,
   }
 }

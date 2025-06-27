@@ -23,16 +23,20 @@ function generateMenus(
     router.getRoutes().map(({ name, path }) => [name, path]),
   );
 
-  const recursive = (route: RouteRecordRaw) => {
-    if (!route.meta?.title && route.children?.length === 1) {
-      return recursive(route.children[0]!);
+  // 移除掉unplugin-vue-router自动生成的无意义路由嵌套
+  const recursive = (route: RouteRecordRaw): RouteRecordRaw[] => {
+    route = {
+      ...route,
+    };
+    if (!route.name) {
+      return route.children?.map(recursive)?.flat() ?? [];
     }
     else {
-      route.children = route.children?.map(recursive);
-      return route;
+      route.children = route.children?.map(recursive)?.flat();
+      return [route];
     }
   };
-  routes = routes.map(recursive);
+  routes = routes.map(recursive).flat();
 
   let menus = mapTree<ExRouteRecordRaw, MenuRecordRaw>(routes, (route) => {
     // 获取最终的路由路径
