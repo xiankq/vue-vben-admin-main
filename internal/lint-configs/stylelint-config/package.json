@@ -1,27 +1,27 @@
 {
   "name": "@vben/stylelint-config",
+  "type": "module",
   "version": "5.5.7",
   "private": true,
+  "license": "MIT",
   "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
     "directory": "internal/lint-configs/stylelint-config"
   },
-  "license": "MIT",
-  "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "./index.mjs",
-  "module": "./index.mjs",
+  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "exports": {
     ".": {
       "import": "./index.mjs",
       "default": "./index.mjs"
     }
   },
+  "main": "./index.mjs",
+  "module": "./index.mjs",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@stylistic/stylelint-plugin": "catalog:",
     "stylelint-config-recess-order": "catalog:",
@@ -31,13 +31,10 @@
     "postcss": "catalog:",
     "postcss-html": "catalog:",
     "postcss-scss": "catalog:",
-    "prettier": "catalog:",
-    "stylelint": "catalog:",
-    "stylelint-config-recommended": "catalog:",
-    "stylelint-config-recommended-scss": "catalog:",
-    "stylelint-config-recommended-vue": "catalog:",
-    "stylelint-config-standard": "catalog:",
-    "stylelint-order": "catalog:",
-    "stylelint-prettier": "catalog:"
+    "stylelint": "^16.21.0",
+    "stylelint-config-recess-order": "^7.1.0",
+    "stylelint-config-recommended-vue": "^1.6.1",
+    "stylelint-config-standard": "^38.0.0",
+    "stylelint-config-standard-scss": "^15.0.1"
   }
 }

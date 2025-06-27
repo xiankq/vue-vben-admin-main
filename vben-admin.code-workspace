@@ -20,10 +20,7 @@
       "name": "@vben/docs",
       "path": "docs",
     },
-    {
-      "name": "@vben/commitlint-config",
-      "path": "internal/lint-configs/commitlint-config",
-    },
+
     {
       "name": "@vben/eslint-config",
       "path": "internal/lint-configs/eslint-config",

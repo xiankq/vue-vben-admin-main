@@ -9,11 +9,13 @@ import dotenv from 'dotenv';
 
 const getBoolean = (value: string | undefined) => value === 'true';
 
-const getString = (value: string | undefined, fallback: string) =>
-  value ?? fallback;
+function getString(value: string | undefined, fallback: string) {
+  return value ?? fallback;
+}
 
-const getNumber = (value: string | undefined, fallback: number) =>
-  Number(value) || fallback;
+function getNumber(value: string | undefined, fallback: number) {
+  return Number(value) || fallback;
+}
 
 /**
  * 获取当前环境下生效的配置文件名
@@ -50,7 +52,8 @@ async function loadEnv<T = Record<string, string>>(
         const env = dotenv.parse(envPath);
         envConfig = { ...envConfig, ...env };
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error(`Error while parsing ${confFile}`, error);
     }
   }
@@ -90,7 +93,7 @@ async function loadAndConvertEnv(
 
   const compressTypes = (VITE_COMPRESS ?? '')
     .split(',')
-    .filter((item) => item === 'brotli' || item === 'gzip');
+    .filter(item => item === 'brotli' || item === 'gzip');
 
   return {
     appTitle: getString(VITE_APP_TITLE, 'Vben Admin'),

@@ -17,10 +17,12 @@ export async function spinner<T>(
     const result = await callback();
     loading.succeed(successText || 'Success!');
     return result;
-  } catch (error) {
+  }
+  catch (error) {
     loading.fail(failedText || 'Failed!');
     throw error;
-  } finally {
+  }
+  finally {
     loading.stop();
   }
 }

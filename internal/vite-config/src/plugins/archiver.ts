@@ -8,9 +8,7 @@ import { join } from 'node:path';
 
 import archiver from 'archiver';
 
-export const viteArchiverPlugin = (
-  options: ArchiverPluginOptions = {},
-): PluginOption => {
+export function viteArchiverPlugin(options: ArchiverPluginOptions = {}): PluginOption {
   return {
     apply: 'build',
     closeBundle: {
@@ -24,14 +22,16 @@ export const viteArchiverPlugin = (
           const zipOutputPath = join(zipOutputDir, `${name}.zip`);
           try {
             await fsp.mkdir(zipOutputDir, { recursive: true });
-          } catch {
+          }
+          catch {
             // ignore
           }
 
           try {
             await zipFolder(folderToZip, zipOutputPath);
             console.log(`Folder has been zipped to: ${zipOutputPath}`);
-          } catch (error) {
+          }
+          catch (error) {
             console.error('Error zipping folder:', error);
           }
         }, 0);
@@ -41,7 +41,7 @@ export const viteArchiverPlugin = (
     enforce: 'post',
     name: 'vite:archiver',
   };
-};
+}
 
 async function zipFolder(
   folderPath: string,

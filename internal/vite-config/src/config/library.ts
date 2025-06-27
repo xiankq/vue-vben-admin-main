@@ -25,8 +25,8 @@ function defineLibraryConfig(userConfigPromise?: DefineLibraryOptions) {
       ...library,
     });
 
-    const { dependencies = {}, peerDependencies = {} } =
-      await readPackageJSON(root);
+    const { dependencies = {}, peerDependencies = {} }
+      = await readPackageJSON(root);
 
     const externalPackages = [
       ...Object.keys(dependencies),
@@ -43,7 +43,7 @@ function defineLibraryConfig(userConfigPromise?: DefineLibraryOptions) {
         rollupOptions: {
           external: (id) => {
             return externalPackages.some(
-              (pkg) => id === pkg || id.startsWith(`${pkg}/`),
+              pkg => id === pkg || id.startsWith(`${pkg}/`),
             );
           },
         },

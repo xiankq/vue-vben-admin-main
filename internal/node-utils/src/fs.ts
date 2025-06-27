@@ -11,7 +11,8 @@ export async function outputJSON(
     await fs.mkdir(dir, { recursive: true });
     const jsonData = JSON.stringify(data, null, spaces);
     await fs.writeFile(filePath, jsonData, 'utf8');
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error writing JSON file:', error);
     throw error;
   }
@@ -22,7 +23,8 @@ export async function ensureFile(filePath: string) {
     const dir = dirname(filePath);
     await fs.mkdir(dir, { recursive: true });
     await fs.writeFile(filePath, '', { flag: 'a' });
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error ensuring file:', error);
     throw error;
   }
@@ -32,7 +34,8 @@ export async function readJSON(filePath: string) {
   try {
     const data = await fs.readFile(filePath, 'utf8');
     return JSON.parse(data);
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error reading JSON file:', error);
     throw error;
   }

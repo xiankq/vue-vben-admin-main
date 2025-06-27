@@ -9,11 +9,11 @@ import { build, createDevServer, createNitro, prepare } from 'nitropack';
 
 const hmrKeyRe = /^runtimeConfig\.|routeRules\./;
 
-export const viteNitroMockPlugin = ({
+export function viteNitroMockPlugin({
   mockServerPackage = '@vben/backend-mock',
   port = 5320,
   verbose = true,
-}: NitroMockPluginOptions = {}): PluginOption => {
+}: NitroMockPluginOptions = {}): PluginOption {
   return {
     async configureServer(server) {
       const availablePort = await getPort({ port });
@@ -43,7 +43,7 @@ export const viteNitroMockPlugin = ({
     enforce: 'pre',
     name: 'vite:mock-server',
   };
-};
+}
 
 async function runNitroServer(rootDir: string, port: number, verbose: boolean) {
   let nitro: any;
@@ -68,13 +68,13 @@ async function runNitroServer(rootDir: string, port: number, verbose: boolean) {
             if (diff.length === 0) {
               return;
             }
-            verbose &&
-              consola.info(
-                `Nitro config updated:\n${diff
-                  .map((entry) => `  ${entry.toString()}`)
-                  .join('\n')}`,
-              );
-            await (diff.every((e) => hmrKeyRe.test(e.key))
+            verbose
+            && consola.info(
+              `Nitro config updated:\n${diff
+                .map(entry => `  ${entry.toString()}`)
+                .join('\n')}`,
+            );
+            await (diff.every(e => hmrKeyRe.test(e.key))
               ? nitro.updateConfig(newConfig.config)
               : reload());
           },

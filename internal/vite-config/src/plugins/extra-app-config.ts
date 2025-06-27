@@ -48,7 +48,8 @@ async function viteExtraAppConfigPlugin({
         });
 
         console.log(colors.cyan(`✨configuration file is build successfully!`));
-      } catch (error) {
+      }
+      catch (error) {
         console.log(
           colors.red(
             `configuration file configuration file failed to package:\n${error}`,

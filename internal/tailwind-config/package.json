@@ -1,33 +1,16 @@
 {
   "name": "@vben/tailwind-config",
+  "type": "module",
   "version": "5.5.7",
   "private": true,
+  "license": "MIT",
   "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
     "directory": "internal/tailwind-config"
   },
-  "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "stub": "pnpm unbuild --stub"
-  },
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
+  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "exports": {
     ".": {
       "types": "./src/index.ts",
@@ -41,6 +24,23 @@
       "default": "./dist/postcss.config.mjs"
     },
     "./*": "./*"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "stub": "pnpm unbuild --stub"
   },
   "peerDependencies": {
     "tailwindcss": "^3.4.3"

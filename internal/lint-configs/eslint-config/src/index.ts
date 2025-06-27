@@ -1,60 +1,35 @@
-import type { Linter } from 'eslint';
+import antfu from '@antfu/eslint-config';
 
-import {
-  command,
-  comments,
-  disableds,
-  ignores,
-  importPluginConfig,
-  javascript,
-  jsdoc,
-  jsonc,
-  node,
-  perfectionist,
-  prettier,
-  regexp,
-  test,
-  turbo,
-  typescript,
-  unicorn,
-  vue,
-} from './configs';
-import { customConfig } from './custom-config';
-
-type FlatConfig = Linter.Config;
-
-type FlatConfigPromise =
-  | FlatConfig
-  | FlatConfig[]
-  | Promise<FlatConfig>
-  | Promise<FlatConfig[]>;
-
-async function defineConfig(config: FlatConfig[] = []) {
-  const configs: FlatConfigPromise[] = [
-    vue(),
-    javascript(),
-    ignores(),
-    prettier(),
-    typescript(),
-    jsonc(),
-    disableds(),
-    importPluginConfig(),
-    node(),
-    perfectionist(),
-    comments(),
-    jsdoc(),
-    unicorn(),
-    test(),
-    regexp(),
-    command(),
-    turbo(),
-    ...customConfig,
-    ...config,
-  ];
-
-  const resolved = await Promise.all(configs);
-
-  return resolved.flat();
-}
-
-export { defineConfig };
+export default antfu({
+  formatters: true,
+  // https://github.com/antfu/eslint-config?tab=readme-ov-file#editor-specific-disables
+  isInEditor: false,
+  jsx: true,
+  unocss: true,
+  stylistic: {
+    semi: true,
+  },
+  ignores: [
+    '**/node_modules/**',
+    '**/dist/**',
+    '**/public/**',
+    '**/*.geojson',
+    '**/*.min.js',
+  ],
+  vue: {
+    overrides: {
+      'vue/valid-template-root': 'off',
+      'vue/component-name-in-template-casing': [
+        'warn',
+        'kebab-case',
+        { registeredComponentsOnly: false, ignores: ['/^i-/'] },
+      ],
+      'vue/max-attributes-per-line': ['warn', { singleline: { max: 5 } }],
+    },
+  },
+  rules: {
+    'import/no-duplicates': 'warn',
+    'import/consistent-type-specifier-style': 'warn',
+    'import/no-default-export': 'off',
+  },
+});

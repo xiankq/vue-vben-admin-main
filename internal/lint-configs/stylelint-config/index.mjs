@@ -1,5 +1,7 @@
+/**
+ * @type {import('stylelint').Config}
+ */
 export default {
-  extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
   ignoreFiles: [
     '**/*.js',
     '**/*.jsx',
@@ -8,134 +10,30 @@ export default {
     '**/*.json',
     '**/*.md',
   ],
-  overrides: [
-    {
-      customSyntax: 'postcss-html',
-      files: ['*.(html|vue)', '**/*.(html|vue)'],
-      rules: {
-        'selector-pseudo-class-no-unknown': [
-          true,
-          {
-            ignorePseudoClasses: ['global', 'deep'],
-          },
-        ],
-        'selector-pseudo-element-no-unknown': [
-          true,
-          {
-            ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted'],
-          },
-        ],
-      },
-    },
-    {
-      customSyntax: 'postcss-scss',
-      extends: [
-        'stylelint-config-recommended-scss',
-        'stylelint-config-recommended-vue/scss',
-      ],
-      files: ['*.scss', '**/*.scss'],
-    },
-  ],
-  plugins: [
-    'stylelint-order',
-    '@stylistic/stylelint-plugin',
-    'stylelint-prettier',
-    'stylelint-scss',
+  extends: [
+    'stylelint-config-standard',
+    'stylelint-config-standard-scss',
+    'stylelint-config-recommended-vue/scss',
+    'stylelint-config-recess-order',
   ],
   rules: {
-    'at-rule-no-deprecated': null,
-    'at-rule-no-unknown': [
+    'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignoreAtRules: [
-          'extends',
-          'ignores',
-          'include',
-          'mixin',
-          'if',
-          'else',
-          'media',
-          'for',
-          'at-root',
-          'tailwind',
-          'apply',
-          'variants',
-          'responsive',
-          'screen',
-          'function',
-          'each',
-          'use',
-          'forward',
-          'return',
-        ],
+        ignorePseudoClasses: ['deep', 'global', 'local'],
       },
     ],
-    'font-family-no-missing-generic-family-keyword': null,
-    'function-no-unknown': null,
-    'import-notation': null,
-    'media-feature-range-notation': null,
-    'named-grid-areas-no-invalid': null,
-    'no-descending-specificity': null,
-    'no-empty-source': null,
-    'order/order': [
-      [
-        'dollar-variables',
-        'custom-properties',
-        'at-rules',
-        'declarations',
-        {
-          name: 'supports',
-          type: 'at-rule',
-        },
-        {
-          name: 'media',
-          type: 'at-rule',
-        },
-        {
-          name: 'include',
-          type: 'at-rule',
-        },
-        'rules',
-      ],
-      { severity: 'error' },
-    ],
-    'prettier/prettier': true,
-    'rule-empty-line-before': [
-      'always',
+    'selector-class-pattern': [
+      '^([a-z0-9]|_|-)*$',
       {
-        ignore: ['after-comment', 'first-nested'],
+        message: 'class 只能以 小写字母,数字, -, _ 进行命名',
       },
     ],
-    'scss/at-rule-no-unknown': [
+    'function-no-unknown': [
       true,
       {
-        ignoreAtRules: [
-          'extends',
-          'ignores',
-          'include',
-          'mixin',
-          'if',
-          'else',
-          'media',
-          'for',
-          'at-root',
-          'tailwind',
-          'apply',
-          'variants',
-          'responsive',
-          'screen',
-          'function',
-          'each',
-          'use',
-          'forward',
-          'return',
-        ],
+        ignoreFunctions: ['v-bind'],
       },
     ],
-    'scss/operator-no-newline-after': null,
-    'selector-class-pattern':
-      '^(?:(?:o|c|u|t|s|is|has|_|js|qa)-)?[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:__[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:--[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:[.+])?$',
-
-    'selector-not-notation': null,
   },
 };

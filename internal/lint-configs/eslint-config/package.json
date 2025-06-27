@@ -1,56 +1,38 @@
 {
   "name": "@vben/eslint-config",
+  "type": "module",
   "version": "5.0.0",
   "private": true,
+  "license": "MIT",
   "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
     "directory": "internal/lint-configs/eslint-config"
   },
-  "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "stub": "pnpm unbuild --stub"
-  },
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs"
     }
   },
-  "dependencies": {
-    "eslint-config-turbo": "catalog:",
-    "eslint-plugin-command": "catalog:",
-    "eslint-plugin-import-x": "catalog:"
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "stub": "pnpm unbuild --stub"
   },
-  "devDependencies": {
-    "@eslint/js": "catalog:",
-    "@types/eslint": "catalog:",
-    "@typescript-eslint/eslint-plugin": "catalog:",
-    "@typescript-eslint/parser": "catalog:",
-    "eslint": "catalog:",
-    "eslint-plugin-eslint-comments": "catalog:",
-    "eslint-plugin-jsdoc": "catalog:",
-    "eslint-plugin-jsonc": "catalog:",
-    "eslint-plugin-n": "catalog:",
-    "eslint-plugin-no-only-tests": "catalog:",
-    "eslint-plugin-perfectionist": "catalog:",
-    "eslint-plugin-prettier": "catalog:",
-    "eslint-plugin-regexp": "catalog:",
-    "eslint-plugin-unicorn": "catalog:",
-    "eslint-plugin-unused-imports": "catalog:",
-    "eslint-plugin-vitest": "catalog:",
-    "eslint-plugin-vue": "catalog:",
-    "globals": "catalog:",
-    "jsonc-eslint-parser": "catalog:",
-    "vue-eslint-parser": "catalog:"
+  "dependencies": {
+    "@antfu/eslint-config": "^4.16.1",
+    "@unocss/eslint-plugin": "^66.3.2",
+    "eslint": "^9.29.0",
+    "eslint-plugin-format": "^1.0.1",
+    "eslint-plugin-project-structure": "^3.13.3"
+
   }
+
 }

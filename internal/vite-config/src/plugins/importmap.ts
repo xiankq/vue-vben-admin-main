@@ -30,7 +30,7 @@ async function getShimsUrl(provide: string) {
   const providerShimsMap: Record<string, string> = {
     'esm.sh': `https://esm.sh/es-module-shims@${version}/${shimsSubpath}`,
     // unpkg: `https://unpkg.com/es-module-shims@${version}/${shimsSubpath}`,
-    jsdelivr: `https://cdn.jsdelivr.net/npm/es-module-shims@${version}/${shimsSubpath}`,
+    'jsdelivr': `https://cdn.jsdelivr.net/npm/es-module-shims@${version}/${shimsSubpath}`,
 
     // 下面两个CDN不稳定，暂时不用
     'jspm.io': `https://ga.jspm.io/npm:es-module-shims@${version}/${shimsSubpath}`,
@@ -85,13 +85,13 @@ async function viteImportMapPlugin(
   const inputMapImports = Object.keys(imports);
 
   const allDepNames: string[] = [
-    ...(importmap?.map((item) => item.name) || []),
+    ...(importmap?.map(item => item.name) || []),
     ...inputMapImports,
     ...inputMapScopes,
   ];
   const depNames = new Set<string>(allDepNames);
 
-  const installDeps = importmap?.map((item) => ({
+  const installDeps = importmap?.map(item => ({
     range: item.range,
     target: item.name,
   }));
@@ -125,9 +125,10 @@ async function viteImportMapPlugin(
         try {
           installed = true;
           await Promise.allSettled(
-            (installDeps || []).map((dep) => generator.install(dep)),
+            (installDeps || []).map(dep => generator.install(dep)),
           );
-        } catch (error: any) {
+        }
+        catch (error: any) {
           installError = error;
           installed = false;
         }
