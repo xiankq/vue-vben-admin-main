@@ -1,0 +1,24 @@
+{
+  "name": "@app/exam",
+  "type": "module",
+  "version": "5.5.7",
+  "private": true,
+  "packageManager": "pnpm@10.10.0",
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=9.12.0"
+  },
+  "scripts": {
+
+  },
+  "dependencies": {
+
+  },
+
+  "devDependencies": {
+
+  }
+}

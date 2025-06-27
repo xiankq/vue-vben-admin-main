@@ -16,8 +16,12 @@ export default defineConfig(async () => {
             {
               extensions: ['.page.vue', '.layout.vue'],
               src: 'apps/core/src/pages',
-              // this is equivalent to the default behavior
-              path: file => file.slice(file.lastIndexOf('/apps/core/src/pages') + '/apps/core/src/pages'.length),
+              path: file => `core${file.slice(file.lastIndexOf('/apps/core/src/pages') + '/apps/core/src/pages'.length)}`,
+            },
+            {
+              extensions: ['.page.vue', '.layout.vue'],
+              src: 'apps/exam/src/pages',
+              path: file => `exam${file.slice(file.lastIndexOf('/apps/exam/src/pages') + '/apps/exam/src/pages'.length)}`,
             },
           ],
         }),
