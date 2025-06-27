@@ -1,0 +1,47 @@
+{
+  "tpl-class": {
+    "scope": "typescript,typescriptreact,javascript,javascriptreact",
+    "prefix": "tpl-class",
+    "description": "新建class",
+
+    "body": [
+      "export interface ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ConstructorOptions{",
+      "}",
+      "",
+      "export class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}{",
+      "    constructor(options?: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}ConstructorOptions){}",
+      "}",
+    ],
+  },
+  "tpl-function": {
+    "scope": "typescript,typescriptreact,javascript,javascriptreact",
+    "prefix": "tpl-function",
+    "description": "新建function",
+    "body": [
+      "export interface ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Options{",
+      "}",
+      "",
+      "export interface ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Retrun{",
+      "}",
+      "",
+      "export function ${TM_FILENAME_BASE/(.*)/${1:/camelcase}/}(options?:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Options): ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Retrun|undefined{",
+      "   //",
+      "}",
+    ],
+  },
+  "tpl-create-injection-state": {
+    "scope": "typescript,typescriptreact,javascript,javascriptreact",
+    "prefix": "tpl-create-injection-state",
+    "description": "新建vueuse store",
+    "body": [
+      "/**",
+      " * ${1:请输入注释}",
+      " */",
+      "export const [create${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}, inject${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}] = createInjectionState(() => {",
+      "  return {};",
+      "},{",
+"  injectionKey: import.meta.env.DEV ? new URL(import.meta.url).pathname : undefined,",
+"});",
+    ],
+  },
+}

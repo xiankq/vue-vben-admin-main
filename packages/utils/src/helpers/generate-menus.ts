@@ -23,6 +23,17 @@ function generateMenus(
     router.getRoutes().map(({ name, path }) => [name, path]),
   );
 
+  const recursive = (route: RouteRecordRaw) => {
+    if (!route.meta?.title && route.children?.length === 1) {
+      return recursive(route.children[0]!);
+    }
+    else {
+      route.children = route.children?.map(recursive);
+      return route;
+    }
+  };
+  routes = routes.map(recursive);
+
   let menus = mapTree<ExRouteRecordRaw, MenuRecordRaw>(routes, (route) => {
     // 获取最终的路由路径
     const path = finalRoutesMap[route.name as string] ?? route.path ?? '';

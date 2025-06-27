@@ -5,8 +5,11 @@
     "baseUrl": ".",
     "paths": {
       "#/*": ["./src/*"]
-    }
+    },
+    "types": [
+      "unplugin-vue-router/client"
+    ]
   },
   "references": [{ "path": "./tsconfig.node.json" }],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "typings/*", "src/**/*.tsx", "src/**/*.vue"]
 }

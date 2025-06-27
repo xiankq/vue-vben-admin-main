@@ -82,6 +82,7 @@
     "unbuild": "catalog:",
     "unocss": "^66.3.2",
     "unplugin-element-plus": "catalog:",
+    "unplugin-vue-router": "^0.12.0",
     "vite": "catalog:",
     "vue": "catalog:",
     "vue-tsc": "catalog:"
