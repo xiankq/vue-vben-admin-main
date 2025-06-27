@@ -9,8 +9,7 @@ packages:
   - packages/business/*
   - apps/*
   - scripts/*
-  - docs
-  - playground
+  - mock
 catalog:
   '@ast-grep/napi': ^0.37.0
   '@clack/prompts': ^0.10.1
