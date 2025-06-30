@@ -92,7 +92,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
         ]"
         :data-active-tab="active"
         :data-index="i"
-        class="group translate-all tabs-chrome__item draggable flex h-full select-none items-center relative -mr-3"
+        class="group tabs-chrome__item draggable translate-all flex h-full select-none items-center relative -mr-3"
         data-tab-item="true"
         @click="active = tab.key"
         @mousedown="onMouseDown($event, tab)"
@@ -139,7 +139,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
               <!-- close-icon -->
               <X
                 v-show="!tab.affixTab && tabsView.length > 1 && tab.closable"
-                class="hover:bg-accent stroke-accent-foreground/80 hover:stroke-accent-foreground text-accent-foreground/80 group-[.is-active]:text-accent-foreground mt-[2px] rounded-full size-3 cursor-pointer transition-all"
+                class="hover:bg-accent stroke-accent-foreground/80 text-accent-foreground/80 hover:stroke-accent-foreground group-[.is-active]:text-accent-foreground mt-[2px] rounded-full size-3 cursor-pointer transition-all"
                 @click.stop="() => emit('close', tab.key)"
               />
               <Pin
@@ -151,7 +151,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
 
             <!-- tab-item-main -->
             <div
-              class="text-accent-foreground group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground tabs-chrome__item-main mx-[calc(var(--gap)*2)] my-0 pl-2 pr-4 rounded-tl-[5px] rounded-tr-[5px] flex h-full duration-150 items-center z-[2] overflow-hidden"
+              class="tabs-chrome__item-main text-accent-foreground group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground mx-[calc(var(--gap)*2)] my-0 pl-2 pr-4 rounded-tl-[5px] rounded-tr-[5px] flex h-full duration-150 items-center z-[2] overflow-hidden"
             >
               <VbenIcon
                 v-if="showIcon"

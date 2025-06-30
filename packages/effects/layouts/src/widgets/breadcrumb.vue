@@ -32,10 +32,10 @@ const breadcrumbs = computed((): IBreadcrumb[] => {
   const resultBreadcrumb: IBreadcrumb[] = [];
 
   for (const match of matched) {
-    const { meta, path,children } = match;
+    const { meta, path, children } = match;
     const { hideChildrenInMenu, hideInBreadcrumb, icon, name, title }
       = meta || {};
-    if (hideInBreadcrumb || hideChildrenInMenu || !path|| (!meta.title && children.length===1 )) {
+    if (hideInBreadcrumb || hideChildrenInMenu || !path || (!meta.title && children.length === 1)) {
       continue;
     }
 

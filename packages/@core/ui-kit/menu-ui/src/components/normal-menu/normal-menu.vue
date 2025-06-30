@@ -78,6 +78,7 @@ $namespace: vben;
   &.is-dark {
     .#{$namespace}-normal-menu__item {
       @apply text-foreground/80;
+
       // color: hsl(var(--foreground) / 80%);
 
       &:not(.is-active):hover {
@@ -113,6 +114,7 @@ $namespace: vben;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     // max-width: 64px;
     // max-height: 64px;
     padding: var(--menu-item-padding-y) var(--menu-item-padding-x);

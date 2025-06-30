@@ -386,6 +386,7 @@ $namespace: vben;
 @mixin menu-item {
   position: relative;
   display: flex;
+
   // gap: 12px;
   align-items: center;
   height: var(--menu-item-height);
@@ -465,6 +466,7 @@ $namespace: vben;
 
   &.is-dark {
     --menu-background-color: hsl(var(--menu));
+
     // --menu-submenu-opened-background-color: hsl(var(--menu-opened-dark));
     --menu-item-background-color: var(--menu-background-color);
     --menu-item-color: hsl(var(--foreground) / 80%);
@@ -481,6 +483,7 @@ $namespace: vben;
 
   &.is-light {
     --menu-background-color: hsl(var(--menu));
+
     // --menu-submenu-opened-background-color: hsl(var(--menu-opened));
     --menu-item-background-color: var(--menu-background-color);
     --menu-item-color: hsl(var(--foreground));
@@ -594,6 +597,7 @@ $namespace: vben;
       padding-right: calc(var(--menu-item-padding-x) + 6px);
       margin: 0;
       margin-right: 2px;
+
       // border-bottom: 2px solid transparent;
       border-radius: var(--menu-item-radius);
     }
@@ -610,6 +614,7 @@ $namespace: vben;
       & .#{$namespace}-sub-menu-content {
         height: 100%;
         padding-right: 40px;
+
         // border-bottom: 2px solid transparent;
         border-radius: var(--menu-item-radius);
       }
@@ -645,6 +650,7 @@ $namespace: vben;
     //   }
     // }
   }
+
   // 折叠菜单
 
   &.is-collapse {
@@ -742,6 +748,7 @@ $namespace: vben;
 
   &.is-collapse-show-title {
     padding: 32px 0 !important;
+
     // margin: 4px 8px !important;
     .#{$namespace}-menu-tooltip__trigger {
       flex-direction: column;
@@ -818,6 +825,7 @@ $namespace: vben;
     width: inherit;
     margin-top: -8px;
     margin-right: 0;
+
     // font-size: 16px;
     font-weight: normal;
     opacity: 1;
@@ -831,6 +839,7 @@ $namespace: vben;
   &.is-collapse-show-title {
     flex-direction: column;
     padding: 32px 0 !important;
+
     // margin: 4px 8px !important;
     .#{$namespace}-menu__icon {
       display: block;

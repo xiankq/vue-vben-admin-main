@@ -61,8 +61,7 @@
   "devDependencies": {
     "@playwright/test": "catalog:",
     "@types/node": "catalog:",
-    "@vben/eslint-config": "workspace:*",
-    "@vben/stylelint-config": "workspace:*",
+    "@vben/lint-config": "workspace:*",
     "@vben/tailwind-config": "workspace:*",
     "@vben/tsconfig": "workspace:*",
     "@vben/vite-config": "workspace:*",

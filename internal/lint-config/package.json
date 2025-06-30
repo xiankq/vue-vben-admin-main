@@ -1,0 +1,38 @@
+{
+  "name": "@vben/lint-config",
+  "type": "module",
+  "version": "5.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "import": "./src"
+    },
+    "./stylelint": {
+      "types": "./src/stylelint.js",
+      "import": "./src/stylelint.js"
+    },
+    "./eslint": {
+      "types": "./src/eslint.js",
+      "import": "./src/eslint.js"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@antfu/eslint-config": "^4.16.1",
+    "@unocss/eslint-plugin": "^66.3.2",
+    "eslint": "^9.29.0",
+    "eslint-plugin-format": "^1.0.1",
+    "eslint-plugin-project-structure": "^3.13.3",
+    "postcss": "catalog:",
+    "postcss-html": "catalog:",
+    "postcss-scss": "catalog:",
+    "stylelint": "^16.21.0",
+    "stylelint-config-recess-order": "catalog:",
+    "stylelint-config-recommended-vue": "^1.6.1",
+    "stylelint-config-standard": "^38.0.0",
+    "stylelint-config-standard-scss": "^15.0.1",
+    "stylelint-scss": "catalog:"
+  }
+}

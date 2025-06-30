@@ -96,5 +96,5 @@ const bindProps = computed<Recordable<any>>(() => {
 </template>
 
 <style lang="scss">
-@use './style.scss';
+@use './style';
 </style>
