@@ -12,6 +12,7 @@ import {
 } from 'element-plus';
 
 import { ref } from 'vue';
+
 definePage({
   meta: {
     title: 'core子包子页面2',
